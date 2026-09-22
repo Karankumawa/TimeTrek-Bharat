@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TimeTrekBharat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/saffron_primary</item>
+        <item name="colorPrimaryVariant">@color/saffron_primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/gold_royal</item>
+        <item name="colorSecondaryVariant">@color/saffron_accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar and window backgrounds -->
+        <item name="android:statusBarColor">@color/saffron_primary_dark</item>
+        <item name="android:windowBackground">@color/bg_canvas</item>
+    </style>
+</resources>

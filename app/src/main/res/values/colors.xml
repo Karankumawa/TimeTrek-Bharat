@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Theme Palette - Indian Royal Heritage -->
+    <color name="saffron_primary">#D84315</color>
+    <color name="saffron_primary_dark">#BF360C</color>
+    <color name="saffron_accent">#FF6F00</color>
+    <color name="gold_royal">#FFB300</color>
+
+    <color name="peacock_blue">#006064</color>
+    <color name="maroon_royal">#4A148C</color>
+
+    <!-- Canvas & Cards -->
+    <color name="bg_canvas">#FAF8F5</color>
+    <color name="card_surface">#FFFFFF</color>
+    <color name="card_stroke">#E2DCD5</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#1D1B20</color>
+    <color name="text_secondary">#49454F</color>
+    <color name="text_muted">#79747E</color>
+
+    <!-- Era Color Badges -->
+    <color name="era_ancient_bg">#FFF3E0</color>
+    <color name="era_ancient_text">#E65100</color>
+
+    <color name="era_medieval_bg">#F3E5F5</color>
+    <color name="era_medieval_text">#6A1B9A</color>
+
+    <color name="era_colonial_bg">#E8F5E9</color>
+    <color name="era_colonial_text">#1B5E20</color>
+
+    <color name="era_modern_bg">#E3F2FD</color>
+    <color name="era_modern_text">#0D47A1</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="scrim_black_50">#80000000</color>
+</resources>

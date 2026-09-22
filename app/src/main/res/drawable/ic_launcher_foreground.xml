@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer Ashoka Wheel of Time Ring -->
+    <path
+        android:pathData="M54,27 A27,27 0 1,0 54.01,27"
+        android:strokeWidth="2.5">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="27"
+                android:startY="27"
+                android:endX="81"
+                android:endY="81"
+                android:type="linear">
+                <item android:color="#FFB300" android:offset="0.0" />
+                <item android:color="#FFFFFF" android:offset="0.4" />
+                <item android:color="#FF6F00" android:offset="0.7" />
+                <item android:color="#00BFA5" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Subtle Glow Ring -->
+    <path
+        android:pathData="M54,30.5 A23.5,23.5 0 1,0 54.01,30.5"
+        android:strokeColor="#40FFFFFF"
+        android:strokeWidth="1.0" />
+
+    <!-- 12 Hours / Chakra Spokes Markers -->
+    <!-- 12 o'clock (Saffron Accent) -->
+    <path android:pathData="M54,24.5 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" android:fillColor="#FF6F00" />
+    <!-- 3 o'clock (Gold Accent) -->
+    <path android:pathData="M83.5,54 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" android:fillColor="#FFB300" />
+    <!-- 6 o'clock (Emerald Accent) -->
+    <path android:pathData="M54,83.5 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" android:fillColor="#00BFA5" />
+    <!-- 9 o'clock (Royal White Accent) -->
+    <path android:pathData="M24.5,54 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" android:fillColor="#FFFFFF" />
+
+    <!-- Additional Radial Spokes Ticks -->
+    <path android:pathData="M67.5,30.6 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M77.4,40.5 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M77.4,67.5 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M67.5,77.4 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M40.5,77.4 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M30.6,67.5 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M30.6,40.5 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+    <path android:pathData="M40.5,30.6 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0" android:fillColor="#80FFFFFF" />
+
+    <!-- HOURGLASS UPPER CHAMBER (Saffron / Heritage Dawn) -->
+    <path android:pathData="M 41,34 L 67,34 Q 64.5,46 57.5,51.5 L 50.5,51.5 Q 43.5,46 41,34 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="34"
+                android:endX="54"
+                android:endY="51.5"
+                android:type="linear">
+                <item android:color="#FF6F00" android:offset="0.0" />
+                <item android:color="#FFB300" android:offset="0.7" />
+                <item android:color="#FFE082" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- HOURGLASS LOWER CHAMBER (Emerald / Future Bharat) -->
+    <path android:pathData="M 50.5,56.5 L 57.5,56.5 Q 64.5,62 67,74 L 41,74 Q 43.5,62 50.5,56.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="56.5"
+                android:endX="54"
+                android:endY="74"
+                android:type="linear">
+                <item android:color="#80CBC4" android:offset="0.0" />
+                <item android:color="#00BFA5" android:offset="0.5" />
+                <item android:color="#006064" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Hourglass Metallic Top Bar Cap -->
+    <path android:pathData="M38,30 h32 a2,2 0 0 1 2,2 v1 a2,2 0 0 1 -2,2 h-32 a2,2 0 0 1 -2,-2 v-1 a2,2 0 0 1 2,-2 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="38"
+                android:startY="32"
+                android:endX="72"
+                android:endY="32"
+                android:type="linear">
+                <item android:color="#FF6F00" android:offset="0.0" />
+                <item android:color="#FFE082" android:offset="0.5" />
+                <item android:color="#FFB300" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Hourglass Metallic Bottom Bar Cap -->
+    <path android:pathData="M38,73 h32 a2,2 0 0 1 2,2 v1 a2,2 0 0 1 -2,2 h-32 a2,2 0 0 1 -2,-2 v-1 a2,2 0 0 1 2,-2 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="38"
+                android:startY="75"
+                android:endX="72"
+                android:endY="75"
+                android:type="linear">
+                <item android:color="#00BFA5" android:offset="0.0" />
+                <item android:color="#E0F2F1" android:offset="0.5" />
+                <item android:color="#004D40" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Glass Contour Outer Shimmer Line -->
+    <path
+        android:pathData="M 41,34 L 67,34 C 64.5,47 59.5,51.5 57.5,53.5 C 59.5,55.5 64.5,60 67,74 L 41,74 C 43.5,60 48.5,55.5 50.5,53.5 C 48.5,51.5 43.5,47 41,34 Z"
+        android:strokeColor="#D0FFFFFF"
+        android:strokeWidth="1.6" />
+
+    <!-- Center Flowing Sand Vertical Light Stream -->
+    <path
+        android:pathData="M54,36 L54,72"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2" />
+
+    <!-- Tilted Dynamic Orbiting Time Ring ("TimeTrek Motion") -->
+    <path
+        android:pathData="M 30,42 C 34,31 74,31 78,42 C 82,53 80,67 76,71 C 72,75 32,75 28,64 C 24,53 26,47 30,42"
+        android:strokeWidth="2.2">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="28"
+                android:startY="32"
+                android:endX="78"
+                android:endY="72"
+                android:type="linear">
+                <item android:color="#FF6F00" android:offset="0.0" />
+                <item android:color="#FFFFFF" android:offset="0.5" />
+                <item android:color="#00BFA5" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Orbit Arrow Head at (76,71) -->
+    <path
+        android:pathData="M 72,67 L 78,71 L 78,64 Z"
+        android:fillColor="#00BFA5" />
+
+    <!-- Central Sparkle Diamond Node (AI Historian / Time Convergence) -->
+    <path
+        android:pathData="M 54,46 L 56.5,51.5 L 62,54 L 56.5,56.5 L 54,62 L 51.5,56.5 L 46,54 L 51.5,51.5 Z"
+        android:fillColor="#FFFFFF" />
+
+    <path
+        android:pathData="M 54,49 L 55.5,52.5 L 59,54 L 55.5,55.5 L 54,59 L 52.5,55.5 L 49,54 L 52.5,52.5 Z"
+        android:fillColor="#FFF59D" />
+
+</vector>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Vertical Timeline Node & Line -->
+    <LinearLayout
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Timeline Node Circle -->
+        <View
+            android:id="@+id/vTimelineDot"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/saffron_primary" />
+
+        <!-- Vertical Connecting Line -->
+        <View
+            android:id="@+id/vTimelineLine"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/card_stroke" />
+    </LinearLayout>
+
+    <!-- Timeline Content Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/card_surface"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Era Badge & Period Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvEraBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/era_ancient_bg"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/era_ancient_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:text="Ancient Era" />
+
+                <TextView
+                    android:id="@+id/tvPeriod"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:text="c. 2500 BCE – 1500 BCE" />
+            </LinearLayout>
+
+            <!-- Event / Era Title -->
+            <TextView
+                android:id="@+id/tvEraTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_primary"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="Indus Valley &amp; Kalibangan Civilization" />
+
+            <!-- Era Image -->
+            <ImageView
+                android:id="@+id/ivEraImage"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                tools:src="@android:drawable/ic_menu_gallery"
+                tools:visibility="visible" />
+
+            <!-- Detailed Narrative Description -->
+            <TextView
+                android:id="@+id/tvEraDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="Kalibangan in Hanumangarh district was a major provincial capital of the Indus Valley Civilization featuring ploughed field surfaces and advanced brick fortifications." />
+
+            <!-- Key Events Section -->
+            <TextView
+                android:id="@+id/tvKeyEventsHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/key_events_label"
+                android:textColor="@color/peacock_blue"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvKeyEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="• Early Harappan urban phases\n• Earliest known ploughed field\n• Fire altars ritual worship" />
+
+            <!-- Key Rulers Section -->
+            <TextView
+                android:id="@+id/tvKeyRulersHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/key_rulers_label"
+                android:textColor="@color/maroon_royal"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvKeyRulers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="Prithviraj Chauhan, Maharana Pratap" />
+
+            <!-- Ask Gemini AI about this era button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAskAiEra"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="12dp"
+                android:text="@string/ask_ai_about_era"
+                android:textColor="@color/maroon_royal"
+                android:textSize="12sp"
+                app:strokeColor="@color/maroon_royal" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

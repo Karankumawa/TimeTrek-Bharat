@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: timetrek-bharat-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: DB_NAME
+        value: timetrek_bharat
+      - key: FLASK_ENV
+        value: production

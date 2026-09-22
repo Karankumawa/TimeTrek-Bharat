@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TimeTrek Bharat</string>
+    <string name="subtitle_home">Explore India\'s Royal History &amp; Timelines</string>
+    <string name="search_hint">Search state name or region…</string>
+    <string name="ask_historian_btn">Ask Historian AI</string>
+    <string name="chronological_timeline">Chronological Historical Timeline</string>
+    <string name="key_events_label">Key Historical Events:</string>
+    <string name="key_rulers_label">Key Rulers &amp; Leaders:</string>
+    <string name="ask_ai_about_era">Ask AI about this Era</string>
+    <string name="consulting_historian">Consulting Gemini Historian AI…</string>
+    <string name="historian_title">Gemini Historian</string>
+    <string name="ask_prompt_hint">Type your history question here…</string>
+    <string name="send">Send</string>
+    <string name="retry">Retry</string>
+    <string name="no_states_found">No states found. Pull down to refresh or check network.</string>
+</resources>
