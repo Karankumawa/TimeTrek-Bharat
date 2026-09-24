@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.timetrekbharat.db.AppDatabase
 import com.example.timetrekbharat.model.State
 import com.example.timetrekbharat.model.TimelineEntry
+import com.example.timetrekbharat.network.RetrofitClient
 import java.util.concurrent.Executors
 
 class StateRepository(context: Context) {
@@ -37,8 +38,21 @@ class StateRepository(context: Context) {
         isLoading.postValue(true)
         errorMessage.postValue(null)
         executorService.execute {
-            seedDatabaseIfEmpty()
-            isLoading.postValue(false)
+            try {
+                val response = RetrofitClient.api.getAllStates(searchQuery).execute()
+                if (response.isSuccessful && response.body() != null && response.body()!!.isSuccess) {
+                    val networkStates = response.body()!!.data
+                    if (!networkStates.isNullOrEmpty()) {
+                        stateDao.insertStates(networkStates)
+                    }
+                } else {
+                    seedDatabaseIfEmpty()
+                }
+            } catch (e: Exception) {
+                seedDatabaseIfEmpty()
+            } finally {
+                isLoading.postValue(false)
+            }
         }
     }
 
@@ -46,8 +60,21 @@ class StateRepository(context: Context) {
         isLoading.postValue(true)
         errorMessage.postValue(null)
         executorService.execute {
-            seedDatabaseIfEmpty()
-            isLoading.postValue(false)
+            try {
+                val response = RetrofitClient.api.getStateDetail(stateSlug).execute()
+                if (response.isSuccessful && response.body() != null && response.body()!!.isSuccess) {
+                    val networkState = response.body()!!.data
+                    if (networkState != null) {
+                        stateDao.insertState(networkState)
+                    }
+                } else {
+                    seedDatabaseIfEmpty()
+                }
+            } catch (e: Exception) {
+                seedDatabaseIfEmpty()
+            } finally {
+                isLoading.postValue(false)
+            }
         }
     }
 

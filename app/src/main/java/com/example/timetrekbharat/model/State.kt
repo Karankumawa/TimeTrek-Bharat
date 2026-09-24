@@ -8,10 +8,10 @@ import java.io.Serializable
 @Entity(tableName = "states")
 data class State(
     @PrimaryKey
-    @SerializedName("slug")
+    @SerializedName(value = "slug", alternate = ["_id", "id"])
     var slug: String = "",
 
-    @SerializedName("name")
+    @SerializedName(value = "name", alternate = ["state_name", "title"])
     var name: String? = null,
 
     @SerializedName("region")
@@ -20,7 +20,7 @@ data class State(
     @SerializedName("capital")
     var capital: String? = null,
 
-    @SerializedName("short_description")
+    @SerializedName(value = "short_description", alternate = ["description"])
     var shortDescription: String? = null,
 
     @SerializedName("image_url")
