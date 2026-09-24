@@ -261,6 +261,41 @@ class StateRepository(context: Context) {
         )
         states.add(tamilNadu)
 
+        // 7. Goa
+        val goa = State(
+            slug = "goa",
+            name = "Goa",
+            region = "Konkan Coast",
+            capital = "Panaji",
+            shortDescription = "Pearl of the Orient, renowned for sun-kissed beaches, Portuguese colonial architecture, Basilica of Bom Jesus, and vibrant culture.",
+            imageUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop",
+            bannerUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1200&auto=format&fit=crop",
+            timeline = listOf(
+                TimelineEntry(
+                    id = 1, era = "Ancient Era", period = "c. 300 BCE – 1312 AD", title = "Kadamba Dynasty & Ancient Gomantak",
+                    description = "Ruled by Bhojas, Satavahanas, and Kadambas of Goa who developed Chandor and Gopakapattana as thriving international ports.",
+                    keyEvents = listOf("Kadamba dynasty maritime expansion", "Construction of Tambdi Surla Mahadev Temple", "Arab & Persian trade interactions"),
+                    keyRulers = listOf("Jayakeshi I", "Shivachitta Permadideva"),
+                    imageUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop"
+                ),
+                TimelineEntry(
+                    id = 2, era = "Colonial Era", period = "1510 AD – 1961 AD", title = "Portuguese Era & Operation Vijay",
+                    description = "Afonso de Albuquerque conquered Goa in 1510 AD. Goa served as the capital of Portuguese India for 451 years until liberation by Indian Armed Forces in 1961.",
+                    keyEvents = listOf("Portuguese Conquest of Goa (1510 AD)", "Construction of Basilica of Bom Jesus (UNESCO World Heritage Site)", "Operation Vijay Liberation of Goa (December 19, 1961)"),
+                    keyRulers = listOf("Afonso de Albuquerque", "General K. P. Candeth (Operation Vijay Commander)"),
+                    imageUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop"
+                ),
+                TimelineEntry(
+                    id = 3, era = "Modern Era", period = "1987 AD – Present", title = "North Goa & South Goa Districts",
+                    description = "Goa attained full statehood on May 30, 1987, becoming India's 25th state with North Goa (HQ: Panaji) and South Goa (HQ: Margao).",
+                    keyEvents = listOf("Statehood of Goa (May 30, 1987)", "Famous beaches: Baga, Calangute, Anjuna, Palolem, Colva", "Transformation into world-renowned cultural tourism destination"),
+                    keyRulers = listOf("Dayanand Bandodkar (First Chief Minister)", "Pratapsingh Rane"),
+                    imageUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop"
+                )
+            )
+        )
+        states.add(goa)
+
         return states
     }
 }
