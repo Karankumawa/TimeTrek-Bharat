@@ -9,8 +9,8 @@ SAMPLE_STATES_DATA = [
         "region": "North-West India",
         "capital": "Jaipur",
         "short_description": "Land of Kings, renowned for majestic hill forts, Thar Desert, royal Rajput heritage, and vibrant culture.",
-        "image_url": "https://images.unsplash.com/photo-1599661046289-e31897703ca6?q=80&w=800&auto=format&fit=crop",
-        "banner_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1200&auto=format&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
         "timeline": [
             {
                 "id": 1,
@@ -24,7 +24,11 @@ SAMPLE_STATES_DATA = [
                     "Fire altars indicating ritual worship practices"
                 ],
                 "key_rulers": ["Indus Valley Clan Leaders"],
-                "image_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 "id": 2,
@@ -38,7 +42,12 @@ SAMPLE_STATES_DATA = [
                     "Defense against early Arab incursions (Battle of Rajasthan)"
                 ],
                 "key_rulers": ["Prithviraj Chauhan", "Bappa Rawal", "Nagabhata I"],
-                "image_url": "https://images.unsplash.com/photo-1599661046289-e31897703ca6?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 "id": 3,
@@ -52,21 +61,11 @@ SAMPLE_STATES_DATA = [
                     "Construction of Jantar Mantar astronomical observatory"
                 ],
                 "key_rulers": ["Maharana Pratap", "Rana Sanga", "Sawai Jai Singh II"],
-                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                "id": 4,
-                "era": "Modern Era",
-                "period": "1949 AD – Present",
-                "title": "Formation of Greater Rajasthan",
-                "description": "Unification of 19 princely states and 3 chiefships into the state of Rajasthan following Indian Independence.",
-                "key_events": [
-                    "Integration of Jaipur, Jodhpur, Bikaner, and Jaisalmer on March 30, 1949",
-                    "Designation of UNESCO World Heritage Hill Forts",
-                    "Transformation into India's top cultural tourism hub"
-                ],
-                "key_rulers": ["Sardar Vallabhbhai Patel (Integrator)", "Maharaja Man Singh II"],
-                "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80"
+                ]
             }
         ]
     },
@@ -76,8 +75,8 @@ SAMPLE_STATES_DATA = [
         "region": "Western India",
         "capital": "Gandhinagar",
         "short_description": "Cradle of maritime trade, Harappan ports like Lothal, Solanki architecture, and birthplace of Mahatma Gandhi.",
-        "image_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?q=80&w=800&auto=format&fit=crop",
-        "banner_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?q=80&w=1200&auto=format&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=1200&q=80",
         "timeline": [
             {
                 "id": 1,
@@ -91,7 +90,11 @@ SAMPLE_STATES_DATA = [
                     "Bead-making and shell ornament industries"
                 ],
                 "key_rulers": ["Harappan Maritime Guilds"],
-                "image_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 "id": 2,
@@ -105,21 +108,11 @@ SAMPLE_STATES_DATA = [
                     "Patronage of Jain scholars like Hemachandra"
                 ],
                 "key_rulers": ["Siddharaja Jayasimha", "Kumarapala", "Bhimdev I"],
-                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                "id": 3,
-                "era": "Modern Era",
-                "period": "1915 AD – 1947 AD",
-                "title": "Indian Freedom Struggle & Sabarmati Ashram",
-                "description": "Mahatma Gandhi established Sabarmati Ashram in Ahmedabad and led pivotal non-violent movements including the Dandi Salt March.",
-                "key_events": [
-                    "Kheda Satyagraha (1918)",
-                    "Dandi Salt March (1930)",
-                    "Bardoli Satyagraha led by Sardar Vallabhbhai Patel (1928)"
-                ],
-                "key_rulers": ["Mahatma Gandhi", "Sardar Vallabhbhai Patel"],
-                "image_url": "https://images.unsplash.com/photo-1609946850020-f571342d326e?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80"
+                ]
             }
         ]
     },
@@ -129,8 +122,8 @@ SAMPLE_STATES_DATA = [
         "region": "Northern India",
         "capital": "New Delhi",
         "short_description": "Historic imperial capital of seven cities, seat of Tomar Rajputs, Delhi Sultanate, Mughals, and modern India.",
-        "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800&auto=format&fit=crop",
-        "banner_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1200&auto=format&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
         "timeline": [
             {
                 "id": 1,
@@ -144,7 +137,11 @@ SAMPLE_STATES_DATA = [
                     "Establishment of early urban habitation"
                 ],
                 "key_rulers": ["Anangpal Tomar II", "Prithviraj Chauhan"],
-                "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 "id": 2,
@@ -158,21 +155,11 @@ SAMPLE_STATES_DATA = [
                     "Expansion under Alauddin Khalji"
                 ],
                 "key_rulers": ["Qutb-ud-din Aibak", "Razia Sultana", "Alauddin Khalji"],
-                "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                "id": 3,
-                "era": "Medieval Era",
-                "period": "1638 AD – 1857 AD",
-                "title": "Shahjahanabad & Mughal Capital",
-                "description": "Emperor Shah Jahan built Shahjahanabad (Old Delhi), Red Fort, and Jama Masjid, making Delhi the jewel of Mughal art.",
-                "key_events": [
-                    "Inauguration of Red Fort and Chandni Chowk (1648 AD)",
-                    "Construction of Jama Masjid",
-                    "1857 First War of Independence and siege of Delhi"
-                ],
-                "key_rulers": ["Shah Jahan", "Aurangzeb", "Bahadur Shah Zafar"],
-                "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80"
+                ]
             }
         ]
     },
@@ -182,8 +169,8 @@ SAMPLE_STATES_DATA = [
         "region": "Western India",
         "capital": "Mumbai",
         "short_description": "Land of Maratha Empire, Chhatrapati Shivaji Maharaj, rock-cut Ajanta & Ellora caves, and economic power center.",
-        "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop",
-        "banner_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1200&auto=format&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
         "timeline": [
             {
                 "id": 1,
@@ -197,7 +184,11 @@ SAMPLE_STATES_DATA = [
                     "Trade with Roman Empire via Kalyan and Sopara ports"
                 ],
                 "key_rulers": ["Gautamiputra Satakarni", "Krishna I (Rashtrakuta)"],
-                "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 "id": 2,
@@ -211,7 +202,311 @@ SAMPLE_STATES_DATA = [
                     "Construction of Rajgad, Pratapgad, and Sindhudurg sea fort"
                 ],
                 "key_rulers": ["Chhatrapati Shivaji Maharaj", "Chhatrapati Sambhaji Maharaj", "Peshwa Baji Rao I"],
-                "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=800&auto=format&fit=crop"
+                "image_url": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "uttar-pradesh",
+        "name": "Uttar Pradesh",
+        "region": "Northern India",
+        "capital": "Lucknow",
+        "short_description": "Heartland of Gangetic civilization, birthland of Lord Rama and Krishna, Sarnath, and Mughal architectural masterworks.",
+        "image_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 1500 BCE – 500 BCE",
+                "title": "Vedic Age & Sacred Cities",
+                "description": "Varanasi (Kashi) evolved as the world's oldest living cultural city, while Sarnath hosted Gautam Buddha's first sermon.",
+                "key_events": [
+                    "Buddha's Dhamma Wheel sermon at Sarnath",
+                    "Vedic literature compilation",
+                    "Mathura sculpture school"
+                ],
+                "key_rulers": ["Mahajanapada Kings", "Emperor Ashoka"],
+                "image_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "1526 AD – 1707 AD",
+                "title": "Mughal Imperial Renaissance at Agra",
+                "description": "Agra served as imperial capital under Akbar and Shah Jahan, featuring Taj Mahal, Agra Fort, and Fatehpur Sikri.",
+                "key_events": [
+                    "Construction of Taj Mahal",
+                    "Creation of Fatehpur Sikri",
+                    "Agra Fort expansion"
+                ],
+                "key_rulers": ["Akbar", "Shah Jahan"],
+                "image_url": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "tamil-nadu",
+        "name": "Tamil Nadu",
+        "region": "Southern India",
+        "capital": "Chennai",
+        "short_description": "Cradle of Dravidian temple architecture, Sangam Tamil literature, Chola naval power, and classical Bharatnatyam.",
+        "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 300 BCE – 300 AD",
+                "title": "Sangam Period & Chera Chola Pandya Triumvirate",
+                "description": "Classical Tamil literature flourished during Sangam academies, alongside extensive maritime trade with Rome and Greece.",
+                "key_events": [
+                    "Sangam literary assemblies at Madurai",
+                    "Port of Poompuhar trade",
+                    "Kallanai Dam construction"
+                ],
+                "key_rulers": ["Karikala Chola", "Nedunjeliyan"],
+                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "850 AD – 1279 AD",
+                "title": "Chola Imperial Golden Era",
+                "description": "Rajaraja Chola I and Rajendra Chola I built naval armadas that expanded Chola influence to Southeast Asia and built Brihadeeswarar Temple.",
+                "key_events": [
+                    "Brihadeeswarar Great Living Chola Temple construction",
+                    "Naval expedition to Southeast Asia",
+                    "Bronze casting mastery"
+                ],
+                "key_rulers": ["Rajaraja Chola I", "Rajendra Chola I"],
+                "image_url": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "goa",
+        "name": "Goa",
+        "region": "Konkan Coast",
+        "capital": "Panaji",
+        "short_description": "Pearl of the Orient, renowned for sun-kissed beaches, Portuguese colonial architecture, Basilica of Bom Jesus, and vibrant culture.",
+        "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 300 BCE – 1312 AD",
+                "title": "Kadamba Dynasty & Ancient Gomantak",
+                "description": "Ruled by Bhojas, Satavahanas, and Kadambas of Goa who developed Chandor and Gopakapattana as thriving international ports.",
+                "key_events": [
+                    "Kadamba dynasty maritime expansion",
+                    "Construction of Tambdi Surla Mahadev Temple",
+                    "Arab & Persian trade interactions"
+                ],
+                "key_rulers": ["Jayakeshi I", "Shivachitta Permadideva"],
+                "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Colonial Era",
+                "period": "1510 AD – 1961 AD",
+                "title": "Portuguese Era & Operation Vijay",
+                "description": "Afonso de Albuquerque conquered Goa in 1510 AD. Goa served as the capital of Portuguese India for 451 years until liberation by Indian Armed Forces in 1961.",
+                "key_events": [
+                    "Portuguese Conquest of Goa (1510 AD)",
+                    "Construction of Basilica of Bom Jesus (UNESCO World Heritage Site)",
+                    "Operation Vijay Liberation of Goa (December 19, 1961)"
+                ],
+                "key_rulers": ["Afonso de Albuquerque", "General K. P. Candeth"],
+                "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1599661046289-e31897703ca6?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 3,
+                "era": "Modern Era",
+                "period": "1987 AD – Present",
+                "title": "North Goa & South Goa Districts",
+                "description": "Goa attained full statehood on May 30, 1987, becoming India's 25th state with North Goa (HQ: Panaji) and South Goa (HQ: Margao).",
+                "key_events": [
+                    "Statehood of Goa (May 30, 1987)",
+                    "Famous beaches: Baga, Calangute, Anjuna, Palolem, Colva",
+                    "Transformation into world-renowned cultural tourism destination"
+                ],
+                "key_rulers": ["Dayanand Bandodkar", "Pratapsingh Rane"],
+                "image_url": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1609946850020-f571342d326e?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "punjab",
+        "name": "Punjab",
+        "region": "North-West India",
+        "capital": "Chandigarh",
+        "short_description": "Land of Five Rivers, Golden Temple, Sikh Empire of Maharaja Ranjit Singh, and granary of India.",
+        "image_url": "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 2600 BCE – 1500 BCE",
+                "title": "Harappan Civilization & Sapta Sindhu",
+                "description": "Ropar (Rupnagar) was a major Harappan urban center. Punjab formed the core of the ancient Vedic Sapta Sindhu.",
+                "key_events": [
+                    "Harappan Ropar urban excavations",
+                    "Vedic Sapta Sindhu hymns composition",
+                    "Taxila trade routes"
+                ],
+                "key_rulers": ["Ancient Vedic Clan Chiefs", "King Porus"],
+                "image_url": "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "1799 AD – 1849 AD",
+                "title": "Sikh Empire & Maharaja Ranjit Singh",
+                "description": "Maharaja Ranjit Singh unified Misls into a sovereign empire stretching from Sutlej to Khyber Pass, gold-plating Sri Harmandir Sahib.",
+                "key_events": [
+                    "Unification of Sikh Misls",
+                    "Gold-plating of Sri Harmandir Sahib (Golden Temple)",
+                    "Secular rule & military modernization"
+                ],
+                "key_rulers": ["Maharaja Ranjit Singh", "Hari Singh Nalwa"],
+                "image_url": "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1514222709107-a180c68d72b4?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "karnataka",
+        "name": "Karnataka",
+        "region": "Southern India",
+        "capital": "Bengaluru",
+        "short_description": "Cradle of stone architecture, Vijayanagara Empire at Hampi, Mysore Palace, and India's tech innovation hub.",
+        "image_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "345 AD – 1000 AD",
+                "title": "Kadambas, Badami Chalukyas & Rashtrakutas",
+                "description": "Badami Chalukyas built cave temples at Badami and stone structural temples at Pattadakal and Aihole.",
+                "key_events": [
+                    "Carving of Badami Cave Temples",
+                    "Pattadakal UNESCO World Heritage temples",
+                    "Aihole temple experimentation"
+                ],
+                "key_rulers": ["Pulakeshin II", "Mayurasharma"],
+                "image_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "1336 AD – 1565 AD",
+                "title": "Vijayanagara Empire Golden Age at Hampi",
+                "description": "Harihara and Bukka founded Vijayanagara at Hampi on the banks of Tungabhadra, becoming a world metropolis.",
+                "key_events": [
+                    "Construction of Stone Chariot & Vittala Temple",
+                    "Foreign trade in gems and horses",
+                    "Patronage of Carnatic music and literature"
+                ],
+                "key_rulers": ["Krishnadevaraya", "Harihara I"],
+                "image_url": "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "west-bengal",
+        "name": "West Bengal",
+        "region": "Eastern India",
+        "capital": "Kolkata",
+        "short_description": "Cultural capital of India, Bengal Renaissance, Rabindranath Tagore, Victoria Memorial, and Sundarbans.",
+        "image_url": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 300 BCE – 1150 AD",
+                "title": "Gangaridai, Maurya & Pala Dynasty",
+                "description": "Gangaridai empire resisted Alexander the Great. Pala Empire made Bengal a global center for Mahayana Buddhist learning.",
+                "key_events": [
+                    "Pala Buddhist monastic art",
+                    "Somapura Mahavihara patronage",
+                    "Maritime commerce via Tamralipta port"
+                ],
+                "key_rulers": ["Gopala I", "Dharmapala"],
+                "image_url": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Colonial Era",
+                "period": "1757 AD – 1947 AD",
+                "title": "Bengal Renaissance & Freedom Movement",
+                "description": "Battle of Plassey (1757) marked British East India Company rule. Bengal became the crucible of intellectual Renaissance and freedom movement.",
+                "key_events": [
+                    "Battle of Plassey (1757 AD)",
+                    "Bengal Renaissance (Tagore, Vivekananda)",
+                    "Subhas Chandra Bose & Azad Hind Fauj"
+                ],
+                "key_rulers": ["Nawab Siraj-ud-Daulah", "Rabindranath Tagore", "Netaji Subhas Chandra Bose"],
+                "image_url": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80"
+                ]
             }
         ]
     }
@@ -224,7 +519,7 @@ def seed_database():
         db = client[Config.DB_NAME]
         states_collection = db["states"]
 
-        # Drop existing collection to ensure fresh clean state schema
+        # Drop existing collection
         states_collection.drop()
         print("[Seed] Cleared existing 'states' collection.")
 
@@ -233,7 +528,7 @@ def seed_database():
 
         # Insert sample data
         result = states_collection.insert_many(SAMPLE_STATES_DATA)
-        print(f"[Seed] Successfully seeded {len(result.inserted_ids)} Indian states into MongoDB!")
+        print(f"[Seed] Successfully seeded {len(result.inserted_ids)} Indian states into MongoDB Atlas!")
 
         client.close()
     except Exception as e:

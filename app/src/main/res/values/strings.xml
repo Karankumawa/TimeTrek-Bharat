@@ -14,4 +14,5 @@
     <string name="send">Send</string>
     <string name="retry">Retry</string>
     <string name="no_states_found">No states found. Pull down to refresh or check network.</string>
+    <string name="gallery_title">📸 Historical Gallery (Tap to view):</string>
 </resources>

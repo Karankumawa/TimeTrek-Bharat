@@ -3,7 +3,9 @@ package com.example.timetrekbharat.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.timetrekbharat.R
@@ -15,10 +17,12 @@ class TimelineAdapter(
 ) : RecyclerView.Adapter<TimelineAdapter.TimelineViewHolder>() {
 
     private var timelineEntries: List<TimelineEntry> = ArrayList()
+    private var lastPosition = -1
 
     fun setTimelineEntries(entries: List<TimelineEntry>?) {
         if (entries != null) {
             this.timelineEntries = entries
+            this.lastPosition = -1
             notifyDataSetChanged()
         }
     }
@@ -32,6 +36,15 @@ class TimelineAdapter(
 
     override fun onBindViewHolder(holder: TimelineViewHolder, position: Int) {
         holder.bind(timelineEntries[position], position == timelineEntries.size - 1)
+        setAnimation(holder.itemView, position)
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.item_animation_slide_right)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 
     override fun getItemCount(): Int = timelineEntries.size
@@ -71,6 +84,20 @@ class TimelineAdapter(
                 }
             }
 
+            // Pulsing dot animation
+            binding.vTimelineDot.animate()
+                .scaleX(1.3f)
+                .scaleY(1.3f)
+                .setDuration(500)
+                .withEndAction {
+                    binding.vTimelineDot.animate()
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .setDuration(500)
+                        .start()
+                }
+                .start()
+
             binding.vTimelineLine.visibility = if (isLastItem) View.INVISIBLE else View.VISIBLE
 
             if (!entry.keyEvents.isNullOrEmpty()) {
@@ -95,14 +122,45 @@ class TimelineAdapter(
                 binding.tvKeyRulers.visibility = View.GONE
             }
 
+            // Main Featured Era Image
             if (!entry.imageUrl.isNullOrBlank()) {
-                binding.ivEraImage.visibility = View.VISIBLE
+                binding.cardImageFrame.visibility = View.VISIBLE
                 Glide.with(context)
                     .load(entry.imageUrl)
+                    .placeholder(R.drawable.placeholder_heritage)
+                    .error(R.drawable.placeholder_heritage)
                     .centerCrop()
                     .into(binding.ivEraImage)
             } else {
-                binding.ivEraImage.visibility = View.GONE
+                binding.cardImageFrame.visibility = View.GONE
+            }
+
+            // Multi-Image Gallery Setup
+            val galleryImages = ArrayList<String>()
+            if (!entry.images.isNullOrEmpty()) {
+                galleryImages.addAll(entry.images!!)
+            } else if (!entry.imageUrl.isNullOrBlank()) {
+                galleryImages.add(entry.imageUrl!!)
+            }
+
+            if (galleryImages.size > 1) {
+                binding.tvGalleryTitle.visibility = View.VISIBLE
+                binding.rvEraGallery.visibility = View.VISIBLE
+                binding.rvEraGallery.layoutManager = LinearLayoutManager(
+                    context, LinearLayoutManager.HORIZONTAL, false
+                )
+                binding.rvEraGallery.adapter = ImageGalleryAdapter(galleryImages) { selectedUrl ->
+                    binding.cardImageFrame.visibility = View.VISIBLE
+                    Glide.with(context)
+                        .load(selectedUrl)
+                        .placeholder(R.drawable.placeholder_heritage)
+                        .error(R.drawable.placeholder_heritage)
+                        .centerCrop()
+                        .into(binding.ivEraImage)
+                }
+            } else {
+                binding.tvGalleryTitle.visibility = View.GONE
+                binding.rvEraGallery.visibility = View.GONE
             }
 
             binding.btnAskAiEra.setOnClickListener {

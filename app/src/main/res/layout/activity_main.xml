@@ -141,17 +141,35 @@
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Ask Historian Floating Action Button -->
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fabAskHistorian"
+    <!-- Floating Action Buttons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:text="@string/ask_historian_btn"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/maroon_royal"
-        app:icon="@android:drawable/ic_menu_help"
-        app:iconTint="@color/gold_royal" />
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabCommunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Community"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/saffron_primary"
+            app:icon="@android:drawable/ic_menu_myplaces"
+            app:iconTint="@color/gold_royal" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAskHistorian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ask_historian_btn"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/maroon_royal"
+            app:icon="@android:drawable/ic_menu_help"
+            app:iconTint="@color/gold_royal" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

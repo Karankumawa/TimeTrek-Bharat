@@ -14,7 +14,7 @@ import java.util.concurrent.Executors
 
 class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_API_KEY) {
 
-    private val modelFutures: GenerativeModelFutures
+    private var modelFutures: GenerativeModelFutures? = null
     private val executor: Executor = Executors.newSingleThreadExecutor()
     private val mainHandler: Handler = Handler(Looper.getMainLooper())
     private val isApiKeyConfigured: Boolean
@@ -25,16 +25,24 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
     }
 
     init {
-        val keyToUse = if (!apiKey.isNullOrBlank() && apiKey != "YOUR_GEMINI_API_KEY") {
+        val keyToUse = if (!apiKey.isNullOrBlank() && !apiKey.startsWith("YOUR_")) {
             apiKey
         } else {
             GEMINI_API_KEY
         }
 
-        isApiKeyConfigured = keyToUse != "YOUR_GEMINI_API_KEY"
+        isApiKeyConfigured = keyToUse.isNotBlank() && !keyToUse.startsWith("YOUR_")
 
-        val gm = GenerativeModel(MODEL_NAME, keyToUse)
-        modelFutures = GenerativeModelFutures.from(gm)
+        if (isApiKeyConfigured) {
+            try {
+                val gm = GenerativeModel(MODEL_NAME, keyToUse)
+                modelFutures = GenerativeModelFutures.from(gm)
+            } catch (_: Exception) {
+                modelFutures = null
+            }
+        } else {
+            modelFutures = null
+        }
     }
 
     fun askHistorian(
@@ -45,49 +53,60 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
     ) {
         if (callback == null) return
 
-        if (!isApiKeyConfigured) {
+        if (!isApiKeyConfigured || modelFutures == null) {
             mainHandler.postDelayed({
                 val offlineAnswer = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                 callback.onSuccess(offlineAnswer)
-            }, 800)
+            }, 600)
             return
         }
 
-        val promptBuilder = StringBuilder().apply {
-            append("You are an expert, respectful, and authoritative Indian Historian and Scholar.\n")
-            append("Your goal is to answer questions about Indian history, dynasties, rulers, architecture, and culture accurately.\n\n")
+        try {
+            val promptBuilder = StringBuilder().apply {
+                append("You are an expert, respectful, and authoritative Indian Historian and Scholar.\n")
+                append("Your goal is to answer questions about Indian history, dynasties, rulers, architecture, and culture accurately.\n\n")
 
-            if (!stateContext.isNullOrBlank()) {
-                append("State Context: ").append(stateContext).append("\n")
-            }
-            if (!eraContext.isNullOrBlank()) {
-                append("Historical Era Context: ").append(eraContext).append("\n")
-            }
-
-            append("User Question: ").append(userQuestion).append("\n\n")
-            append("Provide a clear, engaging, historically structured response highlighting key dynasties, architectural features, rulers, or historical impacts.")
-        }
-
-        val content = Content.Builder()
-            .text(promptBuilder.toString())
-            .build()
-
-        val responseFuture: ListenableFuture<GenerateContentResponse> = modelFutures.generateContent(content)
-
-        Futures.addCallback(responseFuture, object : FutureCallback<GenerateContentResponse> {
-            override fun onSuccess(result: GenerateContentResponse?) {
-                var responseText = result?.text
-                if (responseText.isNullOrBlank()) {
-                    responseText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                if (!stateContext.isNullOrBlank()) {
+                    append("State Context: ").append(stateContext).append("\n")
                 }
-                mainHandler.post { callback.onSuccess(responseText) }
+                if (!eraContext.isNullOrBlank()) {
+                    append("Historical Era Context: ").append(eraContext).append("\n")
+                }
+
+                append("User Question: ").append(userQuestion).append("\n\n")
+                append("Provide a clear, engaging, historically structured response highlighting key dynasties, architectural features, rulers, or historical impacts.")
             }
 
-            override fun onFailure(t: Throwable) {
-                val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
-                mainHandler.post { callback.onSuccess(fallbackText) }
-            }
-        }, executor)
+            val content = Content.Builder()
+                .text(promptBuilder.toString())
+                .build()
+
+            val responseFuture: ListenableFuture<GenerateContentResponse> = modelFutures!!.generateContent(content)
+
+            Futures.addCallback(responseFuture, object : FutureCallback<GenerateContentResponse> {
+                override fun onSuccess(result: GenerateContentResponse?) {
+                    var responseText = result?.text
+                    if (responseText.isNullOrBlank()) {
+                        responseText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                    }
+                    mainHandler.post { callback.onSuccess(responseText) }
+                }
+
+                override fun onFailure(t: Throwable) {
+                    val errorMsg = t.message ?: ""
+                    // If the API key is invalid or unauthenticated, fallback gracefully
+                    if (errorMsg.contains("UNAUTHENTICATED") || errorMsg.contains("API_KEY_INVALID")) {
+                        val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                        mainHandler.post { callback.onSuccess(fallbackText) }
+                    } else {
+                        mainHandler.post { callback.onError("AI Historian Error: ${t.localizedMessage}") }
+                    }
+                }
+            }, executor)
+        } catch (_: Exception) {
+            val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+            mainHandler.post { callback.onSuccess(fallbackText) }
+        }
     }
 
     private fun generateOfflineHistorianAnswer(
@@ -120,7 +139,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
             sb.append("🏛️ Historical Summary for ").append(state).append(":\n")
             sb.append("• The ").append(era).append(" represents a foundational period in ").append(state).append("'s timeline. ")
             sb.append("It produced significant socio-economic expansion, flourishing trade routes, and lasting royal dynasties.\n\n")
-            sb.append("💡 Note: Configure your Gemini API Key in GeminiHistorianService.kt for live generative AI responses.")
+            sb.append("💡 Note: To enable live online Gemini AI responses, add your Gemini API Key in GeminiHistorianService.kt.")
         }
 
         return sb.toString()

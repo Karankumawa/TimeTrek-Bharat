@@ -37,6 +37,17 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".ui.CommunityActivity"
+            android:exported="false"
+            android:label="Community Hub" />
+
+        <activity
+            android:name=".ui.AddPostActivity"
+            android:exported="false"
+            android:label="Add Local Lore"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

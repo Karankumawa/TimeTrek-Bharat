@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerTimelineItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -34,13 +35,14 @@
 
     <!-- Timeline Content Card -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardTimelineContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         app:cardBackgroundColor="@color/card_surface"
         app:cardCornerRadius="14dp"
-        app:cardElevation="2dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,16 +94,45 @@
                 android:textStyle="bold"
                 tools:text="Indus Valley &amp; Kalibangan Civilization" />
 
-            <!-- Era Image -->
-            <ImageView
-                android:id="@+id/ivEraImage"
+            <!-- Featured Main Era Image -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardImageFrame"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/ivEraImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    tools:src="@android:drawable/ic_menu_gallery" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Multi-Image Gallery Horizontal Recycler -->
+            <TextView
+                android:id="@+id/tvGalleryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
+                android:text="@string/gallery_title"
+                android:textColor="@color/peacock_blue"
+                android:textSize="11sp"
+                android:textStyle="bold"
                 android:visibility="gone"
-                tools:src="@android:drawable/ic_menu_gallery"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEraGallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:layout_height="100dp"
                 tools:visibility="visible" />
 
             <!-- Detailed Narrative Description -->
@@ -109,7 +140,7 @@
                 android:id="@+id/tvEraDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:lineSpacingExtra="3dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp"

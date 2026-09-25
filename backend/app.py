@@ -258,6 +258,66 @@ def get_state_timeline(state_identifier):
             "details": str(e)
         }), 500
 
+@app.route("/api/community", methods=["GET"])
+def get_community_posts():
+    """
+    GET /api/community
+    Retrieves community heritage updates/lore.
+    """
+    try:
+        db = Database.get_db()
+        state_filter = request.args.get("state", "").strip().lower()
+        query = {}
+        if state_filter:
+            query["state_slug"] = state_filter
+
+        posts_cursor = db["community_posts"].find(query).sort("created_at", -1)
+
+        posts = []
+        for p in posts_cursor:
+            p["id"] = str(p["_id"])
+            del p["_id"]
+            if "created_at" in p:
+                p["created_at"] = p["created_at"].isoformat()
+            posts.append(p)
+
+        return jsonify({"success": True, "data": posts}), 200
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+from datetime import datetime
+
+@app.route("/api/community", methods=["POST"])
+def add_community_post():
+    """
+    POST /api/community
+    Adds a new community update to MongoDB.
+    """
+    try:
+        db = Database.get_db()
+        data = request.json
+        if not data or not data.get("title") or not data.get("description"):
+            return jsonify({"success": False, "error": "Title and description are required"}), 400
+
+        post = {
+            "title": data.get("title"),
+            "description": data.get("description"),
+            "state_slug": data.get("state_slug", "unknown").lower(),
+            "location_name": data.get("location_name", "Local Area"),
+            "author_name": data.get("author_name", "History Enthusiast"),
+            "image_url": data.get("image_url", ""),
+            "created_at": datetime.utcnow()
+        }
+
+        result = db["community_posts"].insert_one(post)
+        post["id"] = str(result.inserted_id)
+        del post["_id"]
+        post["created_at"] = post["created_at"].isoformat()
+
+        return jsonify({"success": True, "data": post}), 201
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"success": False, "error": "Endpoint not found"}), 404

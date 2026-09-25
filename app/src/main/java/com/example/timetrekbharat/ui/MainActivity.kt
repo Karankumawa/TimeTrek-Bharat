@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         binding.fabAskHistorian.setOnClickListener {
             startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
         }
+
+        binding.fabCommunity.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
+        }
     }
 
     private fun observeViewModel() {
