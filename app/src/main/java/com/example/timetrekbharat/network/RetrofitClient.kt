@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://127.0.0.1:5000/"
+    // Production Live Render Backend API (connected to MongoDB Atlas)
+    private const val BASE_URL = "https://timetrek-bharat.onrender.com/"
 
     val api: HistoryApi by lazy {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
