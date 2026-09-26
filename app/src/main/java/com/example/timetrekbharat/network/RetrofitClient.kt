@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://10.0.2.2:5000/"
+    private const val BASE_URL = "http://127.0.0.1:5000/"
 
     val api: HistoryApi by lazy {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
