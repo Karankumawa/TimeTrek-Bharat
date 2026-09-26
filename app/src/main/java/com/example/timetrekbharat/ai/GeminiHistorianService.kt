@@ -31,7 +31,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
             GEMINI_API_KEY
         }
 
-        isApiKeyConfigured = keyToUse.isNotBlank() && !keyToUse.startsWith("YOUR_")
+        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIza")
 
         if (isApiKeyConfigured) {
             try {

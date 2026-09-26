@@ -40,7 +40,12 @@ class CommunityActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = CommunityPostAdapter()
+        adapter = CommunityPostAdapter { post ->
+            val intent = Intent(this, CommunityDetailActivity::class.java).apply {
+                putExtra("EXTRA_COMMUNITY_POST", post)
+            }
+            startActivity(intent)
+        }
         binding.rvCommunityPosts.layoutManager = LinearLayoutManager(this)
         binding.rvCommunityPosts.adapter = adapter
     }

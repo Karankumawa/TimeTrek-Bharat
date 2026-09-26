@@ -277,8 +277,12 @@ def get_community_posts():
         for p in posts_cursor:
             p["id"] = str(p["_id"])
             del p["_id"]
-            if "created_at" in p:
+            if "created_at" in p and hasattr(p["created_at"], "isoformat"):
                 p["created_at"] = p["created_at"].isoformat()
+            if "category" not in p:
+                p["category"] = "🏛️ Historical Update"
+            if "likes_count" not in p:
+                p["likes_count"] = 0
             posts.append(p)
 
         return jsonify({"success": True, "data": posts}), 200
@@ -302,10 +306,12 @@ def add_community_post():
         post = {
             "title": data.get("title"),
             "description": data.get("description"),
+            "category": data.get("category", "🏛️ Historical Update"),
             "state_slug": data.get("state_slug", "unknown").lower(),
             "location_name": data.get("location_name", "Local Area"),
             "author_name": data.get("author_name", "History Enthusiast"),
             "image_url": data.get("image_url", ""),
+            "likes_count": 0,
             "created_at": datetime.utcnow()
         }
 
@@ -315,6 +321,35 @@ def add_community_post():
         post["created_at"] = post["created_at"].isoformat()
 
         return jsonify({"success": True, "data": post}), 201
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/community/<post_id>/like", methods=["POST"])
+def like_community_post(post_id):
+    """
+    POST /api/community/<post_id>/like
+    Increments the likes count for a community post in MongoDB.
+    """
+    try:
+        db = Database.get_db()
+        if not ObjectId.is_valid(post_id):
+            return jsonify({"success": False, "error": "Invalid post ID"}), 400
+
+        result = db["community_posts"].find_one_and_update(
+            {"_id": ObjectId(post_id)},
+            {"$inc": {"likes_count": 1}},
+            return_document=True
+        )
+
+        if not result:
+            return jsonify({"success": False, "error": "Post not found"}), 404
+
+        result["id"] = str(result["_id"])
+        del result["_id"]
+        if "created_at" in result and hasattr(result["created_at"], "isoformat"):
+            result["created_at"] = result["created_at"].isoformat()
+
+        return jsonify({"success": True, "data": result}), 200
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

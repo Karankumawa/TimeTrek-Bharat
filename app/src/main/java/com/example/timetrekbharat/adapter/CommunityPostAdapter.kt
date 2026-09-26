@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
-class CommunityPostAdapter : RecyclerView.Adapter<CommunityPostAdapter.PostViewHolder>() {
+class CommunityPostAdapter(
+    private val onPostClickListener: (CommunityPost) -> Unit
+) : RecyclerView.Adapter<CommunityPostAdapter.PostViewHolder>() {
 
     private var postList: List<CommunityPost> = ArrayList()
 
@@ -42,10 +44,11 @@ class CommunityPostAdapter : RecyclerView.Adapter<CommunityPostAdapter.PostViewH
         fun bind(post: CommunityPost) {
             binding.tvPostTitle.text = post.title
             binding.tvPostDescription.text = post.description
-            binding.tvPostAuthor.text = "By: ${post.authorName}"
-            
-            val locationText = if (post.stateSlug.isNotBlank()) {
-                "${post.locationName} • ${post.stateSlug.capitalize()}"
+            binding.tvPostAuthor.text = "By: ${post.authorName.ifBlank { "Anonymous" }}"
+
+            val stateDisplay = post.stateSlug.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            val locationText = if (stateDisplay.isNotBlank()) {
+                "${post.locationName} • $stateDisplay"
             } else {
                 post.locationName
             }
@@ -54,7 +57,7 @@ class CommunityPostAdapter : RecyclerView.Adapter<CommunityPostAdapter.PostViewH
             if (!post.createdAt.isNullOrBlank()) {
                 binding.tvPostDate.text = formatDate(post.createdAt!!)
             } else {
-                binding.tvPostDate.text = "Just now"
+                binding.tvPostDate.text = "Recent"
             }
 
             if (post.imageUrl.isNotBlank()) {
@@ -68,8 +71,26 @@ class CommunityPostAdapter : RecyclerView.Adapter<CommunityPostAdapter.PostViewH
             } else {
                 binding.ivPostImage.visibility = View.GONE
             }
+
+            itemView.setOnClickListener {
+                itemView.animate()
+                    .scaleX(0.96f)
+                    .scaleY(0.96f)
+                    .setDuration(100)
+                    .withEndAction {
+                        itemView.animate()
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .setDuration(100)
+                            .withEndAction {
+                                onPostClickListener(post)
+                            }
+                            .start()
+                    }
+                    .start()
+            }
         }
-        
+
         private fun formatDate(isoDate: String): String {
             return try {
                 val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
@@ -77,8 +98,8 @@ class CommunityPostAdapter : RecyclerView.Adapter<CommunityPostAdapter.PostViewH
                 val date = parser.parse(isoDate)
                 val formatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
                 formatter.format(date ?: return isoDate)
-            } catch (e: Exception) {
-                isoDate
+            } catch (_: Exception) {
+                isoDate.take(10)
             }
         }
     }

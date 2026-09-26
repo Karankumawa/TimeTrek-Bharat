@@ -25,4 +25,7 @@ interface HistoryApi {
 
     @POST("api/community")
     fun addCommunityPost(@Body post: CommunityPost): Call<SingleCommunityResponse>
+
+    @POST("api/community/{id}/like")
+    fun likeCommunityPost(@Path("id") postId: String): Call<SingleCommunityResponse>
 }

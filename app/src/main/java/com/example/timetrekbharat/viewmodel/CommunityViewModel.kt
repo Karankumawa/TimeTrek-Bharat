@@ -31,7 +31,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
     fun fetchPosts(stateSlug: String?) {
         _isLoading.postValue(true)
         _errorMessage.postValue(null)
-        
+
         executor.execute {
             try {
                 val response = RetrofitClient.api.getCommunityPosts(stateSlug).execute()
@@ -48,19 +48,20 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun addPost(title: String, description: String, location: String, stateSlug: String, author: String, imageUrl: String) {
+    fun addPost(title: String, description: String, category: String, location: String, stateSlug: String, author: String, imageUrl: String) {
         _isLoading.postValue(true)
         _errorMessage.postValue(null)
-        
+
         val post = CommunityPost(
             title = title,
             description = description,
+            category = category.ifBlank { "🏛️ Historical Update" },
             locationName = location,
             stateSlug = stateSlug,
             authorName = author,
             imageUrl = imageUrl
         )
-        
+
         executor.execute {
             try {
                 val response = RetrofitClient.api.addCommunityPost(post).execute()

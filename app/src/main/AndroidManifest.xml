@@ -48,6 +48,12 @@
             android:label="Add Local Lore"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".ui.CommunityDetailActivity"
+            android:exported="false"
+            android:label="Community Story Detail"
+            android:parentActivityName=".ui.CommunityActivity" />
+
     </application>
 
 </manifest>
