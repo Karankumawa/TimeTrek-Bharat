@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.timetrekbharat.adapter.ChatAdapter
 import com.example.timetrekbharat.databinding.ActivityAskHistorianBinding
 import com.example.timetrekbharat.viewmodel.AskHistorianViewModel
 
@@ -12,6 +14,7 @@ class AskHistorianActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAskHistorianBinding
     private lateinit var viewModel: AskHistorianViewModel
+    private lateinit var chatAdapter: ChatAdapter
 
     private var stateContext: String? = null
     private var eraContext: String? = null
@@ -31,14 +34,22 @@ class AskHistorianActivity : AppCompatActivity() {
             binding.tvContextBadge.text = "Context: General Indian History"
         }
 
-        if (!defaultQuestion.isNullOrEmpty()) {
-            binding.etQuestionInput.setText(defaultQuestion)
-        }
-
         viewModel = ViewModelProvider(this)[AskHistorianViewModel::class.java]
 
+        setupRecyclerView()
         setupListeners()
         observeViewModel()
+
+        if (!defaultQuestion.isNullOrEmpty()) {
+            sendQuestion(defaultQuestion)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        chatAdapter = ChatAdapter()
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvChatMessages.layoutManager = layoutManager
+        binding.rvChatMessages.adapter = chatAdapter
     }
 
     private fun setupListeners() {
@@ -46,19 +57,16 @@ class AskHistorianActivity : AppCompatActivity() {
 
         binding.chipPrompt1.setOnClickListener {
             val q = "Tell me about the famous forts, palaces, and architectural marvels of ${stateContext ?: "India"}."
-            binding.etQuestionInput.setText(q)
             sendQuestion(q)
         }
 
         binding.chipPrompt2.setOnClickListener {
             val q = "Who were the legendary rulers, warriors, and key battles in ${stateContext ?: "Indian history"}?"
-            binding.etQuestionInput.setText(q)
             sendQuestion(q)
         }
 
         binding.chipPrompt3.setOnClickListener {
             val q = "What were the major cultural heritage, arts, and traditions during this historical era?"
-            binding.etQuestionInput.setText(q)
             sendQuestion(q)
         }
 
@@ -71,27 +79,23 @@ class AskHistorianActivity : AppCompatActivity() {
     private fun sendQuestion(question: String?) {
         if (!question.isNullOrBlank()) {
             viewModel.askQuestion(stateContext, eraContext, question)
+            binding.etQuestionInput.setText("")
         } else {
             Toast.makeText(this, "Please type a question.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun observeViewModel() {
+        viewModel.messages.observe(this) { messages ->
+            if (!messages.isNullOrEmpty()) {
+                chatAdapter.setMessages(messages)
+                binding.rvChatMessages.smoothScrollToPosition(messages.size - 1)
+            }
+        }
+
         viewModel.isLoading.observe(this) { isLoading ->
             binding.pbAiLoading.visibility = if (isLoading == true) View.VISIBLE else View.GONE
             binding.btnSendQuestion.isEnabled = isLoading != true
-        }
-
-        viewModel.currentPrompt.observe(this) { prompt ->
-            if (!prompt.isNullOrEmpty()) {
-                binding.tvUserPromptDisplay.text = "Question: $prompt"
-            }
-        }
-
-        viewModel.historianAnswer.observe(this) { answer ->
-            if (!answer.isNullOrEmpty()) {
-                binding.tvAiResponse.text = answer
-            }
         }
 
         viewModel.errorMessage.observe(this) { error ->

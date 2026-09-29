@@ -2,17 +2,32 @@
 <resources>
     <string name="app_name">TimeTrek Bharat</string>
     <string name="subtitle_home">Explore India\'s Royal History &amp; Timelines</string>
-    <string name="search_hint">Search state name or region…</string>
-    <string name="ask_historian_btn">Ask Historian AI</string>
+    <string name="search_hint">Search state, region or keyword…</string>
+    <string name="ask_historian_btn">Ask Historian AI 🤖</string>
+    <string name="community_lore_btn">Community Lore 📜</string>
     <string name="chronological_timeline">Chronological Historical Timeline</string>
     <string name="key_events_label">Key Historical Events:</string>
     <string name="key_rulers_label">Key Rulers &amp; Leaders:</string>
-    <string name="ask_ai_about_era">Ask AI about this Era</string>
-    <string name="consulting_historian">Consulting Gemini Historian AI…</string>
-    <string name="historian_title">Gemini Historian</string>
+    <string name="ask_ai_about_era">Ask AI about this Era 🤖</string>
+    <string name="consulting_historian">Consulting Historian AI…</string>
+    <string name="historian_title">Historian AI Chat 🤖</string>
     <string name="ask_prompt_hint">Type your history question here…</string>
     <string name="send">Send</string>
     <string name="retry">Retry</string>
-    <string name="no_states_found">No states found. Pull down to refresh or check network.</string>
-    <string name="gallery_title">📸 Historical Gallery (Tap to view):</string>
+    <string name="no_states_found">No states found. Try changing filters or search terms.</string>
+    <string name="gallery_title">📸 Historical Photo Gallery (Tap to view):</string>
+
+    <!-- Filter Chips -->
+    <string name="chip_all">All States</string>
+    <string name="chip_favorites">⭐ Favorites</string>
+    <string name="chip_north">Northern</string>
+    <string name="chip_south">Southern</string>
+    <string name="chip_west">Western</string>
+    <string name="chip_east">Eastern</string>
+    <string name="chip_central">Central</string>
+    <string name="chip_northeast">North-East</string>
+
+    <!-- Stats Banner -->
+    <string name="stats_banner_title">18+ Royal States &amp; Union Territories</string>
+    <string name="stats_banner_subtitle">Interactive Timelines, Dynasty Maps &amp; AI Historian</string>
 </resources>

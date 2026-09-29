@@ -4,13 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.timetrekbharat.model.CommunityPost
 import com.example.timetrekbharat.network.RetrofitClient
-import java.util.concurrent.Executors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CommunityViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val executor = Executors.newSingleThreadExecutor()
 
     private val _posts = MutableLiveData<List<CommunityPost>>()
     val posts: LiveData<List<CommunityPost>> = _posts
@@ -28,15 +28,15 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
         fetchPosts(null)
     }
 
-    fun fetchPosts(stateSlug: String?) {
+    fun fetchPosts(stateSlug: String? = null) {
         _isLoading.postValue(true)
         _errorMessage.postValue(null)
 
-        executor.execute {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = RetrofitClient.api.getCommunityPosts(stateSlug).execute()
-                if (response.isSuccessful && response.body() != null && response.body()!!.isSuccess) {
-                    _posts.postValue(response.body()!!.data ?: emptyList())
+                val response = RetrofitClient.api.getCommunityPosts(stateSlug)
+                if (response.isSuccessful && response.body()?.isSuccess == true) {
+                    _posts.postValue(response.body()?.data ?: emptyList())
                 } else {
                     _errorMessage.postValue("Failed to fetch community updates.")
                 }
@@ -62,10 +62,10 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
             imageUrl = imageUrl
         )
 
-        executor.execute {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = RetrofitClient.api.addCommunityPost(post).execute()
-                if (response.isSuccessful && response.body() != null && response.body()!!.isSuccess) {
+                val response = RetrofitClient.api.addCommunityPost(post)
+                if (response.isSuccessful && response.body()?.isSuccess == true) {
                     _postSuccess.postValue(true)
                 } else {
                     _errorMessage.postValue("Failed to submit lore.")

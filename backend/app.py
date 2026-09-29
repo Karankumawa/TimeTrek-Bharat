@@ -136,6 +136,8 @@ def get_all_states():
         states_collection = db["states"]
 
         search_query = request.args.get("search", "").strip()
+        region_query = request.args.get("region", "").strip()
+
         filter_criteria = {}
         if search_query:
             filter_criteria["$or"] = [
@@ -144,6 +146,8 @@ def get_all_states():
                 {"region": {"$regex": search_query, "$options": "i"}},
                 {"short_description": {"$regex": search_query, "$options": "i"}}
             ]
+        if region_query and region_query.lower() != "all":
+            filter_criteria["region"] = {"$regex": region_query, "$options": "i"}
 
         # Fetch without restrictive projection so all fields are available
         states_cursor = states_collection.find(filter_criteria)

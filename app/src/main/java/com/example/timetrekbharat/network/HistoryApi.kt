@@ -5,7 +5,7 @@ import com.example.timetrekbharat.model.CommunityResponse
 import com.example.timetrekbharat.model.SingleCommunityResponse
 import com.example.timetrekbharat.model.StateDetailResponse
 import com.example.timetrekbharat.model.StateResponse
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,17 +15,28 @@ import retrofit2.http.Query
 interface HistoryApi {
 
     @GET("api/states")
-    fun getAllStates(@Query("search") searchQuery: String?): Call<StateResponse>
+    suspend fun getAllStates(
+        @Query("search") searchQuery: String? = null,
+        @Query("region") regionQuery: String? = null
+    ): Response<StateResponse>
 
     @GET("api/states/{id}")
-    fun getStateDetail(@Path("id") stateIdentifier: String): Call<StateDetailResponse>
+    suspend fun getStateDetail(
+        @Path("id") stateIdentifier: String
+    ): Response<StateDetailResponse>
 
     @GET("api/community")
-    fun getCommunityPosts(@Query("state") stateSlug: String?): Call<CommunityResponse>
+    suspend fun getCommunityPosts(
+        @Query("state") stateSlug: String? = null
+    ): Response<CommunityResponse>
 
     @POST("api/community")
-    fun addCommunityPost(@Body post: CommunityPost): Call<SingleCommunityResponse>
+    suspend fun addCommunityPost(
+        @Body post: CommunityPost
+    ): Response<SingleCommunityResponse>
 
     @POST("api/community/{id}/like")
-    fun likeCommunityPost(@Path("id") postId: String): Call<SingleCommunityResponse>
+    suspend fun likeCommunityPost(
+        @Path("id") postId: String
+    ): Response<SingleCommunityResponse>
 }

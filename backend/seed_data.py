@@ -509,6 +509,316 @@ SAMPLE_STATES_DATA = [
                 ]
             }
         ]
+    },
+    {
+        "slug": "kerala",
+        "name": "Kerala",
+        "region": "Southern India",
+        "capital": "Thiruvananthapuram",
+        "short_description": "God's Own Country, birthplace of Chera Dynasty, ancient maritime spice trade with Rome, Padmanabhaswamy Temple, and Kalarippayattu.",
+        "image_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 300 BCE – 1102 AD",
+                "title": "Chera Empire & Muziris Global Spice Port",
+                "description": "Muziris served as the world's chief spice trading hub connecting India with Roman, Greek, and Arab empires.",
+                "key_events": [
+                    "Muziris port maritime pepper trade with Roman Empire",
+                    "Propagation of Kalarippayattu martial arts",
+                    "Establishment of ancient coastal Jewish and Christian communities"
+                ],
+                "key_rulers": ["Uthiyan Cheralathan", "Kulasekhara Varman"],
+                "image_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Colonial Era",
+                "period": "1729 AD – 1949 AD",
+                "title": "Travancore Kingdom & Battle of Colachel",
+                "description": "Marthanda Varma defeated the Dutch East India Company at Colachel (1741), marking the first Asian naval defeat of a European power.",
+                "key_events": [
+                    "Battle of Colachel (1741 AD)",
+                    "Dedication of Travancore to Lord Padmanabha",
+                    "Social reforms of Sri Narayana Guru"
+                ],
+                "key_rulers": ["Anizham Thirunal Marthanda Varma", "Swathi Thirunal"],
+                "image_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "madhya-pradesh",
+        "name": "Madhya Pradesh",
+        "region": "Central India",
+        "capital": "Bhopal",
+        "short_description": "Heart of India, home to UNESCO World Heritage Sanchi Stupa, Khajuraho erotic stone temples, Bhimbetka rock shelters, and Gwalior Fort.",
+        "image_url": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 300 BCE – 100 BCE",
+                "title": "Maurya & Shunga Era at Sanchi Stupa",
+                "description": "Emperor Ashoka commissioned the Great Stupa at Sanchi, creating a masterpiece of Buddhist architecture and stone carving.",
+                "key_events": [
+                    "Construction of Great Stupa 1 by Emperor Ashoka",
+                    "Shunga dynasty stone gateways (Toranas) creation",
+                    "Bhimbetka rock shelters prehistoric cave art"
+                ],
+                "key_rulers": ["Emperor Ashoka", "Pushyamitra Shunga"],
+                "image_url": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "950 AD – 1050 AD",
+                "title": "Chandela Dynasty & Khajuraho Temples",
+                "description": "Chandela Rajput kings built 85 intricate stone temples at Khajuraho celebrating architectural harmony and spiritual art.",
+                "key_events": [
+                    "Construction of Kandariya Mahadeva Temple",
+                    "Gwalior Fort defense under Tomar Rajputs",
+                    "Rani Durgavati's resistance against Akbar"
+                ],
+                "key_rulers": ["Yashovarman", "Dhanga", "Rani Durgavati"],
+                "image_url": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "bihar",
+        "name": "Bihar",
+        "region": "Eastern India",
+        "capital": "Patna",
+        "short_description": "Birthplace of Buddhism and Jainism, imperial seat of Maurya & Gupta Empires, Mahavira, Lord Buddha, and ancient Nalanda University.",
+        "image_url": "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 544 BCE – 232 BCE",
+                "title": "Magadha Empire & Emperor Ashoka",
+                "description": "Pataliputra served as imperial capital of Magadha, Nanda, and Maurya empires under Chandragupta and Ashoka the Great.",
+                "key_events": [
+                    "Enlightenment of Gautam Buddha at Bodh Gaya",
+                    "Establishment of Maurya Empire under Chandragupta & Chanakya",
+                    "Ashokan rock and pillar edicts"
+                ],
+                "key_rulers": ["Bimbisara", "Chandragupta Maurya", "Emperor Ashoka"],
+                "image_url": "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Ancient Era",
+                "period": "240 AD – 550 AD",
+                "title": "Nalanda University Golden Era",
+                "description": "Nalanda University flourished as a global residential seat of higher learning attracting scholars like Xuanzang.",
+                "key_events": [
+                    "Founding of Nalanda Mahavihara by Kumaragupta I",
+                    "Gupta Empire Golden Age of science, astronomy, and mathematics",
+                    "Aryabhata's mathematical treatises"
+                ],
+                "key_rulers": ["Chandragupta II (Vikramaditya)", "Kumaragupta I"],
+                "image_url": "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1622278647429-71bc97e904e8?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "odisha",
+        "name": "Odisha",
+        "region": "Eastern India",
+        "capital": "Bhubaneswar",
+        "short_description": "Land of Kalinga, magnificent Konark Sun Temple chariot architecture, Jagannath Temple at Puri, and ancient seafaring Sadhabas.",
+        "image_url": "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 261 BCE",
+                "title": "Kalinga War & Ashoka's Transformation",
+                "description": "The Kalinga War fought on the banks of Daya river led Emperor Ashoka to renounce warfare and adopt Dhamma (Buddhism).",
+                "key_events": [
+                    "Kalinga War on Daya river",
+                    "Inscription of Dhauli Ashokan Edicts",
+                    "Maritime Sadhabas Bali Yatra sea voyages to Java & Bali"
+                ],
+                "key_rulers": ["Kalinga Generals", "Emperor Ashoka"],
+                "image_url": "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "1035 AD – 1250 AD",
+                "title": "Eastern Ganga Dynasty & Konark Sun Temple",
+                "description": "Narasimhadeva I built the Konark Sun Temple as a giant stone chariot with 24 carved wheels pulled by 7 horses.",
+                "key_events": [
+                    "Konark Sun Temple UNESCO site construction",
+                    "Jagannath Puri Temple grand chariot procession",
+                    "Mastery of Kalinga architectural style"
+                ],
+                "key_rulers": ["Anantavarman Chodaganga", "Narasimhadeva I"],
+                "image_url": "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1606298855672-3efb63017be8?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "assam",
+        "name": "Assam",
+        "region": "North-East India",
+        "capital": "Dispur",
+        "short_description": "Land of the mighty Brahmaputra, 600-year invincible Ahom Kingdom, Lachit Borphukan, Kamakhya Temple, and world-renowned tea estates.",
+        "image_url": "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 350 AD – 1140 AD",
+                "title": "Kamarupa Kingdom & Kamakhya Shrine",
+                "description": "Kamarupa kings established a powerful Eastern kingdom celebrated in ancient epics and visited by pilgrim Xuanzang.",
+                "key_events": [
+                    "Reign of Bhaskaravarman of Kamarupa",
+                    "Patronage of ancient Kamakhya Tantric shrine",
+                    "Pragjyotishpura astronomical heritage"
+                ],
+                "key_rulers": ["Pushyavarman", "Bhaskaravarman"],
+                "image_url": "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                "id": 2,
+                "era": "Medieval Era",
+                "period": "1228 AD – 1826 AD",
+                "title": "Ahom Dynasty & Battle of Saraighat",
+                "description": "Chaolung Sukaphaa founded the Ahom Kingdom. General Lachit Borphukan famously defeated Mughal forces in the naval Battle of Saraighat (1671).",
+                "key_events": [
+                    "Battle of Saraighat (1671 AD)",
+                    "Construction of Rang Ghar amphitheater at Sivasagar",
+                    "600-year unbroken Ahom sovereignty"
+                ],
+                "key_rulers": ["Sukaphaa", "Lachit Borphukan", "Rudra Singha"],
+                "image_url": "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "jammu-and-kashmir",
+        "name": "Jammu & Kashmir",
+        "region": "Northern India",
+        "capital": "Srinagar / Jammu",
+        "short_description": "Paradise on Earth, ancient Martand Sun Temple, Karkota dynasty empire of Lalitaditya, Silk Route trade, and Dal Lake.",
+        "image_url": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "625 AD – 855 AD",
+                "title": "Karkota Dynasty & Emperor Lalitaditya",
+                "description": "Lalitaditya Muktapida constructed Martand Sun Temple and expanded a trans-Himalayan empire spanning Central Asia.",
+                "key_events": [
+                    "Construction of Martand Sun Temple",
+                    "Kashmir Shaivism philosophy compilation",
+                    "Silk Route mountain trade passes control"
+                ],
+                "key_rulers": ["Lalitaditya Muktapida", "Durlabhavardhana"],
+                "image_url": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "telangana",
+        "name": "Telangana",
+        "region": "Southern India",
+        "capital": "Hyderabad",
+        "short_description": "Land of Kakatiya Dynasty fortresses, Thousand Pillar Temple, Warangal Gateways, Charminar, and Koh-i-Noor diamond heritage.",
+        "image_url": "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Medieval Era",
+                "period": "1163 AD – 1323 AD",
+                "title": "Kakatiya Dynasty & Queen Rudrama Devi",
+                "description": "The Kakatiyas built Warangal Fort, Ramappa Temple (UNESCO World Heritage Site), and advanced irrigation chain tanks.",
+                "key_events": [
+                    "Construction of Ramappa Temple with floating bricks",
+                    "Warangal Fort Keerthi Toranas gateways",
+                    "Reign of warrior queen Rani Rudrama Devi"
+                ],
+                "key_rulers": ["Rani Rudrama Devi", "Prataparudra", "Ganapati Deva"],
+                "image_url": "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
+    },
+    {
+        "slug": "himachal-pradesh",
+        "name": "Himachal Pradesh",
+        "region": "Northern India",
+        "capital": "Shimla",
+        "short_description": "Devbhumi (Abode of Gods), ancient Trigarta Kingdom, rock-cut Masrur temples, Himalayan fortresses, and Kangra miniature art.",
+        "image_url": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80",
+        "banner_url": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+        "timeline": [
+            {
+                "id": 1,
+                "era": "Ancient Era",
+                "period": "c. 500 BCE – 1800 AD",
+                "title": "Trigarta Kingdom & Kangra Miniature Art",
+                "description": "Katoch Dynasty ruled Kangra Fort (one of India's oldest), patronizing sublime Kangra miniature school of painting.",
+                "key_events": [
+                    "Defense of Kangra Fort against ancient invasions",
+                    "Carving of Masrur Rock Cut Monolithic Temples",
+                    "Kangra Valley miniature painting tradition"
+                ],
+                "key_rulers": ["Maharaja Sansar Chand Katoch", "Susharma Chand"],
+                "image_url": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80",
+                "images": [
+                    "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ]
     }
 ]
 

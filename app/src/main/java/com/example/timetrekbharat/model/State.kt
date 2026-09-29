@@ -30,5 +30,7 @@ data class State(
     var bannerUrl: String? = null,
 
     @SerializedName("timeline")
-    var timeline: List<TimelineEntry>? = ArrayList()
+    var timeline: List<TimelineEntry>? = ArrayList(),
+
+    var isFavorite: Boolean = false
 ) : Serializable

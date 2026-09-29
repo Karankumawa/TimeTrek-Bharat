@@ -16,7 +16,7 @@
         android:background="@color/maroon_royal"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="14dp">
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -57,7 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FAF2E8"
-        android:padding="10dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="6dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -69,95 +70,61 @@
                 android:id="@+id/chipPrompt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Forts &amp; Architecture"
+                android:layout_marginEnd="6dp"
+                android:text="Forts &amp; Architecture 🏰"
+                android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipIcon="@android:drawable/ic_menu_compass" />
+                app:chipStrokeColor="@color/card_stroke"
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipPrompt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Key Rulers &amp; Battles"
+                android:layout_marginEnd="6dp"
+                android:text="Key Rulers &amp; Battles ⚔️"
+                android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipIcon="@android:drawable/ic_menu_myplaces" />
+                app:chipStrokeColor="@color/card_stroke"
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipPrompt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Cultural Heritage &amp; Arts"
+                android:layout_marginEnd="6dp"
+                android:text="Cultural Heritage &amp; Arts 🎨"
+                android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipIcon="@android:drawable/ic_menu_gallery" />
+                app:chipStrokeColor="@color/card_stroke"
+                app:chipStrokeWidth="1dp" />
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- Conversation Display Scroll Area -->
-    <androidx.core.widget.NestedScrollView
+    <!-- Conversational Chat History List -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:layout_weight="1">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChatMessages"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="8dp"
+            tools:listitem="@layout/item_chat_message" />
+
+        <ProgressBar
+            android:id="@+id/pbAiLoading"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/maroon_royal"
+            android:visibility="gone" />
+    </FrameLayout>
 
-            <!-- Welcome / Question Card -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvUserPromptDisplay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/saffron_primary"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:text="Question: Tell me about the architecture during Rajputana era in Rajasthan" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/card_stroke" />
-
-                    <ProgressBar
-                        android:id="@+id/pbAiLoading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:indeterminateTint="@color/maroon_royal"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tvAiResponse"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="4dp"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp"
-                        tools:text="Welcome! Ask me any question regarding the historical eras, dynasties, architecture, or key battles of India." />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <!-- Question Input Footer -->
+    <!-- Question Input Footer Bar -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -169,7 +136,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:padding="10dp">
 
             <EditText
                 android:id="@+id/etQuestionInput"
@@ -180,8 +147,8 @@
                 android:hint="@string/ask_prompt_hint"
                 android:inputType="textMultiLine"
                 android:maxLines="4"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_muted"
                 android:textSize="14sp" />

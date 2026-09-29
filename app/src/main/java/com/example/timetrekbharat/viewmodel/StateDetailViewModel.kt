@@ -30,4 +30,8 @@ class StateDetailViewModel(application: Application) : AndroidViewModel(applicat
             repository.fetchStateDetailFromNetwork(slug)
         }
     }
+
+    fun toggleFavorite(state: State) {
+        repository.toggleFavorite(state.slug, !state.isFavorite)
+    }
 }

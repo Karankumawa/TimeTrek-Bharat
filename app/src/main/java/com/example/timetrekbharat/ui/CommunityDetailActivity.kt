@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.timetrekbharat.R
 import com.example.timetrekbharat.databinding.ActivityCommunityDetailBinding
 import com.example.timetrekbharat.model.CommunityPost
-import com.example.timetrekbharat.model.SingleCommunityResponse
 import com.example.timetrekbharat.network.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CommunityDetailActivity : AppCompatActivity() {
 
@@ -78,25 +78,25 @@ class CommunityDetailActivity : AppCompatActivity() {
         if (postId.isBlank()) return
         binding.btnLike.isEnabled = false
 
-        RetrofitClient.api.likeCommunityPost(postId).enqueue(object : Callback<SingleCommunityResponse> {
-            override fun onResponse(
-                call: Call<SingleCommunityResponse>,
-                response: Response<SingleCommunityResponse>
-            ) {
-                binding.btnLike.isEnabled = true
-                if (response.isSuccessful && response.body()?.isSuccess == true) {
-                    val updatedPost = response.body()?.data
-                    if (updatedPost != null) {
-                        post = updatedPost
-                        binding.btnLike.text = "❤️ Like (${updatedPost.likesCount})"
-                        Toast.makeText(this@CommunityDetailActivity, "Thanks for upvoting!", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.api.likeCommunityPost(postId)
+                withContext(Dispatchers.Main) {
+                    binding.btnLike.isEnabled = true
+                    if (response.isSuccessful && response.body()?.isSuccess == true) {
+                        val updatedPost = response.body()?.data
+                        if (updatedPost != null) {
+                            post = updatedPost
+                            binding.btnLike.text = "❤️ Like (${updatedPost.likesCount})"
+                            Toast.makeText(this@CommunityDetailActivity, "Thanks for upvoting!", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+            } catch (_: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.btnLike.isEnabled = true
+                }
             }
-
-            override fun onFailure(call: Call<SingleCommunityResponse>, t: Throwable) {
-                binding.btnLike.isEnabled = true
-            }
-        })
+        }
     }
 }

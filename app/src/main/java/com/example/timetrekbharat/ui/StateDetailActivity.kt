@@ -1,5 +1,6 @@
 package com.example.timetrekbharat.ui
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -20,6 +21,7 @@ class StateDetailActivity : AppCompatActivity() {
     private lateinit var adapter: TimelineAdapter
     private var currentStateSlug: String? = null
     private var currentStateName: String? = null
+    private var currentState: State? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +41,11 @@ class StateDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[StateDetailViewModel::class.java]
 
         setupRecyclerView()
+        setupListeners()
         observeViewModel()
 
         if (!currentStateSlug.isNullOrEmpty()) {
             viewModel.setStateSlug(currentStateSlug)
-        }
-
-        binding.fabAskHistorianState.setOnClickListener {
-            val intent = Intent(this@StateDetailActivity, AskHistorianActivity::class.java).apply {
-                putExtra("EXTRA_STATE_NAME", currentStateName)
-            }
-            startActivity(intent)
         }
     }
 
@@ -66,9 +62,35 @@ class StateDetailActivity : AppCompatActivity() {
         binding.rvTimeline.adapter = adapter
     }
 
+    private fun setupListeners() {
+        binding.fabAskHistorianState.setOnClickListener {
+            val intent = Intent(this@StateDetailActivity, AskHistorianActivity::class.java).apply {
+                putExtra("EXTRA_STATE_NAME", currentStateName)
+            }
+            startActivity(intent)
+        }
+
+        binding.btnFavoriteDetail.setOnClickListener {
+            val state = currentState ?: return@setOnClickListener
+            viewModel.toggleFavorite(state)
+        }
+
+        binding.btnShareDetail.setOnClickListener {
+            val state = currentState ?: return@setOnClickListener
+            val shareText = "📜 Discover the rich history of ${state.name} on TimeTrek Bharat!\n\n${state.shortDescription}\n\nDownload TimeTrek Bharat to explore royal timelines."
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "History of ${state.name}")
+                putExtra(Intent.EXTRA_TEXT, shareText)
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share History via"))
+        }
+    }
+
     private fun observeViewModel() {
         viewModel.stateDetail.observe(this) { state ->
             if (state != null) {
+                currentState = state
                 bindStateData(state)
             }
         }
@@ -91,6 +113,12 @@ class StateDetailActivity : AppCompatActivity() {
         binding.tvCapitalDetail.text = "Capital: ${state.capital ?: "N/A"}"
         binding.tvRegionDetail.text = "Region: ${state.region ?: "N/A"}"
         binding.tvDescriptionDetail.text = state.shortDescription
+
+        if (state.isFavorite) {
+            binding.btnFavoriteDetail.setImageResource(R.drawable.btn_star_big_on)
+        } else {
+            binding.btnFavoriteDetail.setImageResource(R.drawable.btn_star_big_off)
+        }
 
         val bannerUrl = if (!state.bannerUrl.isNullOrBlank()) state.bannerUrl else state.imageUrl
 

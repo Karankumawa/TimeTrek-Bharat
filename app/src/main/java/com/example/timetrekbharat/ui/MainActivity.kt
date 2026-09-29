@@ -8,7 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.timetrekbharat.R
 import com.example.timetrekbharat.adapter.StateAdapter
 import com.example.timetrekbharat.databinding.ActivityMainBinding
 import com.example.timetrekbharat.viewmodel.MainViewModel
@@ -27,23 +28,28 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setupRecyclerView()
-        setupSearchAndListeners()
+        setupSearchAndFilterListeners()
         observeViewModel()
     }
 
     private fun setupRecyclerView() {
-        adapter = StateAdapter { state ->
-            val intent = Intent(this@MainActivity, StateDetailActivity::class.java).apply {
-                putExtra("EXTRA_STATE_SLUG", state.slug)
-                putExtra("EXTRA_STATE_NAME", state.name)
+        adapter = StateAdapter(
+            onStateClickListener = { state ->
+                val intent = Intent(this@MainActivity, StateDetailActivity::class.java).apply {
+                    putExtra("EXTRA_STATE_SLUG", state.slug)
+                    putExtra("EXTRA_STATE_NAME", state.name)
+                }
+                startActivity(intent)
+            },
+            onFavoriteClickListener = { state ->
+                viewModel.toggleFavorite(state)
             }
-            startActivity(intent)
-        }
-        binding.rvStates.layoutManager = GridLayoutManager(this, 1)
+        )
+        binding.rvStates.layoutManager = LinearLayoutManager(this)
         binding.rvStates.adapter = adapter
     }
 
-    private fun setupSearchAndListeners() {
+    private fun setupSearchAndFilterListeners() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshStates()
         }
@@ -55,10 +61,31 @@ class MainActivity : AppCompatActivity() {
         binding.etSearchState.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.setSearchQuery(s?.toString() ?: "")
+                val query = s?.toString() ?: ""
+                viewModel.setSearchQuery(query)
+                binding.btnClearSearch.visibility = if (query.isNotBlank()) View.VISIBLE else View.GONE
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        binding.btnClearSearch.setOnClickListener {
+            binding.etSearchState.setText("")
+        }
+
+        binding.chipGroupRegions.setOnCheckedStateChangeListener { _, checkedIds ->
+            if (checkedIds.isEmpty()) return@setOnCheckedStateChangeListener
+            val filter = when (checkedIds[0]) {
+                R.id.chipFavorites -> "Favorites"
+                R.id.chipNorth -> "North"
+                R.id.chipSouth -> "South"
+                R.id.chipWest -> "West"
+                R.id.chipEast -> "East"
+                R.id.chipCentral -> "Central"
+                R.id.chipNorthEast -> "North-East"
+                else -> "All"
+            }
+            viewModel.setRegionFilter(filter)
+        }
 
         binding.fabAskHistorian.setOnClickListener {
             startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
@@ -83,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this) { isLoading ->
             binding.swipeRefreshLayout.isRefreshing = isLoading == true
-            binding.progressBar.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+            binding.progressBar.visibility = if (isLoading == true && adapter.itemCount == 0) View.VISIBLE else View.GONE
         }
 
         viewModel.errorMessage.observe(this) { error ->

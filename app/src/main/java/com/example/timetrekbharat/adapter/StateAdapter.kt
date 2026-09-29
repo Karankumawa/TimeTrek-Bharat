@@ -11,7 +11,8 @@ import com.example.timetrekbharat.databinding.ItemStateCardBinding
 import com.example.timetrekbharat.model.State
 
 class StateAdapter(
-    private val onStateClickListener: (State) -> Unit
+    private val onStateClickListener: (State) -> Unit,
+    private val onFavoriteClickListener: ((State) -> Unit)? = null
 ) : RecyclerView.Adapter<StateAdapter.StateViewHolder>() {
 
     private var stateList: List<State> = ArrayList()
@@ -59,6 +60,28 @@ class StateAdapter(
             val eraCount = state.timeline?.size ?: 0
             binding.tvTimelineCount.text = "$eraCount Historical Eras"
 
+            if (state.isFavorite) {
+                binding.ibFavorite.setImageResource(android.R.drawable.btn_star_big_on)
+            } else {
+                binding.ibFavorite.setImageResource(android.R.drawable.btn_star_big_off)
+            }
+
+            binding.ibFavorite.setOnClickListener {
+                binding.ibFavorite.animate()
+                    .scaleX(1.3f)
+                    .scaleY(1.3f)
+                    .setDuration(150)
+                    .withEndAction {
+                        binding.ibFavorite.animate()
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .setDuration(150)
+                            .start()
+                    }
+                    .start()
+                onFavoriteClickListener?.invoke(state)
+            }
+
             if (!state.imageUrl.isNullOrBlank()) {
                 Glide.with(itemView.context)
                     .load(state.imageUrl)
@@ -71,7 +94,6 @@ class StateAdapter(
             }
 
             itemView.setOnClickListener {
-                // Interactive Card Press Scale Animation
                 itemView.animate()
                     .scaleX(0.96f)
                     .scaleY(0.96f)
