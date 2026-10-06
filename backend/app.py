@@ -6,6 +6,7 @@ import os
 
 from config import Config
 from db import Database
+from model import heritage_ml_engine
 
 app = Flask(__name__)
 # Enable CORS for cross-origin mobile and web requests
@@ -356,6 +357,69 @@ def like_community_post(post_id):
         return jsonify({"success": True, "data": result}), 200
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route("/api/v1/predict", methods=["POST"])
+def predict_monument():
+    """
+    POST /api/v1/predict
+    Analyzes uploaded image file or URL to predict the Indian Heritage monument class.
+    Flags low confidence results (<0.60) as False Predictions.
+    """
+    try:
+        image_bytes = None
+        if "image" in request.files:
+            file = request.files["image"]
+            image_bytes = file.read()
+        elif request.is_json and request.json.get("image_url"):
+            url = request.json.get("image_url")
+            import requests
+            res = requests.get(url, timeout=5)
+            image_bytes = res.content
+        elif request.data:
+            image_bytes = request.data
+
+        if not image_bytes:
+            return jsonify({
+                "success": False,
+                "is_false_prediction": True,
+                "error": "No image file or image_url provided.",
+                "dataset_links": heritage_ml_engine.get_dataset_links()
+            }), 400
+
+        result = heritage_ml_engine.predict_image(image_bytes)
+        result["dataset_links"] = heritage_ml_engine.get_dataset_links()
+        return jsonify(result), 200
+
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "is_false_prediction": True,
+            "error": f"Model inference error: {str(e)}",
+            "dataset_links": heritage_ml_engine.get_dataset_links()
+        }), 500
+
+@app.route("/api/v1/model-info", methods=["GET"])
+def get_model_info():
+    """
+    GET /api/v1/model-info
+    Returns details on the ML monument classifier, dataset training links, and false prediction threshold.
+    """
+    return jsonify({
+        "success": True,
+        "model_name": "TimeTrek Bharat Heritage Classifier v1.0",
+        "algorithm": "Random Forest with RGB Color & Texture Feature Moments",
+        "is_trained": heritage_ml_engine.is_trained,
+        "false_prediction_threshold": heritage_ml_engine.confidence_threshold,
+        "dataset_links": heritage_ml_engine.get_dataset_links(),
+        "supported_classes": [
+            "Badal Mahal (Kumbhalgarh Fort)",
+            "Rani ki Vav (Queen's Stepwell)",
+            "Vittala Temple Musical Pillars (Hampi)",
+            "Gol Gumbaz Whispering Gallery",
+            "Taj Mahal",
+            "Konark Sun Temple"
+        ]
+    }), 200
 
 @app.errorhandler(404)
 def not_found(e):
