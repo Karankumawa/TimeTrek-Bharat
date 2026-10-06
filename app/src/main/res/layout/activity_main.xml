@@ -282,6 +282,17 @@
         android:orientation="vertical">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabSmritiWalk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="स्मृतिवॉक SmritiWalk AI"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/maroon_royal"
+            app:icon="@android:drawable/ic_menu_camera"
+            app:iconTint="@color/gold_royal" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fabCommunity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

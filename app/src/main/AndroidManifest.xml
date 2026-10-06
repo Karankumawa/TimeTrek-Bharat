@@ -54,6 +54,12 @@
             android:label="Community Story Detail"
             android:parentActivityName=".ui.CommunityActivity" />
 
+        <activity
+            android:name=".ui.SmritiWalkActivity"
+            android:exported="false"
+            android:label="SmritiWalk - AI Living Heritage"
+            android:parentActivityName=".ui.MainActivity" />
+
     </application>
 
 </manifest>

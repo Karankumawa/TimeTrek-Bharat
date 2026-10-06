@@ -87,6 +87,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.setRegionFilter(filter)
         }
 
+        binding.fabSmritiWalk.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
+        }
+
         binding.fabAskHistorian.setOnClickListener {
             startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
         }
