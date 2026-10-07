@@ -110,14 +110,15 @@ class StateDetailActivity : AppCompatActivity() {
         currentStateName = state.name
         binding.collapsingToolbar.title = state.name
         binding.tvStateTitleDetail.text = state.name
-        binding.tvCapitalDetail.text = "Capital: ${state.capital ?: "N/A"}"
+        binding.tvCapitalDetail.text = "🏛️ Capital: ${state.capital ?: "N/A"}"
         binding.tvRegionDetail.text = "Region: ${state.region ?: "N/A"}"
         binding.tvDescriptionDetail.text = state.shortDescription
+        binding.fabAskHistorianState.text = "🤖 Ask AI about ${state.name}"
 
         if (state.isFavorite) {
-            binding.btnFavoriteDetail.setImageResource(R.drawable.btn_star_big_on)
+            binding.btnFavoriteDetail.setImageResource(com.example.timetrekbharat.R.drawable.ic_star_filled)
         } else {
-            binding.btnFavoriteDetail.setImageResource(R.drawable.btn_star_big_off)
+            binding.btnFavoriteDetail.setImageResource(com.example.timetrekbharat.R.drawable.ic_star_outline)
         }
 
         val bannerUrl = if (!state.bannerUrl.isNullOrBlank()) state.bannerUrl else state.imageUrl

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetrekbharat.R
 import com.example.timetrekbharat.adapter.StateAdapter
 import com.example.timetrekbharat.databinding.ActivityMainBinding
+import com.example.timetrekbharat.databinding.DialogExplorerHubBinding
 import com.example.timetrekbharat.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -87,29 +89,37 @@ class MainActivity : AppCompatActivity() {
             viewModel.setRegionFilter(filter)
         }
 
-        binding.fabSmritiWalk.setOnClickListener {
+        binding.fabExplorerHub.setOnClickListener {
+            showExplorerHubBottomSheet()
+        }
+
+        binding.tvHeaderBadge.setOnClickListener {
+            val count = adapter.itemCount
+            Toast.makeText(this, "🏛️ Currently displaying $count Indian States & UTs from live database.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showExplorerHubBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val hubBinding = DialogExplorerHubBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(hubBinding.root)
+
+        hubBinding.cardHubSmritiWalk.setOnClickListener {
+            bottomSheetDialog.dismiss()
             startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
         }
 
-        binding.cardQuickSmritiWalk.setOnClickListener {
-            startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
-        }
-
-        binding.fabAskHistorian.setOnClickListener {
+        hubBinding.cardHubAskHistorian.setOnClickListener {
+            bottomSheetDialog.dismiss()
             startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
         }
 
-        binding.cardQuickHistorian.setOnClickListener {
-            startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
-        }
-
-        binding.fabCommunity.setOnClickListener {
+        hubBinding.cardHubCommunity.setOnClickListener {
+            bottomSheetDialog.dismiss()
             startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
         }
 
-        binding.cardQuickCommunity.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
-        }
+        bottomSheetDialog.show()
     }
 
     private fun observeViewModel() {
@@ -118,9 +128,11 @@ class MainActivity : AppCompatActivity() {
             if (states.isNullOrEmpty()) {
                 binding.layoutEmpty.visibility = View.VISIBLE
                 binding.rvStates.visibility = View.GONE
+                binding.tvHeaderBadge.text = "🏛️ 0 States"
             } else {
                 binding.layoutEmpty.visibility = View.GONE
                 binding.rvStates.visibility = View.VISIBLE
+                binding.tvHeaderBadge.text = "🏛️ ${states.size} States & UTs"
             }
         }
 

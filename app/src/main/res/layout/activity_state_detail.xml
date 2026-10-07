@@ -178,10 +178,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:text="@string/ask_historian_btn"
+        android:text="🤖 Ask AI Scholar"
         android:textColor="@color/white"
         app:backgroundTint="@color/maroon_royal"
-        app:icon="@android:drawable/ic_menu_help"
+        app:icon="@drawable/ic_sparkle_ai"
         app:iconTint="@color/gold_royal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

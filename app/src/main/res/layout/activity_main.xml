@@ -65,120 +65,22 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
+                <!-- Re-purposed Dynamic Live Database Counter Badge -->
                 <TextView
                     android:id="@+id/tvHeaderBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/placeholder_heritage"
                     android:backgroundTint="@color/gold_royal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="👑 Royal Edition"
+                    android:text="🏛️ 28 States &amp; UTs"
                     android:textColor="@color/black"
                     android:textSize="11sp"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Quick Feature Actions Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardQuickSmritiWalk"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#33FFFFFF"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="#60FFFFFF"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="⚡ SmritiWalk AI"
-                            android:textColor="@color/white"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardQuickHistorian"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#33FFFFFF"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="#60FFFFFF"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🤖 Ask AI Scholar"
-                            android:textColor="@color/white"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardQuickCommunity"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#33FFFFFF"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="#60FFFFFF"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🏛️ Local Lore"
-                            android:textColor="@color/white"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <!-- Search Bar Card -->
@@ -379,46 +281,17 @@
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Floating Action Buttons -->
-    <LinearLayout
+    <!-- Single Consolidated Explorer Hub Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabExplorerHub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:gravity="end"
-        android:orientation="vertical">
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabSmritiWalk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="স্মृतिवॉक SmritiWalk AI"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/maroon_royal"
-            app:icon="@android:drawable/ic_menu_camera"
-            app:iconTint="@color/gold_royal" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabCommunity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="@string/community_lore_btn"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/saffron_primary"
-            app:icon="@android:drawable/ic_menu_myplaces"
-            app:iconTint="@color/gold_royal" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabAskHistorian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ask_historian_btn"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/maroon_royal"
-            app:icon="@android:drawable/ic_menu_help"
-            app:iconTint="@color/gold_royal" />
-    </LinearLayout>
+        android:layout_margin="18dp"
+        android:text="✨ Explorer Hub"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/saffron_primary"
+        app:icon="@drawable/ic_sparkle_ai"
+        app:iconTint="@color/gold_royal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
