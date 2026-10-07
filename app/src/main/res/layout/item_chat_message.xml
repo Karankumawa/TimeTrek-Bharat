@@ -9,47 +9,57 @@
     android:paddingVertical="6dp">
 
     <!-- User Chat Bubble Container -->
-    <LinearLayout
-        android:id="@+id/containerUser"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/containerUserCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:background="@drawable/placeholder_heritage"
-        android:backgroundTint="@color/chat_user_bg"
-        android:orientation="vertical"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="10dp"
-        android:visibility="visible">
+        android:layout_marginStart="40dp"
+        app:cardBackgroundColor="@color/chat_user_bg"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@color/saffron_primary"
+        app:strokeWidth="1dp">
 
-        <TextView
-            android:id="@+id/tvUserLabel"
+        <LinearLayout
+            android:id="@+id/containerUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You 👤"
-            android:textColor="@color/saffron_primary_dark"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvUserText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            tools:text="Tell me about Maharana Pratap and Haldighati." />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvUserLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You 👤"
+                android:textColor="@color/saffron_primary_dark"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUserText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                tools:text="Tell me about Maharana Pratap and Haldighati." />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- AI Historian Chat Bubble Container -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/containerAi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="6dp"
         app:cardBackgroundColor="@color/chat_ai_bg"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:strokeColor="@color/chat_border"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="3dp"
+        app:strokeColor="@color/gold_royal"
         app:strokeWidth="1dp">
 
         <LinearLayout
@@ -64,11 +74,17 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/ic_sparkle_ai" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏛️ Historian AI"
-                    android:textColor="@color/saffron_primary"
+                    android:text="AI Historian &amp; Scholar"
+                    android:textColor="@color/saffron_primary_dark"
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -77,8 +93,8 @@
                 android:id="@+id/tvAiText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:lineSpacingExtra="3dp"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4dp"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 tools:text="Maharana Pratap of Mewar defended Rajput sovereignty against Mughal Emperor Akbar during the Battle of Haldighati in 1576 AD." />

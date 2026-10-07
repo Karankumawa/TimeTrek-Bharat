@@ -54,16 +54,16 @@ class StateAdapter(
         fun bind(state: State) {
             binding.tvStateName.text = state.name
             binding.tvRegionBadge.text = state.region
-            binding.tvCapital.text = "Capital: ${state.capital ?: "N/A"}"
+            binding.tvCapital.text = "🏛️ Capital: ${state.capital ?: "N/A"}"
             binding.tvShortDescription.text = state.shortDescription
 
             val eraCount = state.timeline?.size ?: 0
-            binding.tvTimelineCount.text = "$eraCount Historical Eras"
+            binding.tvTimelineCount.text = "📜 $eraCount Historical Eras"
 
             if (state.isFavorite) {
-                binding.ibFavorite.setImageResource(android.R.drawable.btn_star_big_on)
+                binding.ibFavorite.setImageResource(R.drawable.ic_star_filled)
             } else {
-                binding.ibFavorite.setImageResource(android.R.drawable.btn_star_big_off)
+                binding.ibFavorite.setImageResource(R.drawable.ic_star_outline)
             }
 
             binding.ibFavorite.setOnClickListener {

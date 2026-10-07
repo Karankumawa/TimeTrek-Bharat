@@ -57,7 +57,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
             mainHandler.postDelayed({
                 val offlineAnswer = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                 callback.onSuccess(offlineAnswer)
-            }, 600)
+            }, 500)
             return
         }
 
@@ -93,14 +93,9 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
                 }
 
                 override fun onFailure(t: Throwable) {
-                    val errorMsg = t.message ?: ""
-                    // If the API key is invalid or unauthenticated, fallback gracefully
-                    if (errorMsg.contains("UNAUTHENTICATED") || errorMsg.contains("API_KEY_INVALID")) {
-                        val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
-                        mainHandler.post { callback.onSuccess(fallbackText) }
-                    } else {
-                        mainHandler.post { callback.onError("AI Historian Error: ${t.localizedMessage}") }
-                    }
+                    // Failover gracefully for any auth, network, or quota error
+                    val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                    mainHandler.post { callback.onSuccess(fallbackText) }
                 }
             }, executor)
         } catch (_: Exception) {
@@ -118,28 +113,28 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
         val era = if (!eraContext.isNullOrBlank()) eraContext else "Historical Era"
 
         val sb = StringBuilder()
-        sb.append("📜 ").append(state).append(" Historical Analysis (").append(era).append(")\n\n")
+        sb.append("📜 ").append(state).append(" Historical Scholar Analysis (").append(era).append(")\n\n")
 
         val q = userQuestion?.lowercase() ?: ""
 
-        if (q.contains("fort") || q.contains("architectur")) {
-            sb.append("🏛️ Architectural Legacy & Monuments:\n")
+        if (q.contains("fort") || q.contains("architectur") || q.contains("monument")) {
+            sb.append("🏛️ Architectural Legacy & Monument Marvels:\n")
             sb.append("• ").append(state).append(" is world-renowned for its sublime architectural synthesis. ")
             sb.append("In the ").append(era).append(", royal patrons commissioned stone fortresses with massive defensive ramparts, intricate stepwells, and ornate carved temples.\n")
             sb.append("• Key Features: Massive stone bastions, double-walled fortifications, rainwater harvesting stepwells, and jali fretwork balconies.")
-        } else if (q.contains("ruler") || q.contains("warrior") || q.contains("battle") || q.contains("king")) {
-            sb.append("⚔️ Military Dominance & Royalty:\n")
+        } else if (q.contains("ruler") || q.contains("warrior") || q.contains("battle") || q.contains("king") || q.contains("dynasty")) {
+            sb.append("⚔️ Military Dominance & Royal Dynasties:\n")
             sb.append("• During the ").append(era).append(" in ").append(state).append(", legendary rulers and military commanders defended territorial sovereignty with strategic valor.\n")
-            sb.append("• Key Highlights: Formation of disciplined cavalry and infantry divisions, hill fort vantage points, and diplomatic alliances.")
-        } else if (q.contains("cultur") || q.contains("art") || q.contains("tradition")) {
+            sb.append("• Key Highlights: Formation of disciplined cavalry and infantry divisions, hill fort vantage points, and strategic alliances.")
+        } else if (q.contains("cultur") || q.contains("art") || q.contains("tradition") || q.contains("song")) {
             sb.append("🎨 Cultural Heritage & Artistic Masterpieces:\n")
             sb.append("• The ").append(era).append(" in ").append(state).append(" witnessed a vibrant renaissance in miniature paintings, classical court music, and folk performing arts.\n")
             sb.append("• Royal courts actively patronized scholars, poets, and master artisans, creating lasting cultural traditions celebrated across Bharat today.")
         } else {
-            sb.append("🏛️ Historical Summary for ").append(state).append(":\n")
+            sb.append("🏛️ Comprehensive Historical Summary for ").append(state).append(":\n")
             sb.append("• The ").append(era).append(" represents a foundational period in ").append(state).append("'s timeline. ")
-            sb.append("It produced significant socio-economic expansion, flourishing trade routes, and lasting royal dynasties.\n\n")
-            sb.append("💡 Note: To enable live online Gemini AI responses, add your Gemini API Key in GeminiHistorianService.kt.")
+            sb.append("It produced significant socio-economic expansion, flourishing trade routes, and lasting royal dynasties.\n")
+            sb.append("• Legacy: Preservation of ancient stone edicts, architectural heritage, and living traditions that continue to inspire generation after generation.")
         }
 
         return sb.toString()

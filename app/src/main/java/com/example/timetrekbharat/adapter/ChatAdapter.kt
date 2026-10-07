@@ -42,11 +42,11 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
         fun bind(msg: ChatMessage) {
             if (msg.isUser) {
-                binding.containerUser.visibility = View.VISIBLE
+                binding.containerUserCard.visibility = View.VISIBLE
                 binding.containerAi.visibility = View.GONE
                 binding.tvUserText.text = msg.text
             } else {
-                binding.containerUser.visibility = View.GONE
+                binding.containerUserCard.visibility = View.GONE
                 binding.containerAi.visibility = View.VISIBLE
                 binding.tvAiText.text = msg.text
             }

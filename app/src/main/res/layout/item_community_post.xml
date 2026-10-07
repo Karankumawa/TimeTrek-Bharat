@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/card_surface"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
+    app:strokeColor="@color/card_stroke"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +24,8 @@
         <ImageView
             android:id="@+id/ivPostImage"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="190dp"
+            android:contentDescription="Post Image"
             android:scaleType="centerCrop"
             android:visibility="gone"
             tools:src="@drawable/placeholder_heritage"
@@ -30,52 +37,28 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvLocationBadge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/era_ancient_bg"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:textColor="@color/era_ancient_text"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                tools:text="Amer, Jaipur • Rajasthan" />
-
-            <TextView
-                android:id="@+id/tvPostTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Recent discovery in Amer Fort" />
-
-            <TextView
-                android:id="@+id/tvPostDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="2dp"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                tools:text="A new hidden chamber was just discovered by the archaeological survey team..." />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvPostAuthor"
-                    android:layout_width="0dp"
+                    android:id="@+id/tvLocationBadge"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/text_muted"
-                    android:textSize="12sp"
-                    tools:text="By: Karan" />
+                    android:background="@color/era_ancient_bg"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/era_ancient_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:text="Amer, Jaipur • Rajasthan" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tvPostDate"
@@ -85,6 +68,55 @@
                     android:textSize="12sp"
                     tools:text="2026-09-25" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Recent discovery in Amer Fort secret tunnel" />
+
+            <TextView
+                android:id="@+id/tvPostDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="3"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                tools:text="A new hidden subterranean chamber was discovered connecting Jaigarh Fort with Amer Palace..." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPostAuthor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/maroon_royal"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:text="👤 By: Karan" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLikePost"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="❤️ 0 Likes"
+                    android:textColor="@color/saffron_primary"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

@@ -91,11 +91,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
         }
 
+        binding.cardQuickSmritiWalk.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
+        }
+
         binding.fabAskHistorian.setOnClickListener {
             startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
         }
 
+        binding.cardQuickHistorian.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
+        }
+
         binding.fabCommunity.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
+        }
+
+        binding.cardQuickCommunity.setOnClickListener {
             startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
         }
     }
