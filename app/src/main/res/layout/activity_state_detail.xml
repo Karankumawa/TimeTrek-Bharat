@@ -48,6 +48,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -177,8 +179,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:text="🤖 Ask AI Scholar"
+        android:layout_margin="16dp"
+        android:text="Ask Scholar"
         android:textColor="@color/white"
         app:backgroundTint="@color/maroon_royal"
         app:icon="@drawable/ic_sparkle_ai"

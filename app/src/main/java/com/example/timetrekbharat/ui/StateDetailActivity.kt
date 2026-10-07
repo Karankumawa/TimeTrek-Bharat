@@ -110,10 +110,10 @@ class StateDetailActivity : AppCompatActivity() {
         currentStateName = state.name
         binding.collapsingToolbar.title = state.name
         binding.tvStateTitleDetail.text = state.name
-        binding.tvCapitalDetail.text = "🏛️ Capital: ${state.capital ?: "N/A"}"
+        binding.tvCapitalDetail.text = "Capital: ${state.capital ?: "N/A"}"
         binding.tvRegionDetail.text = "Region: ${state.region ?: "N/A"}"
         binding.tvDescriptionDetail.text = state.shortDescription
-        binding.fabAskHistorianState.text = "🤖 Ask AI about ${state.name}"
+        binding.fabAskHistorianState.text = "Ask Scholar"
 
         if (state.isFavorite) {
             binding.btnFavoriteDetail.setImageResource(com.example.timetrekbharat.R.drawable.ic_star_filled)

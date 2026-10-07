@@ -222,7 +222,8 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingHorizontal="12dp"
-                android:paddingVertical="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="88dp"
                 tools:listitem="@layout/item_state_card" />
 
             <!-- Empty / Error View -->
@@ -270,8 +271,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="18dp"
-        android:text="✨ Explorer Hub"
+        android:layout_margin="16dp"
+        android:text="Explore Hub"
         android:textColor="@color/white"
         app:backgroundTint="@color/saffron_primary"
         app:icon="@drawable/ic_sparkle_ai"
