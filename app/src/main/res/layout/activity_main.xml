@@ -64,23 +64,6 @@
                         android:textColor="#F5F5F5"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <!-- Re-purposed Dynamic Live Database Counter Badge -->
-                <TextView
-                    android:id="@+id/tvHeaderBadge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/placeholder_heritage"
-                    android:backgroundTint="@color/gold_royal"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:text="🏛️ 28 States &amp; UTs"
-                    android:textColor="@color/black"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Search Bar Card -->

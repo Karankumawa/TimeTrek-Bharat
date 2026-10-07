@@ -92,11 +92,6 @@ class MainActivity : AppCompatActivity() {
         binding.fabExplorerHub.setOnClickListener {
             showExplorerHubBottomSheet()
         }
-
-        binding.tvHeaderBadge.setOnClickListener {
-            val count = adapter.itemCount
-            Toast.makeText(this, "🏛️ Currently displaying $count Indian States & UTs from live database.", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun showExplorerHubBottomSheet() {
@@ -128,11 +123,9 @@ class MainActivity : AppCompatActivity() {
             if (states.isNullOrEmpty()) {
                 binding.layoutEmpty.visibility = View.VISIBLE
                 binding.rvStates.visibility = View.GONE
-                binding.tvHeaderBadge.text = "🏛️ 0 States"
             } else {
                 binding.layoutEmpty.visibility = View.GONE
                 binding.rvStates.visibility = View.VISIBLE
-                binding.tvHeaderBadge.text = "🏛️ ${states.size} States & UTs"
             }
         }
 
