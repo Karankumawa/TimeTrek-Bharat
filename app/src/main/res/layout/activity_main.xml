@@ -271,11 +271,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="Explore Hub"
+        android:layout_margin="18dp"
+        android:text="Explore Hub ✨"
         android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:backgroundTint="@color/saffron_primary"
-        app:icon="@drawable/ic_sparkle_ai"
+        app:elevation="8dp"
+        app:icon="@drawable/ic_explore_hub"
         app:iconTint="@color/gold_royal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

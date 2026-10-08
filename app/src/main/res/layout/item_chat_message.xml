@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="12dp"
+    android:paddingHorizontal="10dp"
     android:paddingVertical="6dp">
 
     <!-- User Chat Bubble Container -->
@@ -14,10 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="48dp"
         app:cardBackgroundColor="@color/chat_user_bg"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="3dp"
         app:strokeColor="@color/saffron_primary"
         app:strokeWidth="1dp">
 
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="14dp"
+            android:paddingHorizontal="16dp"
             android:paddingVertical="10dp">
 
             <TextView
@@ -54,19 +54,19 @@
         android:id="@+id/containerAi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="28dp"
         app:cardBackgroundColor="@color/chat_ai_bg"
-        app:cardCornerRadius="18dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
         app:strokeColor="@color/gold_royal"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:padding="16dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -75,17 +75,19 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginEnd="6dp"
-                    android:src="@drawable/ic_sparkle_ai" />
+                    android:contentDescription="AI Scholar"
+                    android:src="@drawable/ic_ask_historian"
+                    app:tint="@color/maroon_royal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AI Historian &amp; Scholar"
-                    android:textColor="@color/saffron_primary_dark"
-                    android:textSize="12sp"
+                    android:text="AI Historian &amp; Scholar 📜"
+                    android:textColor="@color/maroon_royal"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

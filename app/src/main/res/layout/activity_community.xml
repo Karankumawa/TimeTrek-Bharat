@@ -8,19 +8,117 @@
     android:background="@color/bg_canvas"
     tools:context=".ui.CommunityActivity">
 
+    <!-- Top AppBar Header -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/saffron_primary"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:background="@drawable/bg_hero_header"
+        app:elevation="6dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Community Heritage Hub" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Back"
+                    android:src="@android:drawable/ic_menu_revert"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Community Heritage Hub"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Discover &amp; Share Local Lore, Discoveries &amp; History"
+                        android:textColor="#E0E0E0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Quick Filter Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCommunityFilters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAllLore"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="All Lore ✨"
+                        android:textColor="@color/black"
+                        app:chipBackgroundColor="@color/gold_royal" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDiscoveries"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Discoveries 🏛️"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTraditions"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Traditions 🎨"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipForts"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Forts &amp; Battles ⚔️"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/white" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+        </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Swipe Refresh & Posts List -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -36,7 +134,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingBottom="88dp" />
+                android:paddingTop="8dp"
+                android:paddingBottom="88dp"
+                tools:listitem="@layout/item_community_post" />
 
             <!-- Empty State -->
             <LinearLayout
@@ -49,17 +149,18 @@
                 android:visibility="gone">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:contentDescription="No posts"
                     android:src="@drawable/placeholder_heritage"
-                    app:tint="@color/text_muted" />
+                    app:tint="@color/saffron_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="No local lore or heritage updates found yet.\nBe the first to share one!"
+                    android:text="No local lore found yet.\nBe the first to share a discovery!"
                     android:textColor="@color/text_secondary"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -69,19 +170,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:indeterminateTint="@color/saffron_primary"
                 android:visibility="gone" />
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <!-- Add Post Extended FAB -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabAddPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/saffron_primary"
-        android:text="Add Lore"
+        android:layout_margin="18dp"
+        android:text="Share Lore 📝"
         android:textColor="@color/white"
-        app:iconTint="@color/white" />
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/saffron_primary"
+        app:elevation="8dp"
+        app:icon="@drawable/ic_community_lore"
+        app:iconTint="@color/gold_royal" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

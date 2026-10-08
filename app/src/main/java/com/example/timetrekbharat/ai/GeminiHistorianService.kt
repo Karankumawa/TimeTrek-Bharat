@@ -2,6 +2,7 @@ package com.example.timetrekbharat.ai
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.example.timetrekbharat.BuildConfig
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.java.GenerativeModelFutures
@@ -16,9 +17,12 @@ import java.util.concurrent.Executors
 class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildConfig.GEMINI_API_KEY) {
 
     private var modelFutures: GenerativeModelFutures? = null
+    private var fallbackModelFutures: GenerativeModelFutures? = null
     private val executor: Executor = Executors.newSingleThreadExecutor()
     private val mainHandler: Handler = Handler(Looper.getMainLooper())
-    private val isApiKeyConfigured: Boolean
+
+    val isApiKeyConfigured: Boolean
+    val configuredKey: String
 
     interface HistorianCallback {
         fun onSuccess(responseText: String)
@@ -26,26 +30,37 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
     }
 
     init {
-        val keyToUse = if (!apiKey.isNullOrBlank() && !apiKey.startsWith("YOUR_")) {
-            apiKey
-        } else if (BuildConfig.GEMINI_API_KEY.isNotBlank() && !BuildConfig.GEMINI_API_KEY.startsWith("YOUR_")) {
-            BuildConfig.GEMINI_API_KEY
+        val rawKey = (apiKey ?: BuildConfig.GEMINI_API_KEY).trim().removeSurrounding("\"").removeSurrounding("'")
+        configuredKey = if (rawKey.isNotBlank() && !rawKey.startsWith("YOUR_", ignoreCase = true)) {
+            rawKey
+        } else if (BuildConfig.GEMINI_API_KEY.isNotBlank() && !BuildConfig.GEMINI_API_KEY.startsWith("YOUR_", ignoreCase = true)) {
+            BuildConfig.GEMINI_API_KEY.trim().removeSurrounding("\"").removeSurrounding("'")
         } else {
             ""
         }
 
-        // Google Gemini API Studio keys must start with 'AIza' (e.g., 'AIzaSy...')
-        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIza")
+        // A key is configured if it is non-blank, not a placeholder, and has valid length
+        isApiKeyConfigured = configuredKey.isNotBlank() && configuredKey.length >= 10
 
-        modelFutures = if (isApiKeyConfigured) {
-            try {
-                val gm = GenerativeModel(MODEL_NAME, keyToUse)
+        if (isApiKeyConfigured) {
+            modelFutures = try {
+                val gm = GenerativeModel(PRIMARY_MODEL_NAME, configuredKey)
                 GenerativeModelFutures.from(gm)
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to initialize primary model $PRIMARY_MODEL_NAME", e)
+                null
+            }
+
+            fallbackModelFutures = try {
+                val fallbackGm = GenerativeModel(FALLBACK_MODEL_NAME, configuredKey)
+                GenerativeModelFutures.from(fallbackGm)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to initialize fallback model $FALLBACK_MODEL_NAME", e)
                 null
             }
         } else {
-            null
+            modelFutures = null
+            fallbackModelFutures = null
         }
     }
 
@@ -66,6 +81,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
 
         val futures = modelFutures
         if (!isApiKeyConfigured || futures == null) {
+            Log.d(TAG, "API Key not configured or model unavailable. Using offline Knowledge Engine.")
             mainHandler.postDelayed({
                 val offlineAnswer = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                 callback.onSuccess(offlineAnswer)
@@ -93,27 +109,49 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
                 .text(promptBuilder.toString())
                 .build()
 
-            val responseFuture: ListenableFuture<GenerateContentResponse> = futures.generateContent(content)
-
-            Futures.addCallback(responseFuture, object : FutureCallback<GenerateContentResponse> {
-                override fun onSuccess(result: GenerateContentResponse?) {
-                    var responseText = result?.text
-                    if (responseText.isNullOrBlank()) {
-                        responseText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
-                    }
-                    val finalResponseText = responseText
-                    mainHandler.post { callback.onSuccess(finalResponseText) }
-                }
-
-                override fun onFailure(t: Throwable) {
-                    val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
-                    mainHandler.post { callback.onSuccess(fallbackText) }
-                }
-            }, executor)
-        } catch (_: Exception) {
+            executePromptWithFutures(futures, content, stateContext, eraContext, userQuestion, callback, isSecondary = false)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error building prompt or starting request", e)
             val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
             mainHandler.post { callback.onSuccess(fallbackText) }
         }
+    }
+
+    private fun executePromptWithFutures(
+        activeFutures: GenerativeModelFutures,
+        content: Content,
+        stateContext: String?,
+        eraContext: String?,
+        userQuestion: String,
+        callback: HistorianCallback,
+        isSecondary: Boolean
+    ) {
+        val responseFuture: ListenableFuture<GenerateContentResponse> = activeFutures.generateContent(content)
+
+        Futures.addCallback(responseFuture, object : FutureCallback<GenerateContentResponse> {
+            override fun onSuccess(result: GenerateContentResponse?) {
+                var responseText = result?.text
+                if (responseText.isNullOrBlank()) {
+                    Log.w(TAG, "Gemini returned empty response text. Falling back to offline engine.")
+                    responseText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                }
+                val finalResponseText = responseText
+                mainHandler.post { callback.onSuccess(finalResponseText) }
+            }
+
+            override fun onFailure(t: Throwable) {
+                Log.e(TAG, "Gemini request failed (isSecondary=$isSecondary): ${t.localizedMessage}", t)
+
+                val secondaryFutures = fallbackModelFutures
+                if (!isSecondary && secondaryFutures != null) {
+                    Log.i(TAG, "Attempting request with fallback model $FALLBACK_MODEL_NAME...")
+                    executePromptWithFutures(secondaryFutures, content, stateContext, eraContext, userQuestion, callback, isSecondary = true)
+                } else {
+                    val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
+                    mainHandler.post { callback.onSuccess(fallbackText) }
+                }
+            }
+        }, executor)
     }
 
     private fun generateOfflineHistorianAnswer(
@@ -125,6 +163,8 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
     }
 
     companion object {
-        private const val MODEL_NAME = "gemini-1.5-flash"
+        private const val TAG = "GeminiHistorianService"
+        private const val PRIMARY_MODEL_NAME = "gemini-1.5-flash"
+        private const val FALLBACK_MODEL_NAME = "gemini-pro"
     }
 }

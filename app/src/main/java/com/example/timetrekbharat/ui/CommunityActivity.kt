@@ -22,9 +22,7 @@ class CommunityActivity : AppCompatActivity() {
         binding = ActivityCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         viewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
 
@@ -74,7 +72,7 @@ class CommunityActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this) { isLoading ->
             binding.swipeRefreshLayout.isRefreshing = isLoading == true
-            binding.progressBar.visibility = if (isLoading == true && adapter.itemCount == 0) View.VISIBLE else View.GONE
+            binding.progressBar.visibility = if ((isLoading == true) && (adapter.itemCount == 0)) View.VISIBLE else View.GONE
         }
 
         viewModel.errorMessage.observe(this) { error ->

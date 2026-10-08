@@ -13,15 +13,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/maroon_royal"
+        android:background="@drawable/bg_hero_header"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="14dp">
+        android:padding="16dp">
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name"
             android:src="@android:drawable/ic_menu_revert"
@@ -30,22 +30,42 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/historian_title"
-                android:textColor="@color/gold_royal"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/historian_title"
+                    android:textColor="@color/gold_royal"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="#2E7D32"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="● Gemini 1.5 Online"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvContextBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="Context: General Indian History"
                 android:textColor="#E0E0E0"
                 android:textSize="12sp" />
@@ -56,9 +76,9 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FAF2E8"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="6dp"
+        android:background="#F7F1E7"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -70,33 +90,39 @@
                 android:id="@+id/chipPrompt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:text="Forts &amp; Architecture 🏰"
+                android:layout_marginEnd="8dp"
+                android:text="Forts &amp; Palaces 🏰"
+                android:textColor="@color/text_primary"
                 android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipStrokeColor="@color/card_stroke"
+                app:chipCornerRadius="16dp"
+                app:chipStrokeColor="@color/gold_royal"
                 app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipPrompt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:text="Key Rulers &amp; Battles ⚔️"
+                android:layout_marginEnd="8dp"
+                android:text="Rulers &amp; Battles ⚔️"
+                android:textColor="@color/text_primary"
                 android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipStrokeColor="@color/card_stroke"
+                app:chipCornerRadius="16dp"
+                app:chipStrokeColor="@color/saffron_primary"
                 app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipPrompt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:text="Cultural Heritage &amp; Arts 🎨"
+                android:layout_marginEnd="8dp"
+                android:text="Cultural Heritage 🎨"
+                android:textColor="@color/text_primary"
                 android:textSize="12sp"
                 app:chipBackgroundColor="@color/white"
-                app:chipStrokeColor="@color/card_stroke"
+                app:chipCornerRadius="16dp"
+                app:chipStrokeColor="@color/peacock_blue"
                 app:chipStrokeWidth="1dp" />
         </LinearLayout>
     </HorizontalScrollView>
@@ -112,7 +138,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingVertical="8dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp"
             tools:listitem="@layout/item_chat_message" />
 
         <ProgressBar
@@ -120,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/maroon_royal"
+            android:indeterminateTint="@color/saffron_primary"
             android:visibility="gone" />
     </FrameLayout>
 
@@ -128,15 +155,20 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
-        app:cardElevation="8dp">
+        app:cardCornerRadius="26dp"
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="6dp">
 
             <EditText
                 android:id="@+id/etQuestionInput"
@@ -147,21 +179,21 @@
                 android:hint="@string/ask_prompt_hint"
                 android:inputType="textMultiLine"
                 android:maxLines="4"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_muted"
                 android:textSize="14sp" />
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnSendQuestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/send"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/maroon_royal"
-                app:cornerRadius="20dp" />
+                android:contentDescription="@string/send"
+                android:src="@drawable/ic_send"
+                app:backgroundTint="@color/saffron_primary"
+                app:fabCustomSize="42dp"
+                app:maxImageSize="20dp"
+                app:tint="@color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

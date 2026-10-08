@@ -1,6 +1,5 @@
 package com.example.timetrekbharat.ui
 
-import android.R
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -17,15 +16,15 @@ class AddPostActivity : AppCompatActivity() {
     private val indianStates = arrayOf(
         "Rajasthan", "Gujarat", "Delhi", "Maharashtra", "Uttar Pradesh",
         "Tamil Nadu", "Goa", "Punjab", "Karnataka", "West Bengal",
-        "Kerala", "Bihar", "Odisha", "Madhya Pradesh", "Assam", "Telangana"
+        "Kerala", "Bihar", "Odisha", "Madhya Pradesh", "Assam", "Telangana",
     )
 
     private val categories = arrayOf(
-        "🏛️ Historical Discovery",
-        "🎭 Cultural Event",
-        "🏰 Monument Update",
-        "📜 Local Legend",
-        "🌊 Coastal Heritage"
+        "Historical Discovery",
+        "Cultural Event",
+        "Monument Update",
+        "Local Legend",
+        "Coastal Heritage",
     )
 
     private val districtMap = mapOf(
@@ -46,9 +45,7 @@ class AddPostActivity : AppCompatActivity() {
         binding = ActivityAddPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         viewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
 
@@ -63,7 +60,7 @@ class AddPostActivity : AppCompatActivity() {
 
     private fun setupDropdowns() {
         // State Adapter
-        val stateAdapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, indianStates)
+        val stateAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, indianStates)
         binding.actvState.setAdapter(stateAdapter)
 
         binding.actvState.setOnItemClickListener { parent, _, position, _ ->
@@ -72,14 +69,14 @@ class AddPostActivity : AppCompatActivity() {
         }
 
         // Category Adapter
-        val categoryAdapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, categories)
+        val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
         binding.actvCategory.setAdapter(categoryAdapter)
         binding.actvCategory.setText(categories[0], false)
     }
 
     private fun updateDistrictSuggestions(state: String) {
         val districts = districtMap[state] ?: arrayOf("City / Local Area")
-        val districtAdapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, districts)
+        val districtAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, districts)
         binding.actvLocation.setAdapter(districtAdapter)
         if (districts.isNotEmpty()) {
             binding.actvLocation.setText(districts[0], false)

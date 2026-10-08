@@ -11,15 +11,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/maroon_royal"
-        app:elevation="4dp">
+        android:background="@drawable/bg_hero_header"
+        app:elevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="14dp">
+            android:padding="16dp">
 
             <ImageButton
                 android:id="@+id/btnBack"
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SmritiWalk Guide"
+                    android:text="SmritiWalk AR Guide"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Heritage &amp; Oral History Companion"
+                    android:text="Heritage &amp; Multimodal Oral Companion"
                     android:textColor="#E0E0E0"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -57,12 +57,11 @@
                 android:id="@+id/tvVaultBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/placeholder_heritage"
-                android:backgroundTint="@color/gold_royal"
+                android:background="#2E7D32"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
-                android:text="Offline Vault"
-                android:textColor="@color/black"
+                android:paddingVertical="5dp"
+                android:text="● Offline Vault"
+                android:textColor="@color/white"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -79,15 +78,15 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Camera Scan & Monument Vault Selector Card -->
+            <!-- Camera Scan & Monument Vault Selector Hero Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
-                app:strokeColor="@color/saffron_primary_dark"
-                app:strokeWidth="1dp">
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/saffron_primary"
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,18 +100,19 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/ivArtifactPreview"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
                             android:contentDescription="Artifact Preview"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/app_logo" />
+                            android:src="@drawable/app_logo"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.SmallComponent" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="14dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Badal Mahal (Palace of Clouds)"
                                 android:textColor="@color/text_primary"
-                                android:textSize="16sp"
+                                android:textSize="17sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -136,11 +136,11 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Camera & Vault Buttons -->
+                    <!-- Camera & Vault Action Buttons -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="6dp"
                             android:layout_weight="1"
-                            android:text="Camera Scan Artifact"
+                            android:text="Camera Scan 📷"
                             android:textColor="@color/white"
                             app:backgroundTint="@color/saffron_primary"
                             app:cornerRadius="20dp" />
@@ -161,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
-                            android:text="Change Monument"
+                            android:text="Change Monument 🏛️"
                             android:textColor="@color/maroon_royal"
                             app:cornerRadius="20dp"
                             app:strokeColor="@color/maroon_royal" />
@@ -174,20 +174,20 @@
                 android:id="@+id/tvStatusMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:background="#FFF3E0"
-                android:padding="8dp"
+                android:padding="10dp"
                 android:text="Offline Vector Vault Active • Instant Cosine Matching"
                 android:textColor="@color/saffron_primary_dark"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
-            <!-- 1. Story Granularity Selector -->
+            <!-- 1. Narrative Depth Selector -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="1. Narrative Length &amp; Depth"
+                android:layout_marginTop="18dp"
+                android:text="1. Narrative Length &amp; Granularity"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -226,53 +226,59 @@
                     app:chipBackgroundColor="@color/chip_bg_unselected" />
             </com.google.android.material.chip.ChipGroup>
 
-            <!-- 2. Multi-Persona Perspectives -->
+            <!-- 2. Storytelling Persona Selector -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="2. Perspective Persona"
+                android:text="2. Storytelling Persona"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupPersona"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                app:singleLine="true"
-                app:singleSelection="true">
+                android:scrollbars="none">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipPersonaBard"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupPersona"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Court Bard" />
+                    app:singleLine="true"
+                    app:singleSelection="true">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipPersonaArchitect"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Royal Architect" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPersonaBard"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Court Bard 📜" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipPersonaSentry"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fortress Sentry" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPersonaArchitect"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Royal Architect 🏛️" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipPersonaChronicler"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chronicler" />
-            </com.google.android.material.chip.ChipGroup>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPersonaSentry"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fortress Sentry ⚔️" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipPersonaChronicler"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chronicler 📖" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
 
             <!-- Main Narrative & Synchronized Audio Player Card -->
             <com.google.android.material.card.MaterialCardView
@@ -280,10 +286,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="#FAF8F5"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
                 app:strokeColor="@color/gold_royal"
-                app:strokeWidth="1dp">
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -291,7 +297,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Audio Controls & Soundwave Visualizer Bar -->
+                    <!-- Audio Controls & Visualizer Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -305,10 +311,10 @@
                             style="@style/Widget.MaterialComponents.Button.Icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Listen Audio"
+                            android:text="Listen Audio 🔊"
                             android:textColor="@color/black"
                             app:backgroundTint="@color/gold_royal"
-                            app:cornerRadius="16dp" />
+                            app:cornerRadius="18dp" />
 
                         <TextView
                             android:id="@+id/tvSoundwaveVisualizer"
@@ -333,21 +339,21 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <!-- Scrollable Narrative Text -->
+                    <!-- Narrative Content -->
                     <TextView
                         android:id="@+id/tvNarrativeText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:lineSpacingExtra="4dp"
-                        android:text="Perched at 3,600 feet above sea level..."
+                        android:layout_marginTop="14dp"
+                        android:lineSpacingExtra="5dp"
                         android:textColor="@color/text_primary"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:text="Perched at 3,600 feet above sea level, Badal Mahal crowns the highest peak of Kumbhalgarh Fort..." />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 3. Interactive Heritage Exploration Tools -->
+            <!-- 3. Interactive Heritage Tools -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -370,10 +376,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:text="Decipher Inscription"
+                    android:text="Decipher Script 📜"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
-                    app:cornerRadius="12dp" />
+                    app:cornerRadius="14dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAcousticEcho"
@@ -382,27 +388,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:text="Acoustic Resonance"
+                    android:text="Acoustic Echo 🎵"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
-                    app:cornerRadius="12dp" />
+                    app:cornerRadius="14dp" />
             </LinearLayout>
 
-            <!-- Epigraphy Overlay Container (Visible when toggled) -->
+            <!-- Epigraphy Overlay Container -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardEpigraphyOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:visibility="gone"
                 app:cardBackgroundColor="#212121"
-                app:cardCornerRadius="12dp">
+                app:cardCornerRadius="14dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -432,21 +438,21 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Hydraulic Cutaway Slider Section -->
+            <!-- Hydraulic Level Cutaway Section -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHydraulicSlider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -458,7 +464,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Subterranean Water Level"
+                            android:text="Subterranean Water Reservoir"
                             android:textColor="@color/text_primary"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -485,26 +491,26 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Oral History Hunter & Bardic Seals Section -->
+            <!-- Oral History Ledger Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 app:cardBackgroundColor="#FFFDE7"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="14dp"
                 app:strokeColor="@color/gold_royal"
-                app:strokeWidth="1dp">
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Oral History Ledger"
+                        android:text="Oral History Ledger 📜"
                         android:textColor="@color/maroon_royal"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -525,7 +531,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="Collect Oral History Seal"
+                        android:text="Collect Bardic Seal ✨"
                         android:textColor="@color/saffron_primary_dark"
                         android:textSize="12sp" />
                 </LinearLayout>

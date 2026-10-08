@@ -5,9 +5,20 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_hero_header"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingStart="20dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="24dp">
 
-    <!-- Title Header -->
+    <!-- Bottom Sheet Drag Handle Bar -->
+    <View
+        android:layout_width="48dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
+        android:background="#80FFFFFF" />
+
+    <!-- Title Header & Active AI Badge -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Heritage &amp; Scholar Hub"
+                android:text="Heritage &amp; AI Explorer Hub"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -31,26 +42,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Choose a feature to explore Indian history and monuments"
+                android:layout_marginTop="3dp"
+                android:text="Choose an experience to explore Indian history &amp; monuments"
                 android:textColor="#E0E0E0"
                 android:textSize="12sp" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#2E7D32"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="● Active AI"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Option 1: SmritiWalk -->
+    <!-- Option 1: SmritiWalk Guide -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardHubSmritiWalk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/card_surface"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="4dp"
         app:strokeColor="@color/gold_royal"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,25 +81,62 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!-- Circular Icon Container -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/placeholder_heritage"
+                android:backgroundTint="@color/saffron_primary"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="SmritiWalk"
+                    android:src="@drawable/ic_smriti_walk"
+                    app:tint="@color/gold_royal" />
+            </FrameLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SmritiWalk Guide"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SmritiWalk AR Guide"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/era_ancient_bg"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:text="Multimodal AI"
+                        android:textColor="@color/era_ancient_text"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Identify monuments, carvings and oral heritage"
+                    android:layout_marginTop="3dp"
+                    android:text="Camera scan monuments, carvings &amp; decipher oral heritage"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -87,12 +146,12 @@
                 android:layout_height="wrap_content"
                 android:text="➔"
                 android:textColor="@color/saffron_primary"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Option 2: Ask Historian -->
+    <!-- Option 2: Ask Historian Scholar -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardHubAskHistorian"
         android:layout_width="match_parent"
@@ -101,10 +160,10 @@
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/card_surface"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="4dp"
         app:strokeColor="@color/saffron_primary"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,25 +172,62 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!-- Circular Icon Container -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/placeholder_heritage"
+                android:backgroundTint="@color/maroon_royal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Ask Historian"
+                    android:src="@drawable/ic_ask_historian"
+                    app:tint="@color/gold_royal" />
+            </FrameLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ask Historian Scholar"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ask Historian Scholar"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/era_medieval_bg"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:text="Gemini 1.5 Live"
+                        android:textColor="@color/era_medieval_text"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Ask questions about dynasties, battles and architecture"
+                    android:layout_marginTop="3dp"
+                    android:text="Ask questions about dynasties, battles, fort architecture &amp; culture"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -141,25 +237,24 @@
                 android:layout_height="wrap_content"
                 android:text="➔"
                 android:textColor="@color/saffron_primary"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Option 3: Community Stories -->
+    <!-- Option 3: Community Lore & Stories -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardHubCommunity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/card_surface"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="3dp"
-        app:strokeColor="@color/card_stroke"
-        app:strokeWidth="1dp">
+        app:cardCornerRadius="18dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/peacock_blue"
+        app:strokeWidth="1.5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -168,25 +263,62 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!-- Circular Icon Container -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/placeholder_heritage"
+                android:backgroundTint="@color/peacock_blue"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Community Stories"
+                    android:src="@drawable/ic_community_lore"
+                    app:tint="@color/gold_royal" />
+            </FrameLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Community Stories"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Community Stories &amp; Lore"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/era_colonial_bg"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
+                        android:text="Live Lore Feed"
+                        android:textColor="@color/era_colonial_text"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Read and share local lore and historical discoveries"
+                    android:layout_marginTop="3dp"
+                    android:text="Read &amp; publish local discoveries, oral traditions &amp; legends"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -196,7 +328,7 @@
                 android:layout_height="wrap_content"
                 android:text="➔"
                 android:textColor="@color/saffron_primary"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
