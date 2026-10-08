@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:layout_width="24dp"
+    android:height="24dp"
+    android:layout_height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Camera Frame with Monument Dome inside -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M9,3L7.17,5H4C2.9,5 2,5.9 2,7V19C2,20.1 2.9,21 4,21H20C21.1,21 22,20.1 22,19V7C22,5.9 21.1,5 20,5H16.83L15,3H9Z"/>
+    <!-- Dome Symbol in Center -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M12,8C9.5,8 8,10.5 8,13H16C16,10.5 14.5,8 12,8Z"/>
+    <!-- Base line -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD700"
+        android:strokeWidth="1.5"
+        android:pathData="M7,16H17"/>
+</vector>
