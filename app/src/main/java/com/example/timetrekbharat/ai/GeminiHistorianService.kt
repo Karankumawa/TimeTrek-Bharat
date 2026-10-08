@@ -2,6 +2,7 @@ package com.example.timetrekbharat.ai
 
 import android.os.Handler
 import android.os.Looper
+import com.example.timetrekbharat.BuildConfig
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.java.GenerativeModelFutures
 import com.google.ai.client.generativeai.type.Content
@@ -12,7 +13,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_API_KEY) {
+class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildConfig.GEMINI_API_KEY) {
 
     private var modelFutures: GenerativeModelFutures? = null
     private val executor: Executor = Executors.newSingleThreadExecutor()
@@ -28,10 +29,11 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
         val keyToUse = if (!apiKey.isNullOrBlank() && !apiKey.startsWith("YOUR_")) {
             apiKey
         } else {
-            GEMINI_API_KEY
+            BuildConfig.GEMINI_API_KEY
         }
 
-        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIza")
+        // Google Gemini API Studio keys must start with 'AIzaSy'
+        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIzaSy")
 
         if (isApiKeyConfigured) {
             try {
@@ -57,7 +59,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
             mainHandler.postDelayed({
                 val offlineAnswer = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                 callback.onSuccess(offlineAnswer)
-            }, 500)
+            }, 300)
             return
         }
 
@@ -93,7 +95,6 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
                 }
 
                 override fun onFailure(t: Throwable) {
-                    // Failover gracefully for any auth, network, or quota error
                     val fallbackText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                     mainHandler.post { callback.onSuccess(fallbackText) }
                 }
@@ -113,7 +114,6 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
     }
 
     companion object {
-        private const val GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
         private const val MODEL_NAME = "gemini-1.5-flash"
     }
 }
