@@ -16,7 +16,7 @@ class AddPostActivity : AppCompatActivity() {
     private val indianStates = arrayOf(
         "Rajasthan", "Gujarat", "Delhi", "Maharashtra", "Uttar Pradesh",
         "Tamil Nadu", "Goa", "Punjab", "Karnataka", "West Bengal",
-        "Kerala", "Bihar", "Odisha", "Madhya Pradesh", "Assam", "Telangana",
+        "Kerala", "Bihar", "Odisha", "Madhya Pradesh", "Assam", "Telangana"
     )
 
     private val categories = arrayOf(
