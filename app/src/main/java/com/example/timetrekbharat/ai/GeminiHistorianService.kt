@@ -109,35 +109,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = GEMINI_
         eraContext: String?,
         userQuestion: String?
     ): String {
-        val state = if (!stateContext.isNullOrBlank()) stateContext else "India"
-        val era = if (!eraContext.isNullOrBlank()) eraContext else "Historical Era"
-
-        val sb = StringBuilder()
-        sb.append("📜 ").append(state).append(" Historical Scholar Analysis (").append(era).append(")\n\n")
-
-        val q = userQuestion?.lowercase() ?: ""
-
-        if (q.contains("fort") || q.contains("architectur") || q.contains("monument")) {
-            sb.append("🏛️ Architectural Legacy & Monument Marvels:\n")
-            sb.append("• ").append(state).append(" is world-renowned for its sublime architectural synthesis. ")
-            sb.append("In the ").append(era).append(", royal patrons commissioned stone fortresses with massive defensive ramparts, intricate stepwells, and ornate carved temples.\n")
-            sb.append("• Key Features: Massive stone bastions, double-walled fortifications, rainwater harvesting stepwells, and jali fretwork balconies.")
-        } else if (q.contains("ruler") || q.contains("warrior") || q.contains("battle") || q.contains("king") || q.contains("dynasty")) {
-            sb.append("⚔️ Military Dominance & Royal Dynasties:\n")
-            sb.append("• During the ").append(era).append(" in ").append(state).append(", legendary rulers and military commanders defended territorial sovereignty with strategic valor.\n")
-            sb.append("• Key Highlights: Formation of disciplined cavalry and infantry divisions, hill fort vantage points, and strategic alliances.")
-        } else if (q.contains("cultur") || q.contains("art") || q.contains("tradition") || q.contains("song")) {
-            sb.append("🎨 Cultural Heritage & Artistic Masterpieces:\n")
-            sb.append("• The ").append(era).append(" in ").append(state).append(" witnessed a vibrant renaissance in miniature paintings, classical court music, and folk performing arts.\n")
-            sb.append("• Royal courts actively patronized scholars, poets, and master artisans, creating lasting cultural traditions celebrated across Bharat today.")
-        } else {
-            sb.append("🏛️ Comprehensive Historical Summary for ").append(state).append(":\n")
-            sb.append("• The ").append(era).append(" represents a foundational period in ").append(state).append("'s timeline. ")
-            sb.append("It produced significant socio-economic expansion, flourishing trade routes, and lasting royal dynasties.\n")
-            sb.append("• Legacy: Preservation of ancient stone edicts, architectural heritage, and living traditions that continue to inspire generation after generation.")
-        }
-
-        return sb.toString()
+        return HistorianKnowledgeEngine.queryKnowledge(stateContext, eraContext, userQuestion ?: "")
     }
 
     companion object {
