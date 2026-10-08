@@ -28,22 +28,24 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
     init {
         val keyToUse = if (!apiKey.isNullOrBlank() && !apiKey.startsWith("YOUR_")) {
             apiKey
-        } else {
+        } else if (BuildConfig.GEMINI_API_KEY.isNotBlank() && !BuildConfig.GEMINI_API_KEY.startsWith("YOUR_")) {
             BuildConfig.GEMINI_API_KEY
+        } else {
+            ""
         }
 
-        // Google Gemini API Studio keys must start with 'AIzaSy'
-        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIzaSy")
+        // Google Gemini API Studio keys must start with 'AIza' (e.g., 'AIzaSy...')
+        isApiKeyConfigured = keyToUse.isNotBlank() && keyToUse.startsWith("AIza")
 
-        if (isApiKeyConfigured) {
+        modelFutures = if (isApiKeyConfigured) {
             try {
                 val gm = GenerativeModel(MODEL_NAME, keyToUse)
-                modelFutures = GenerativeModelFutures.from(gm)
+                GenerativeModelFutures.from(gm)
             } catch (_: Exception) {
-                modelFutures = null
+                null
             }
         } else {
-            modelFutures = null
+            null
         }
     }
 
@@ -55,7 +57,15 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
     ) {
         if (callback == null) return
 
-        if (!isApiKeyConfigured || modelFutures == null) {
+        if (userQuestion.isBlank()) {
+            mainHandler.post {
+                callback.onError("Please enter a valid question.")
+            }
+            return
+        }
+
+        val futures = modelFutures
+        if (!isApiKeyConfigured || futures == null) {
             mainHandler.postDelayed({
                 val offlineAnswer = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                 callback.onSuccess(offlineAnswer)
@@ -83,7 +93,7 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
                 .text(promptBuilder.toString())
                 .build()
 
-            val responseFuture: ListenableFuture<GenerateContentResponse> = modelFutures!!.generateContent(content)
+            val responseFuture: ListenableFuture<GenerateContentResponse> = futures.generateContent(content)
 
             Futures.addCallback(responseFuture, object : FutureCallback<GenerateContentResponse> {
                 override fun onSuccess(result: GenerateContentResponse?) {
@@ -91,7 +101,8 @@ class GeminiHistorianService @JvmOverloads constructor(apiKey: String? = BuildCo
                     if (responseText.isNullOrBlank()) {
                         responseText = generateOfflineHistorianAnswer(stateContext, eraContext, userQuestion)
                     }
-                    mainHandler.post { callback.onSuccess(responseText) }
+                    val finalResponseText = responseText
+                    mainHandler.post { callback.onSuccess(finalResponseText) }
                 }
 
                 override fun onFailure(t: Throwable) {
