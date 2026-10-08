@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SmritiWalk (स्मृतिवॉक)"
+                    android:text="SmritiWalk Guide"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Where Stones Remember • AI Living Heritage"
+                    android:text="Heritage &amp; Oral History Companion"
                     android:textColor="#E0E0E0"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -61,7 +61,7 @@
                 android:backgroundTint="@color/gold_royal"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="⚡ Offline Vault"
+                android:text="Offline Vault"
                 android:textColor="@color/black"
                 android:textSize="11sp"
                 android:textStyle="bold" />
@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="6dp"
                             android:layout_weight="1"
-                            android:text="📷 Scan Monument"
+                            android:text="Camera Scan Artifact"
                             android:textColor="@color/white"
                             app:backgroundTint="@color/saffron_primary"
                             app:cornerRadius="20dp" />
@@ -161,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
-                            android:text="🏛️ Change Site"
+                            android:text="Change Monument"
                             android:textColor="@color/maroon_royal"
                             app:cornerRadius="20dp"
                             app:strokeColor="@color/maroon_royal" />
@@ -177,17 +177,17 @@
                 android:layout_marginTop="8dp"
                 android:background="#FFF3E0"
                 android:padding="8dp"
-                android:text="⚡ Offline Vector Vault Active • Instant 512-dim Cosine Matching"
+                android:text="Offline Vector Vault Active • Instant Cosine Matching"
                 android:textColor="@color/saffron_primary_dark"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
-            <!-- 1. 3-Tier Granularity Engine Selector -->
+            <!-- 1. Story Granularity Selector -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="1. Granularity Depth Control (3-Tier Engine)"
+                android:text="1. Narrative Length &amp; Depth"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -205,7 +205,7 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚡ Smriti Quick (~15s)"
+                    android:text="Quick Insight (~20s)"
                     app:chipBackgroundColor="@color/chip_bg_unselected" />
 
                 <com.google.android.material.chip.Chip
@@ -214,7 +214,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="📜 Smriti Tale (~60s)"
+                    android:text="Full Story (~60s)"
                     app:chipBackgroundColor="@color/gold_royal" />
 
                 <com.google.android.material.chip.Chip
@@ -222,16 +222,16 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🏰 Smriti Chronicle (~3m)"
+                    android:text="Detailed Chronicle (~3m)"
                     app:chipBackgroundColor="@color/chip_bg_unselected" />
             </com.google.android.material.chip.ChipGroup>
 
-            <!-- 2. Multi-Persona Perspectives ('Rashomon' Storytelling) -->
+            <!-- 2. Multi-Persona Perspectives -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="2. Perspective Persona ('Rashomon' Mode)"
+                android:text="2. Perspective Persona"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -250,28 +250,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="🪕 Court Bard" />
+                    android:text="Court Bard" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipPersonaArchitect"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📐 Royal Architect" />
+                    android:text="Royal Architect" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipPersonaSentry"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚔️ Fortress Sentry" />
+                    android:text="Fortress Sentry" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipPersonaChronicler"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📜 Chronicler" />
+                    android:text="Chronicler" />
             </com.google.android.material.chip.ChipGroup>
 
             <!-- Main Narrative & Synchronized Audio Player Card -->
@@ -305,7 +305,7 @@
                             style="@style/Widget.MaterialComponents.Button.Icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="▶ Listen"
+                            android:text="Listen Audio"
                             android:textColor="@color/black"
                             app:backgroundTint="@color/gold_royal"
                             app:cornerRadius="16dp" />
@@ -317,7 +317,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="░▒▓█ SOUNDWAVE █▓▒░"
+                            android:text="Audio Ready"
                             android:textColor="@color/gold_royal"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -347,12 +347,12 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 3. High-Impact Differentiator Tools -->
+            <!-- 3. Interactive Heritage Exploration Tools -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="3. Interactive Heritage Exploration Tools"
+                android:text="3. Interactive Heritage Tools"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -370,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:text="📜 Decipher Script"
+                    android:text="Decipher Inscription"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
                     app:cornerRadius="12dp" />
@@ -382,7 +382,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:text="🔊 Acoustic Echo"
+                    android:text="Acoustic Resonance"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
                     app:cornerRadius="12dp" />
@@ -407,7 +407,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🔍 AR Script Bounding Box Translation (Brahmi/Devanagari)"
+                        android:text="AR Script Translation (Brahmi/Devanagari)"
                         android:textColor="@color/gold_royal"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -458,7 +458,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="💧 Subterranean Hydraulic Cutaway"
+                            android:text="Subterranean Water Level"
                             android:textColor="@color/text_primary"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -467,7 +467,7 @@
                             android:id="@+id/tvHydraulicLevelLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Monsoon 1600 CE (85%)"
+                            android:text="Monsoon Level (85%)"
                             android:textColor="@color/saffron_primary"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -504,7 +504,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🪕 Oral History Hunter — Bardic Seals Ledger"
+                        android:text="Oral History Ledger"
                         android:textColor="@color/maroon_royal"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -525,7 +525,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="📜 Collect Bardic Seal"
+                        android:text="Collect Oral History Seal"
                         android:textColor="@color/saffron_primary_dark"
                         android:textSize="12sp" />
                 </LinearLayout>

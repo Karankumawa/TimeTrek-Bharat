@@ -129,7 +129,6 @@ class StateRepository(context: Context) {
 
     fun fetchStatesFromNetwork(searchQuery: String? = null, regionQuery: String? = null) {
         isLoading.postValue(true)
-        errorMessage.postValue(null)
         scope.launch {
             try {
                 val response = RetrofitClient.api.getAllStates(searchQuery, regionQuery)
@@ -144,11 +143,9 @@ class StateRepository(context: Context) {
                         }
                         stateDao.insertStates(networkStates)
                     }
-                } else {
-                    errorMessage.postValue("Using cached offline database.")
                 }
-            } catch (e: Exception) {
-                errorMessage.postValue("Offline Mode Active")
+            } catch (_: Exception) {
+                // Silently use cached local Room data without showing error toast when cache is present
             } finally {
                 isLoading.postValue(false)
             }
@@ -157,7 +154,6 @@ class StateRepository(context: Context) {
 
     fun fetchStateDetailFromNetwork(stateSlug: String) {
         isLoading.postValue(true)
-        errorMessage.postValue(null)
         scope.launch {
             try {
                 val response = RetrofitClient.api.getStateDetail(stateSlug)
@@ -170,11 +166,9 @@ class StateRepository(context: Context) {
                         }
                         stateDao.insertState(networkState)
                     }
-                } else {
-                    errorMessage.postValue("Using cached state details.")
                 }
-            } catch (e: Exception) {
-                errorMessage.postValue("Offline Mode Active")
+            } catch (_: Exception) {
+                // Silently use cached state detail
             } finally {
                 isLoading.postValue(false)
             }

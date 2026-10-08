@@ -160,11 +160,11 @@ class SmritiWalkActivity : AppCompatActivity() {
 
         viewModel.isPlayingAudio.observe(this) { isPlaying ->
             if (isPlaying == true) {
-                binding.btnPlayAudio.text = "⏸ Pause"
-                binding.tvSoundwaveVisualizer.text = "░▒▓█ 🔊 AUDIO PLAYING █▓▒░"
+                binding.btnPlayAudio.text = "Pause"
+                binding.tvSoundwaveVisualizer.text = "Playing Narration"
             } else {
-                binding.btnPlayAudio.text = "▶ Listen"
-                binding.tvSoundwaveVisualizer.text = "░▒▓█ SOUNDWAVE █▓▒░"
+                binding.btnPlayAudio.text = "Listen Audio"
+                binding.tvSoundwaveVisualizer.text = "Audio Ready"
             }
         }
 
