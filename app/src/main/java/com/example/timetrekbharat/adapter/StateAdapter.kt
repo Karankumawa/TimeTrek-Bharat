@@ -83,12 +83,16 @@ class StateAdapter(
             }
 
             if (!state.imageUrl.isNullOrBlank()) {
-                Glide.with(itemView.context)
+                var glideRequest = Glide.with(itemView.context)
                     .load(state.imageUrl)
                     .placeholder(R.drawable.placeholder_heritage)
                     .error(R.drawable.placeholder_heritage)
-                    .centerCrop()
-                    .into(binding.ivStateImage)
+
+                if (state.imageUrl?.startsWith("file:///android_asset/") == true) {
+                    glideRequest = glideRequest.signature(com.bumptech.glide.signature.ObjectKey(state.imageUrl + "_" + (System.currentTimeMillis() / 60000)))
+                }
+
+                glideRequest.centerCrop().into(binding.ivStateImage)
             } else {
                 binding.ivStateImage.setImageResource(R.drawable.placeholder_heritage)
             }

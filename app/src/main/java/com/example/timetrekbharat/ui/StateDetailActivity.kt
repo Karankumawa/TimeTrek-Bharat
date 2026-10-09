@@ -1,6 +1,5 @@
 package com.example.timetrekbharat.ui
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -124,10 +123,18 @@ class StateDetailActivity : AppCompatActivity() {
         val bannerUrl = if (!state.bannerUrl.isNullOrBlank()) state.bannerUrl else state.imageUrl
 
         if (!bannerUrl.isNullOrBlank()) {
-            Glide.with(this)
+            var glideRequest = Glide.with(this)
                 .load(bannerUrl)
-                .centerCrop()
-                .into(binding.ivStateBanner)
+                .placeholder(com.example.timetrekbharat.R.drawable.placeholder_heritage)
+                .error(com.example.timetrekbharat.R.drawable.placeholder_heritage)
+
+            if (bannerUrl.startsWith("file:///android_asset/")) {
+                glideRequest = glideRequest.signature(com.bumptech.glide.signature.ObjectKey(bannerUrl + "_" + (System.currentTimeMillis() / 60000)))
+            }
+
+            glideRequest.centerCrop().into(binding.ivStateBanner)
+        } else {
+            binding.ivStateBanner.setImageResource(com.example.timetrekbharat.R.drawable.placeholder_heritage)
         }
 
         if (state.timeline != null) {
