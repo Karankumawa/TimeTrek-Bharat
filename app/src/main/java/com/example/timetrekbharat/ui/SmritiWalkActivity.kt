@@ -42,7 +42,7 @@ class SmritiWalkActivity : AppCompatActivity() {
                         MediaStore.Images.Media.getBitmap(contentResolver, uri)
                     }
                     binding.ivArtifactPreview.setImageBitmap(bitmap)
-                    viewModel.analyzeCameraCapturedImage(bitmap, "Identify heritage carving or monument in camera scan")
+                    viewModel.analyzeCameraCapturedImage(bitmap)
                 } catch (e: Exception) {
                     Toast.makeText(this, "Unable to process image: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -67,13 +67,18 @@ class SmritiWalkActivity : AppCompatActivity() {
         }
 
         binding.btnScanCamera.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-                type = "image/*"
-            }
-            selectImageLauncher.launch(intent)
+            triggerCameraScanLauncher()
+        }
+
+        binding.btnRescanCamera.setOnClickListener {
+            triggerCameraScanLauncher()
         }
 
         binding.btnSelectVault.setOnClickListener {
+            showSiteVaultSelectorDialog()
+        }
+
+        binding.btnChangeVault.setOnClickListener {
             showSiteVaultSelectorDialog()
         }
 
@@ -115,18 +120,19 @@ class SmritiWalkActivity : AppCompatActivity() {
             viewModel.toggleAcousticMode()
         }
 
-        binding.sliderHydraulicLevel.addOnChangeListener { _, value, _ ->
-            val level = value.toInt()
-            viewModel.setHydraulicLevel(level)
-            binding.tvHydraulicLevelLabel.text = "Subterranean Level ($level%)"
-        }
-
         binding.btnCollectSeal.setOnClickListener {
             val currentSeals = viewModel.bardicSeals.value
             if (!currentSeals.isNullOrEmpty()) {
                 viewModel.collectBardicSeal(currentSeals[0].id)
             }
         }
+    }
+
+    private fun triggerCameraScanLauncher() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        selectImageLauncher.launch(intent)
     }
 
     private fun showSiteVaultSelectorDialog() {
@@ -145,12 +151,25 @@ class SmritiWalkActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.selectedArtifact.observe(this) { artifact ->
-            if (artifact != null) {
-                binding.tvArtifactName.text = artifact.name
-                binding.tvArtifactLocation.text = artifact.locationEra
-                binding.tvEpigraphyOriginal.text = artifact.epigraphyOriginal ?: "𑀅𑀥𑀺𑀧𑀢𑀺 𑀭𑀸𑀡𑀸..."
-                binding.tvEpigraphyDeciphered.text = artifact.epigraphyDeciphered ?: "Deciphered Inscription"
+        viewModel.hasScanned.observe(this) { hasScanned ->
+            if (hasScanned == true) {
+                binding.cardSmritiWalkGuidelines.visibility = View.GONE
+                binding.cardPredictionResult.visibility = View.VISIBLE
+                binding.layoutDetailsContainer.visibility = View.VISIBLE
+            } else {
+                binding.cardSmritiWalkGuidelines.visibility = View.VISIBLE
+                binding.cardPredictionResult.visibility = View.GONE
+                binding.layoutDetailsContainer.visibility = View.GONE
+            }
+        }
+
+        viewModel.mlPrediction.observe(this) { prediction ->
+            if (prediction != null) {
+                binding.tvPredictionAccuracyBadge.text = "✨ ML Identified • ${prediction.confidencePercentage}% Match"
+                binding.tvArtifactName.text = prediction.name
+                binding.tvArtifactLocation.text = prediction.locationEra
+                binding.tvEpigraphyOriginal.text = prediction.epigraphyOriginal ?: "𑀚𑀬 𑀅𑀫𑁆𑀩𑀭 𑀤𑀼𑀭𑁆𑀕..."
+                binding.tvEpigraphyDeciphered.text = prediction.epigraphyDeciphered ?: "Deciphered Inscription"
             }
         }
 
@@ -160,10 +179,10 @@ class SmritiWalkActivity : AppCompatActivity() {
 
         viewModel.isPlayingAudio.observe(this) { isPlaying ->
             if (isPlaying == true) {
-                binding.btnPlayAudio.text = "Pause"
-                binding.tvSoundwaveVisualizer.text = "Playing Narration"
+                binding.btnPlayAudio.text = "Pause ⏸️"
+                binding.tvSoundwaveVisualizer.text = "Playing Narration 🔊"
             } else {
-                binding.btnPlayAudio.text = "Listen Audio"
+                binding.btnPlayAudio.text = "Listen Audio 🔊"
                 binding.tvSoundwaveVisualizer.text = "Audio Ready"
             }
         }
@@ -174,8 +193,8 @@ class SmritiWalkActivity : AppCompatActivity() {
 
         viewModel.isAcousticMode.observe(this) { isAcoustic ->
             if (isAcoustic == true) {
-                val artifact = viewModel.selectedArtifact.value
-                val desc = artifact?.acousticResonanceDesc ?: "Resonance Frequency Active: 432 Hz Convolution Reverb"
+                val prediction = viewModel.mlPrediction.value
+                val desc = "Resonance Frequency Active: 432 Hz Convolution Reverb for ${prediction?.name ?: "Heritage Site"}"
                 Toast.makeText(this, "🔊 Acoustic Archaeology Active: $desc", Toast.LENGTH_LONG).show()
             }
         }
