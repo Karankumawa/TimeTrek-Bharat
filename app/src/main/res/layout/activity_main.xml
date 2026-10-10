@@ -60,17 +60,210 @@
                         android:id="@+id/tvAppSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/subtitle_home"
+                        android:text="Explore Indian States, Kings, Politics &amp; Eras"
                         android:textColor="#F5F5F5"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Quick Access AI Badges Bar -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- SmritiWalk AI Badge Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardQuickSmritiWalk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="#26FFFFFF"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#40FFFFFF"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:contentDescription="SmritiWalk"
+                                android:src="@drawable/ic_smriti_walk"
+                                app:tint="@color/gold_royal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="SmritiWalk AI 📸"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Ask Historian Badge Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardQuickAskHistorian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="#26FFFFFF"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#40FFFFFF"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:contentDescription="Ask Historian"
+                                android:src="@drawable/ic_ask_historian"
+                                app:tint="@color/gold_royal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Ask Historian 🤖"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Community Lore Badge Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardQuickCommunity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="#26FFFFFF"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#40FFFFFF"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:contentDescription="Community"
+                                android:src="@drawable/ic_community_lore"
+                                app:tint="@color/gold_royal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Community Lore 📜"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Main History Category Selection Bar -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupHistoryCategories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategoryStates"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="🏛️ Indian States"
+                        android:textColor="@color/black"
+                        app:chipBackgroundColor="@color/gold_royal" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategoryKings"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="👑 Indian Kings"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/saffron_primary_dark" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategoryPolitics"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚖️ Indian Politics"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/chip_bg_unselected" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategoryAncient"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📜 Ancient History"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/chip_bg_unselected" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategoryModern"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚀 Modern History"
+                        android:textColor="@color/text_primary"
+                        app:chipBackgroundColor="@color/chip_bg_unselected" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
             <!-- Search Bar Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="12dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="3dp">
@@ -96,7 +289,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:hint="@string/search_hint"
+                        android:hint="Search state, ruler, event or history..."
                         android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:maxLines="1"
@@ -115,17 +308,20 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Region Filter Chips ScrollView -->
+            <!-- Region Filter Chips ScrollView (Visible when Indian States is active) -->
             <HorizontalScrollView
+                android:id="@+id/svRegionFilters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:scrollbars="none">
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                android:visibility="visible">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroupRegions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:selectionRequired="true"
                     app:singleLine="true"
                     app:singleSelection="true">
 
@@ -261,11 +457,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:indeterminateTint="@color/saffron_primary"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Single Consolidated Explorer Hub Floating Action Button -->
+    <!-- Consolidated Explorer Hub Floating Action Button -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabExplorerHub"
         android:layout_width="wrap_content"
