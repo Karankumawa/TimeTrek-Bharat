@@ -58,22 +58,53 @@ class StateRepository(context: Context) {
     }
 
     /**
-     * Lists files in assets/statesimage/ and dynamically matches slug with any extension (.png, .jpg, .jpeg, .webp).
-     * Returns file:///android_asset/statesimage/... URI so manual edits in assets take effect on app run and in Room DB.
+     * Lists files in assets/statesimage/ and statesimages/ and state-specific subfolders (e.g. rajasthanimages/).
+     * Returns file:///android_asset/... URI so manual edits in assets take effect on app run and in Room DB.
      */
     private fun resolveStateImageUrl(slug: String, fallbackUrl: String): String {
-        try {
-            val assetFiles = appContext.assets.list("statesimage")?.toList() ?: emptyList()
-            val matchedFile = assetFiles.firstOrNull { fileName ->
-                val nameWithoutExt = fileName.substringBeforeLast(".")
-                nameWithoutExt.equals(slug, ignoreCase = true)
+        val cleanSlug = slug.replace("-", "").replace("_", "").lowercase()
+        val dirsToCheck = listOf(
+            "statesimage",
+            "statesimages",
+            "statesimage/${cleanSlug}images",
+            "statesimages/${cleanSlug}images",
+            "statesimage/${slug}images",
+            "statesimages/${slug}images",
+            "statesimage/$slug",
+            "statesimages/$slug"
+        )
+
+        for (dir in dirsToCheck) {
+            try {
+                val files = appContext.assets.list(dir)?.toList() ?: emptyList()
+
+                // 1. Direct match on filename without extension
+                val matchedFile = files.firstOrNull { fileName ->
+                    val nameWithoutExt = fileName.substringBeforeLast(".")
+                    nameWithoutExt.equals(slug, ignoreCase = true) ||
+                    nameWithoutExt.replace("-", "").replace("_", "").equals(cleanSlug, ignoreCase = true)
+                }
+                if (matchedFile != null) {
+                    return "file:///android_asset/$dir/$matchedFile"
+                }
+
+                // 2. If folder is state-specific (e.g. rajasthanimages) and contains images, take first image
+                if (dir.contains("images") || dir.contains(slug)) {
+                    val firstImage = files.firstOrNull { f ->
+                        f.endsWith(".jpg", ignoreCase = true) ||
+                        f.endsWith(".jpeg", ignoreCase = true) ||
+                        f.endsWith(".png", ignoreCase = true) ||
+                        f.endsWith(".webp", ignoreCase = true)
+                    }
+                    if (firstImage != null) {
+                        return "file:///android_asset/$dir/$firstImage"
+                    }
+                }
+            } catch (_: Exception) {
+                // Ignore missing directory
             }
-            if (matchedFile != null) {
-                return "file:///android_asset/statesimage/$matchedFile"
-            }
-        } catch (e: Exception) {
-            Log.e("StateRepository", "Error resolving asset image for $slug", e)
         }
+
         return fallbackUrl
     }
 

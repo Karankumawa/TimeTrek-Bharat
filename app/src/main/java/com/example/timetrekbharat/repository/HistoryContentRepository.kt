@@ -1,22 +1,37 @@
 package com.example.timetrekbharat.repository
 
+import android.content.Context
 import com.example.timetrekbharat.model.HistoryCategory
 import com.example.timetrekbharat.model.HistoryTopicItem
 
 object HistoryContentRepository {
 
-    fun getTopicsByCategory(category: HistoryCategory): List<HistoryTopicItem> {
-        return when (category) {
+    fun getTopicsByCategory(category: HistoryCategory, context: Context? = null): List<HistoryTopicItem> {
+        val rawTopics = when (category) {
             HistoryCategory.KINGS -> getIndianKingsAndDynasties()
             HistoryCategory.POLITICS -> getIndianPoliticsAndFreedomMovement()
             HistoryCategory.ANCIENT -> getIndianAncientHistory()
             HistoryCategory.MODERN -> getIndianModernHistory()
             HistoryCategory.STATES -> emptyList() // States handled separately via StateRepository
         }
+        if (context == null) return rawTopics
+
+        val folderName = when (category) {
+            HistoryCategory.KINGS -> "indian_kings"
+            HistoryCategory.POLITICS -> "indian_politics"
+            HistoryCategory.ANCIENT -> "ancient_history"
+            HistoryCategory.MODERN -> "modern_history"
+            else -> "statesimage"
+        }
+
+        return rawTopics.map { topic ->
+            val resolvedUrl = resolveAssetImage(context, folderName, topic.id, topic.title, topic.imageUrl)
+            topic.copy(imageUrl = resolvedUrl)
+        }
     }
 
-    fun searchTopics(category: HistoryCategory, query: String): List<HistoryTopicItem> {
-        val topics = getTopicsByCategory(category)
+    fun searchTopics(category: HistoryCategory, query: String, context: Context? = null): List<HistoryTopicItem> {
+        val topics = getTopicsByCategory(category, context)
         if (query.isBlank()) return topics
         val q = query.trim().lowercase()
         return topics.filter { item ->
@@ -27,6 +42,23 @@ object HistoryContentRepository {
             item.prominentFigures.any { it.lowercase().contains(q) } ||
             item.keyFacts.any { it.lowercase().contains(q) }
         }
+    }
+
+    private fun resolveAssetImage(context: Context, folderName: String, topicId: String, title: String, fallbackUrl: String): String {
+        try {
+            val files = context.assets.list(folderName)?.toList() ?: emptyList()
+            val cleanId = topicId.lowercase().replace("-", "_")
+            val cleanTitle = title.lowercase().replace(" ", "_").replace("-", "_")
+
+            val matchedFile = files.firstOrNull { fileName ->
+                val name = fileName.substringBeforeLast(".").lowercase().replace("-", "_")
+                name == cleanId || name == cleanTitle || cleanId.contains(name) || name.contains(cleanId)
+            }
+            if (matchedFile != null) {
+                return "file:///android_asset/$folderName/$matchedFile"
+            }
+        } catch (_: Exception) {}
+        return fallbackUrl
     }
 
     private fun getIndianKingsAndDynasties(): List<HistoryTopicItem> {

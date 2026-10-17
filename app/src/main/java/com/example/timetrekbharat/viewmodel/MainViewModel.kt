@@ -59,7 +59,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         val query = _searchQuery.value ?: ""
-        val filteredTopics = HistoryContentRepository.searchTopics(category, query)
+        val filteredTopics = HistoryContentRepository.searchTopics(category, query, getApplication())
         historyTopics.value = filteredTopics
     }
 
