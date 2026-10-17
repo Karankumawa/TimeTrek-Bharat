@@ -13,6 +13,9 @@ interface StateDao {
     @Query("SELECT * FROM states ORDER BY name ASC")
     fun getAllStates(): LiveData<List<State>>
 
+    @Query("SELECT * FROM states ORDER BY name ASC")
+    fun getAllStatesSync(): List<State>
+
     @Query("SELECT * FROM states WHERE isFavorite = 1 ORDER BY name ASC")
     fun getFavoriteStates(): LiveData<List<State>>
 

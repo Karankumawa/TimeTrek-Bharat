@@ -20,7 +20,7 @@ class StateRepository(context: Context) {
     val errorMessage = MutableLiveData<String?>(null)
 
     init {
-        // Fetch states directly from Supabase Production Database
+        // Fetch states from Supabase Database & auto-connect local assets if available
         scope.launch {
             fetchStatesFromNetwork()
         }
@@ -54,6 +54,64 @@ class StateRepository(context: Context) {
         }
     }
 
+    /**
+     * Searches local assets/ directory and subfolders (e.g. rajasthanimages/).
+     * Returns file:///android_asset/... URI if local image exists, else returns fallback Supabase URL.
+     */
+    private fun resolveStateImageUrl(slug: String, fallbackUrl: String): String {
+        val cleanSlug = slug.replace("-", "").replace("_", "").lowercase()
+
+        // 1. Check state-specific subfolders FIRST
+        val subDirs = listOf(
+            "statesimage/${cleanSlug}images",
+            "statesimages/${cleanSlug}images",
+            "statesimage/${slug}images",
+            "statesimages/${slug}images",
+            "statesimage/$slug",
+            "statesimages/$slug",
+            "${cleanSlug}images",
+            "${slug}images",
+            cleanSlug,
+            slug
+        )
+
+        for (dir in subDirs) {
+            try {
+                val files = appContext.assets.list(dir)?.toList() ?: emptyList()
+                val imageFile = files.firstOrNull { f ->
+                    !f.startsWith(".") && (
+                        f.endsWith(".jpg", ignoreCase = true) ||
+                        f.endsWith(".jpeg", ignoreCase = true) ||
+                        f.endsWith(".png", ignoreCase = true) ||
+                        f.endsWith(".webp", ignoreCase = true)
+                    )
+                }
+                if (imageFile != null) {
+                    return "file:///android_asset/$dir/$imageFile"
+                }
+            } catch (_: Exception) {}
+        }
+
+        // 2. Check main statesimage folders for direct matching filename
+        val mainDirs = listOf("statesimage", "statesimages")
+        for (dir in mainDirs) {
+            try {
+                val files = appContext.assets.list(dir)?.toList() ?: emptyList()
+                val matchedFile = files.firstOrNull { fileName ->
+                    val nameWithoutExt = fileName.substringBeforeLast(".")
+                    nameWithoutExt.equals(slug, ignoreCase = true) ||
+                    nameWithoutExt.replace("-", "").replace("_", "").equals(cleanSlug, ignoreCase = true) ||
+                    nameWithoutExt.contains(cleanSlug, ignoreCase = true)
+                }
+                if (matchedFile != null) {
+                    return "file:///android_asset/$dir/$matchedFile"
+                }
+            } catch (_: Exception) {}
+        }
+
+        return fallbackUrl
+    }
+
     fun fetchStatesFromNetwork(searchQuery: String? = null, regionQuery: String? = null) {
         isLoading.postValue(true)
         scope.launch {
@@ -67,6 +125,12 @@ class StateRepository(context: Context) {
                             if (local != null) {
                                 netState.isFavorite = local.isFavorite
                             }
+                            // Connect local asset image if present in assets folder
+                            val assetUrl = resolveStateImageUrl(netState.slug, netState.imageUrl ?: "")
+                            if (assetUrl.startsWith("file:///android_asset/")) {
+                                netState.imageUrl = assetUrl
+                                netState.bannerUrl = resolveStateImageUrl(netState.slug, netState.bannerUrl ?: assetUrl)
+                            }
                         }
                         stateDao.insertStates(networkStates)
                     }
@@ -74,6 +138,18 @@ class StateRepository(context: Context) {
             } catch (_: Exception) {
                 // Silently fallback to cached Room DB data
             } finally {
+                // Resolve assets for cached states if offline
+                try {
+                    val cachedStates = stateDao.getAllStatesSync()
+                    for (cState in cachedStates) {
+                        val assetUrl = resolveStateImageUrl(cState.slug, cState.imageUrl ?: "")
+                        if (assetUrl.startsWith("file:///android_asset/") && cState.imageUrl != assetUrl) {
+                            cState.imageUrl = assetUrl
+                            cState.bannerUrl = resolveStateImageUrl(cState.slug, cState.bannerUrl ?: assetUrl)
+                            stateDao.insertState(cState)
+                        }
+                    }
+                } catch (_: Exception) {}
                 isLoading.postValue(false)
             }
         }
@@ -89,6 +165,11 @@ class StateRepository(context: Context) {
                     val local = stateDao.getStateBySlugSync(networkState.slug)
                     if (local != null) {
                         networkState.isFavorite = local.isFavorite
+                    }
+                    val assetUrl = resolveStateImageUrl(networkState.slug, networkState.imageUrl ?: "")
+                    if (assetUrl.startsWith("file:///android_asset/")) {
+                        networkState.imageUrl = assetUrl
+                        networkState.bannerUrl = resolveStateImageUrl(networkState.slug, networkState.bannerUrl ?: assetUrl)
                     }
                     stateDao.insertState(networkState)
                 }
