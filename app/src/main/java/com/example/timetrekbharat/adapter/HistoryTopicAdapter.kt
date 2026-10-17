@@ -1,5 +1,6 @@
 package com.example.timetrekbharat.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,19 +75,18 @@ class HistoryTopicAdapter(
             binding.tvFactCount.text = "📜 $factCount Key Historical Facts"
 
             if (topic.imageUrl.isNotBlank()) {
-                var glideRequest = Glide.with(itemView.context)
-                    .load(topic.imageUrl)
-                    .placeholder(R.drawable.placeholder_heritage)
-                    .error(R.drawable.placeholder_heritage)
-
-                if (topic.imageUrl.startsWith("file:///android_asset/")) {
-                    glideRequest = glideRequest
-                        .skipMemoryCache(true)
-                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
-                        .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
+                val imageModel: Any = if (topic.imageUrl.startsWith("file:///android_asset/")) {
+                    Uri.parse(topic.imageUrl)
+                } else {
+                    topic.imageUrl
                 }
 
-                glideRequest.centerCrop().into(binding.ivTopicImage)
+                Glide.with(itemView.context)
+                    .load(imageModel)
+                    .placeholder(R.drawable.placeholder_heritage)
+                    .error(R.drawable.placeholder_heritage)
+                    .centerCrop()
+                    .into(binding.ivTopicImage)
             } else {
                 binding.ivTopicImage.setImageResource(R.drawable.placeholder_heritage)
             }

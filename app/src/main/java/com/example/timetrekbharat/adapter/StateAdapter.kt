@@ -1,5 +1,6 @@
 package com.example.timetrekbharat.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,19 +84,18 @@ class StateAdapter(
             }
 
             if (!state.imageUrl.isNullOrBlank()) {
-                var glideRequest = Glide.with(itemView.context)
-                    .load(state.imageUrl)
-                    .placeholder(R.drawable.placeholder_heritage)
-                    .error(R.drawable.placeholder_heritage)
-
-                if (state.imageUrl?.startsWith("file:///android_asset/") == true) {
-                    glideRequest = glideRequest
-                        .skipMemoryCache(true)
-                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
-                        .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
+                val imageModel: Any = if (state.imageUrl?.startsWith("file:///android_asset/") == true) {
+                    Uri.parse(state.imageUrl)
+                } else {
+                    state.imageUrl!!
                 }
 
-                glideRequest.centerCrop().into(binding.ivStateImage)
+                Glide.with(itemView.context)
+                    .load(imageModel)
+                    .placeholder(R.drawable.placeholder_heritage)
+                    .error(R.drawable.placeholder_heritage)
+                    .centerCrop()
+                    .into(binding.ivStateImage)
             } else {
                 binding.ivStateImage.setImageResource(R.drawable.placeholder_heritage)
             }

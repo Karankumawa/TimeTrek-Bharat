@@ -1,6 +1,7 @@
 package com.example.timetrekbharat.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -123,19 +124,18 @@ class StateDetailActivity : AppCompatActivity() {
         val bannerUrl = if (!state.bannerUrl.isNullOrBlank()) state.bannerUrl else state.imageUrl
 
         if (!bannerUrl.isNullOrBlank()) {
-            var glideRequest = Glide.with(this)
-                .load(bannerUrl)
-                .placeholder(com.example.timetrekbharat.R.drawable.placeholder_heritage)
-                .error(com.example.timetrekbharat.R.drawable.placeholder_heritage)
-
-            if (bannerUrl.startsWith("file:///android_asset/")) {
-                glideRequest = glideRequest
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
-                    .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
+            val imageModel: Any = if (bannerUrl.startsWith("file:///android_asset/")) {
+                Uri.parse(bannerUrl)
+            } else {
+                bannerUrl
             }
 
-            glideRequest.centerCrop().into(binding.ivStateBanner)
+            Glide.with(this)
+                .load(imageModel)
+                .placeholder(com.example.timetrekbharat.R.drawable.placeholder_heritage)
+                .error(com.example.timetrekbharat.R.drawable.placeholder_heritage)
+                .centerCrop()
+                .into(binding.ivStateBanner)
         } else {
             binding.ivStateBanner.setImageResource(com.example.timetrekbharat.R.drawable.placeholder_heritage)
         }
