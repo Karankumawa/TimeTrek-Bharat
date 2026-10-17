@@ -159,7 +159,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="❤️ Like (0)"
+                    android:text="Like (0)"
                     android:textColor="@color/saffron_primary"
                     app:cornerRadius="20dp"
                     app:strokeColor="@color/saffron_primary" />
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/maroon_royal"
-                    android:text="Ask AI About This ✨"
+                    android:text="Ask AI"
                     android:textColor="@color/white"
                     app:cornerRadius="20dp" />
             </LinearLayout>

@@ -19,7 +19,7 @@
 
     <!-- Filter Chips -->
     <string name="chip_all">All States</string>
-    <string name="chip_favorites">⭐ Favorites</string>
+    <string name="chip_favorites">Favorites</string>
     <string name="chip_north">Northern</string>
     <string name="chip_south">Southern</string>
     <string name="chip_west">Western</string>

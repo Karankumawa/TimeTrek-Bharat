@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📜 Era Narrative &amp; Historical Analysis"
+                        android:text="Historical Analysis"
                         android:textColor="@color/maroon_royal"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚔️ Key Historical Milestones:"
+                        android:text="Key Historical Milestones:"
                         android:textColor="@color/peacock_blue"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -204,7 +204,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="👑 Key Rulers &amp; Leaders:"
+                        android:text="Key Rulers &amp; Leaders:"
                         android:textColor="@color/maroon_royal"
                         android:textSize="14sp"
                         android:textStyle="bold" />

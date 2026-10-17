@@ -191,8 +191,8 @@ class SmritiWalkViewModel(application: Application) : AndroidViewModel(applicati
             prediction != null -> {
                 val persona = _currentPersona.value ?: StoryPersona.BARD
                 val factsFormatted = prediction.quickFacts.joinToString("\n• ") { it }
-                val personaHeader = "📜 Persona Guide (${persona.displayName}):"
-                val architecturalHeader = "🏛️ Architectural Heritage: ${prediction.architecturalStyle} (${prediction.dynasty})"
+                val personaHeader = "Persona Guide (${persona.displayName}):"
+                val architecturalHeader = "Architectural Heritage: ${prediction.architecturalStyle} (${prediction.dynasty})"
 
                 "$personaHeader\n\"${prediction.summary}\"\n\n$architecturalHeader\n\nKey Historical Highlights:\n• $factsFormatted"
             }

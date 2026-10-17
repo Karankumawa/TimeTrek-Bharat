@@ -83,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="All Lore ✨"
+                        android:text="All Posts"
                         android:textColor="@color/black"
                         app:chipBackgroundColor="@color/gold_royal" />
 
@@ -92,7 +92,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Discoveries 🏛️"
+                        android:text="Discoveries"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/white" />
 
@@ -101,7 +101,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Traditions 🎨"
+                        android:text="Traditions"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/white" />
 

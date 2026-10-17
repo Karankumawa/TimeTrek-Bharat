@@ -374,28 +374,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="Court Bard 📜" />
+                            android:text="Court Bard" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPersonaArchitect"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Royal Architect 🏛️" />
+                            android:text="Royal Architect" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPersonaSentry"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fortress Sentry ⚔️" />
+                            android:text="Fortress Sentry" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipPersonaChronicler"
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Chronicler 📖" />
+                            android:text="Chronicler" />
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
@@ -463,7 +463,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📜 Monument Story &amp; Analysis"
+                            android:text="Monument Story &amp; Analysis"
                             android:textColor="@color/maroon_royal"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -505,7 +505,7 @@
                         android:layout_height="48dp"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:text="Decipher Inscriptions 📜"
+                        android:text="Decipher Inscriptions"
                         android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         app:cornerRadius="24dp" />
@@ -517,7 +517,7 @@
                         android:layout_height="48dp"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:text="Acoustic Echo 🎵"
+                        android:text="Acoustic Echo"
                         android:textColor="@color/text_primary"
                         android:textSize="12sp"
                         app:cornerRadius="24dp" />
@@ -586,7 +586,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Oral History Ledger 📜"
+                            android:text="History Ledger"
                             android:textColor="@color/maroon_royal"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -607,7 +607,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:text="Collect Bardic Seal ✨"
+                            android:text="Save Seal"
                             android:textColor="@color/saffron_primary_dark"
                             android:textSize="12sp" />
                     </LinearLayout>

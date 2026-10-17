@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="🏛️ Indian States"
+                        android:text="Indian States"
                         android:textColor="@color/black"
                         app:chipBackgroundColor="@color/gold_royal" />
 
@@ -96,7 +96,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="👑 Indian Kings"
+                        android:text="Indian Kings"
                         android:textColor="@color/white"
                         app:chipBackgroundColor="@color/saffron_primary_dark" />
 
@@ -105,7 +105,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚖️ Indian Politics"
+                        android:text="Indian Politics"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/chip_bg_unselected" />
 
@@ -114,7 +114,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📜 Ancient History"
+                        android:text="Ancient History"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/chip_bg_unselected" />
 
@@ -123,7 +123,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🚀 Modern History"
+                        android:text="Modern History"
                         android:textColor="@color/text_primary"
                         app:chipBackgroundColor="@color/chip_bg_unselected" />
                 </com.google.android.material.chip.ChipGroup>
@@ -338,7 +338,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="18dp"
-        android:text="Explore Hub ✨"
+        android:text="Explore Hub"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
