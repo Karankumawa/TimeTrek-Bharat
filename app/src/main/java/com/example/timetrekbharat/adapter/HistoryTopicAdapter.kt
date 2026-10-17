@@ -74,12 +74,19 @@ class HistoryTopicAdapter(
             binding.tvFactCount.text = "📜 $factCount Key Historical Facts"
 
             if (topic.imageUrl.isNotBlank()) {
-                Glide.with(itemView.context)
+                var glideRequest = Glide.with(itemView.context)
                     .load(topic.imageUrl)
                     .placeholder(R.drawable.placeholder_heritage)
                     .error(R.drawable.placeholder_heritage)
-                    .centerCrop()
-                    .into(binding.ivTopicImage)
+
+                if (topic.imageUrl.startsWith("file:///android_asset/")) {
+                    glideRequest = glideRequest
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
+                        .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
+                }
+
+                glideRequest.centerCrop().into(binding.ivTopicImage)
             } else {
                 binding.ivTopicImage.setImageResource(R.drawable.placeholder_heritage)
             }

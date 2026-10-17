@@ -89,7 +89,10 @@ class StateAdapter(
                     .error(R.drawable.placeholder_heritage)
 
                 if (state.imageUrl?.startsWith("file:///android_asset/") == true) {
-                    glideRequest = glideRequest.signature(com.bumptech.glide.signature.ObjectKey(state.imageUrl + "_" + (System.currentTimeMillis() / 60000)))
+                    glideRequest = glideRequest
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
+                        .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
                 }
 
                 glideRequest.centerCrop().into(binding.ivStateImage)

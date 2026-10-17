@@ -129,7 +129,10 @@ class StateDetailActivity : AppCompatActivity() {
                 .error(com.example.timetrekbharat.R.drawable.placeholder_heritage)
 
             if (bannerUrl.startsWith("file:///android_asset/")) {
-                glideRequest = glideRequest.signature(com.bumptech.glide.signature.ObjectKey(bannerUrl + "_" + (System.currentTimeMillis() / 60000)))
+                glideRequest = glideRequest
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
+                    .signature(com.bumptech.glide.signature.ObjectKey(System.currentTimeMillis().toString()))
             }
 
             glideRequest.centerCrop().into(binding.ivStateBanner)
