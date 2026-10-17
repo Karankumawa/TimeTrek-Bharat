@@ -120,6 +120,50 @@ class StateDetailActivity : AppCompatActivity() {
             binding.btnFavoriteDetail.setImageResource(com.example.timetrekbharat.R.drawable.ic_star_outline)
         }
 
+        // Detailed Overview
+        if (!state.detailedOverview.isNullOrBlank()) {
+            binding.cardOverview.visibility = View.VISIBLE
+            binding.tvDetailedOverview.text = state.detailedOverview
+        } else {
+            binding.cardOverview.visibility = View.GONE
+        }
+
+        // Fast Facts
+        if (!state.language.isNullOrBlank() || !state.areaSqKm.isNullOrBlank() || !state.bestTimeToVisit.isNullOrBlank()) {
+            binding.cardFastFacts.visibility = View.VISIBLE
+            binding.tvLanguageDetail.text = "Languages: ${state.language ?: "N/A"}"
+            binding.tvAreaDetail.text = "Area: ${state.areaSqKm ?: "N/A"}"
+            binding.tvBestTimeDetail.text = "Best Season: ${state.bestTimeToVisit ?: "N/A"}"
+        } else {
+            binding.cardFastFacts.visibility = View.GONE
+        }
+
+        // Cultural Heritage
+        val heritage = state.culturalHeritage
+        if (heritage != null && (!heritage.danceMusic.isNullOrEmpty() || !heritage.festivals.isNullOrEmpty() || !heritage.cuisine.isNullOrEmpty() || !heritage.handicrafts.isNullOrEmpty())) {
+            binding.cardCulturalHeritage.visibility = View.VISIBLE
+            binding.tvDanceMusicDetail.text = "Dance & Music: ${heritage.danceMusic?.joinToString(", ") ?: "N/A"}"
+            binding.tvFestivalsDetail.text = "Festivals: ${heritage.festivals?.joinToString(", ") ?: "N/A"}"
+            binding.tvCuisineDetail.text = "Cuisine: ${heritage.cuisine?.joinToString(", ") ?: "N/A"}"
+            binding.tvHandicraftsDetail.text = "Handicrafts: ${heritage.handicrafts?.joinToString(", ") ?: "N/A"}"
+        } else {
+            binding.cardCulturalHeritage.visibility = View.GONE
+        }
+
+        // Famous Monuments
+        val monuments = state.famousMonuments
+        if (!monuments.isNullOrEmpty()) {
+            binding.cardMonuments.visibility = View.VISIBLE
+            val monumentsBuilder = StringBuilder()
+            for (m in monuments) {
+                val unescoTag = if (m.isUnesco) " [UNESCO World Heritage]" else ""
+                monumentsBuilder.append("• ").append(m.name ?: "").append(" (").append(m.city ?: "").append(")").append(unescoTag).append("\n")
+            }
+            binding.tvMonumentsDetail.text = monumentsBuilder.toString().trim()
+        } else {
+            binding.cardMonuments.visibility = View.GONE
+        }
+
         val bannerUrl = if (!state.bannerUrl.isNullOrBlank()) state.bannerUrl else state.imageUrl
 
         if (!bannerUrl.isNullOrBlank()) {
