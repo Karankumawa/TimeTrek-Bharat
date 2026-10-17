@@ -74,23 +74,21 @@ class CommunityDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun likePost(postId: String) {
-        if (postId.isBlank()) return
+    private fun likePost(postId: String?) {
+        if (postId.isNullOrBlank()) return
         binding.btnLike.isEnabled = false
+
+        val currentLikes = (post?.likesCount ?: 0) + 1
+        post?.likesCount = currentLikes
+        binding.btnLike.text = "❤️ Like ($currentLikes)"
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = RetrofitClient.api.likeCommunityPost(postId)
+                val body = mapOf("post_id" to postId)
+                RetrofitClient.api.likeCommunityPost(body)
                 withContext(Dispatchers.Main) {
                     binding.btnLike.isEnabled = true
-                    if (response.isSuccessful && response.body()?.isSuccess == true) {
-                        val updatedPost = response.body()?.data
-                        if (updatedPost != null) {
-                            post = updatedPost
-                            binding.btnLike.text = "❤️ Like (${updatedPost.likesCount})"
-                            Toast.makeText(this@CommunityDetailActivity, "Thanks for upvoting!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                    Toast.makeText(this@CommunityDetailActivity, "Thanks for upvoting!", Toast.LENGTH_SHORT).show()
                 }
             } catch (_: Exception) {
                 withContext(Dispatchers.Main) {

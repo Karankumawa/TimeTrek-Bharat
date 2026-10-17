@@ -34,9 +34,10 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = RetrofitClient.api.getCommunityPosts(stateSlug)
-                if (response.isSuccessful && response.body()?.isSuccess == true) {
-                    _posts.postValue(response.body()?.data ?: emptyList())
+                val filter = if (!stateSlug.isNullOrBlank()) "eq.$stateSlug" else null
+                val response = RetrofitClient.api.getCommunityPosts(filter)
+                if (response.isSuccessful && response.body() != null) {
+                    _posts.postValue(response.body()!!)
                 } else {
                     _errorMessage.postValue("Failed to fetch community updates.")
                 }
@@ -53,6 +54,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
         _errorMessage.postValue(null)
 
         val post = CommunityPost(
+            id = null,
             title = title,
             description = description,
             category = category.ifBlank { "🏛️ Historical Update" },
@@ -65,7 +67,7 @@ class CommunityViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = RetrofitClient.api.addCommunityPost(post)
-                if (response.isSuccessful && response.body()?.isSuccess == true) {
+                if (response.isSuccessful) {
                     _postSuccess.postValue(true)
                 } else {
                     _errorMessage.postValue("Failed to submit lore.")

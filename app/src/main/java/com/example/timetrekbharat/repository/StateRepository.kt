@@ -412,10 +412,10 @@ class StateRepository(context: Context) {
         isLoading.postValue(true)
         scope.launch {
             try {
-                val response = RetrofitClient.api.getAllStates(searchQuery, regionQuery)
-                if (response.isSuccessful && (response.body()?.isSuccess == true)) {
-                    val networkStates = response.body()?.data
-                    if (!networkStates.isNullOrEmpty()) {
+                val response = RetrofitClient.api.getAllStates()
+                if (response.isSuccessful && response.body() != null) {
+                    val networkStates = response.body()!!
+                    if (networkStates.isNotEmpty()) {
                         for (netState in networkStates) {
                             val local = stateDao.getStateBySlugSync(netState.slug)
                             if (local != null) {
@@ -443,21 +443,19 @@ class StateRepository(context: Context) {
         isLoading.postValue(true)
         scope.launch {
             try {
-                val response = RetrofitClient.api.getStateDetail(stateSlug)
-                if (response.isSuccessful && (response.body()?.isSuccess == true)) {
-                    val networkState = response.body()?.data
-                    if (networkState != null) {
-                        val local = stateDao.getStateBySlugSync(networkState.slug)
-                        if (local != null) {
-                            networkState.isFavorite = local.isFavorite
-                        }
-                        val localAssetUrl = resolveStateImageUrl(networkState.slug, networkState.imageUrl ?: "")
-                        if (localAssetUrl.startsWith("file:///android_asset/")) {
-                            networkState.imageUrl = localAssetUrl
-                            networkState.bannerUrl = resolveStateImageUrl(networkState.slug, networkState.bannerUrl ?: localAssetUrl)
-                        }
-                        stateDao.insertState(networkState)
+                val response = RetrofitClient.api.getStateDetail("eq.$stateSlug")
+                if (response.isSuccessful && !response.body().isNullOrEmpty()) {
+                    val networkState = response.body()!![0]
+                    val local = stateDao.getStateBySlugSync(networkState.slug)
+                    if (local != null) {
+                        networkState.isFavorite = local.isFavorite
                     }
+                    val localAssetUrl = resolveStateImageUrl(networkState.slug, networkState.imageUrl ?: "")
+                    if (localAssetUrl.startsWith("file:///android_asset/")) {
+                        networkState.imageUrl = localAssetUrl
+                        networkState.bannerUrl = resolveStateImageUrl(networkState.slug, networkState.bannerUrl ?: localAssetUrl)
+                    }
+                    stateDao.insertState(networkState)
                 }
             } catch (_: Exception) {
                 // Silently fallback to local Room data

@@ -1,42 +1,35 @@
 package com.example.timetrekbharat.network
 
 import com.example.timetrekbharat.model.CommunityPost
-import com.example.timetrekbharat.model.CommunityResponse
-import com.example.timetrekbharat.model.SingleCommunityResponse
-import com.example.timetrekbharat.model.StateDetailResponse
-import com.example.timetrekbharat.model.StateResponse
+import com.example.timetrekbharat.model.State
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface HistoryApi {
 
-    @GET("api/states")
-    suspend fun getAllStates(
-        @Query("search") searchQuery: String? = null,
-        @Query("region") regionQuery: String? = null
-    ): Response<StateResponse>
+    @GET("states?select=*&order=name.asc")
+    suspend fun getAllStates(): Response<List<State>>
 
-    @GET("api/states/{id}")
+    @GET("states?select=*")
     suspend fun getStateDetail(
-        @Path("id") stateIdentifier: String
-    ): Response<StateDetailResponse>
+        @Query("slug") slugEqFilter: String
+    ): Response<List<State>>
 
-    @GET("api/community")
+    @GET("community_posts?select=*&order=created_at.desc")
     suspend fun getCommunityPosts(
-        @Query("state") stateSlug: String? = null
-    ): Response<CommunityResponse>
+        @Query("state_slug") stateFilter: String? = null
+    ): Response<List<CommunityPost>>
 
-    @POST("api/community")
+    @POST("community_posts")
     suspend fun addCommunityPost(
         @Body post: CommunityPost
-    ): Response<SingleCommunityResponse>
+    ): Response<List<CommunityPost>>
 
-    @POST("api/community/{id}/like")
+    @POST("rpc/increment_post_likes")
     suspend fun likeCommunityPost(
-        @Path("id") postId: String
-    ): Response<SingleCommunityResponse>
+        @Body body: Map<String, String>
+    ): Response<Void>
 }

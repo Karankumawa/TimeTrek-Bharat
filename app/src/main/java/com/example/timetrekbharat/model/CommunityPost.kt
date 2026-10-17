@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class CommunityPost(
-    @SerializedName("id") var id: String = "",
+    @SerializedName("id") var id: String? = null,
     @SerializedName("title") var title: String = "",
     @SerializedName("description") var description: String = "",
     @SerializedName("category") var category: String = "🏛️ Historical Update",
