@@ -189,8 +189,12 @@ class SmritiWalkViewModel(application: Application) : AndroidViewModel(applicati
 
         val text = when {
             prediction != null -> {
-                val facts = prediction.quickFacts.joinToString("\n• ", prefix = "• ")
-                "${prediction.summary}\n\nKey Insights:\n$facts"
+                val persona = _currentPersona.value ?: StoryPersona.BARD
+                val factsFormatted = prediction.quickFacts.joinToString("\n• ") { it }
+                val personaHeader = "📜 Persona Guide (${persona.displayName}):"
+                val architecturalHeader = "🏛️ Architectural Heritage: ${prediction.architecturalStyle} (${prediction.dynasty})"
+
+                "$personaHeader\n\"${prediction.summary}\"\n\n$architecturalHeader\n\nKey Historical Highlights:\n• $factsFormatted"
             }
             artifact != null -> {
                 val depth = _currentDepth.value ?: DepthTier.TALE
@@ -230,7 +234,16 @@ class SmritiWalkViewModel(application: Application) : AndroidViewModel(applicati
         val speed = _playbackSpeed.value ?: 1.0f
         tts?.setSpeechRate(speed)
 
-        val cleanText = text.replace("•", "").replace("[", "").replace("]", "")
+        val cleanText = text
+            .replace("•", "")
+            .replace("📜", "")
+            .replace("🏛️", "")
+            .replace("✨", "")
+            .replace("[", "")
+            .replace("]", "")
+            .replace("*", "")
+            .trim()
+
         tts?.speak(cleanText, TextToSpeech.QUEUE_FLUSH, params, "SMRITI_NARRATION_UTTERANCE")
         _isPlayingAudio.value = true
     }

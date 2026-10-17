@@ -41,17 +41,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SmritiWalk AI Guide"
+                    android:text="SmritiWalk AI Agent Guide 🤖"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Real-time ML Monument &amp; Oral Heritage Classifier"
+                    android:text="ML Monument Classifier &amp; Audio Narrative Agent"
                     android:textColor="#E0E0E0"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <TextView
@@ -61,7 +61,7 @@
                 android:background="#2E7D32"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
-                android:text="● ML 90%+ Active"
+                android:text="● ML Active"
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 android:textStyle="bold" />
@@ -79,7 +79,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- 1. Guidelines & Initial Instructions Hero Card (Visible before scan/select) -->
+            <!-- 1. Primary Scan & Select Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardSmritiWalkGuidelines"
                 android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="How SmritiWalk AI Works 🤖"
+                            android:text="Explore Monument Heritage 📸"
                             android:textColor="@color/maroon_royal"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -122,9 +122,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="10dp"
                         android:lineSpacingExtra="4dp"
-                        android:text="• 📷 1. Point &amp; Scan: Capture any Indian monument, fort, sculpture, or carving.\n• 🤖 2. 90%+ ML Model Prediction: Machine learning model extracts features &amp; classifies the site with >90% precision.\n• 📜 3. Oral Bard &amp; Audio: Hear traditional court bards, architects &amp; decipher ancient inscriptions."
+                        android:text="• 📷 Scan or pick any photo of an Indian monument, fort, sculpture, or ancient temple.\n• 🤖 Machine Learning model extracts spatial features to identify the site with >90% precision.\n• 🔊 Listen to rich audio stories and decipher ancient stone inscriptions."
                         android:textColor="@color/text_primary"
                         android:textSize="13sp" />
 
@@ -132,40 +132,40 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnScanCamera"
                             android:layout_width="0dp"
-                            android:layout_height="48dp"
+                            android:layout_height="50dp"
                             android:layout_marginEnd="6dp"
                             android:layout_weight="1"
-                            android:text="📷 Camera Scan"
+                            android:text="📷 Pick Photo"
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:backgroundTint="@color/saffron_primary"
-                            app:cornerRadius="24dp" />
+                            app:cornerRadius="25dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSelectVault"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="0dp"
-                            android:layout_height="48dp"
+                            android:layout_height="50dp"
                             android:layout_marginStart="6dp"
                             android:layout_weight="1"
                             android:text="🏛️ Select Monument"
                             android:textColor="@color/maroon_royal"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            app:cornerRadius="24dp"
+                            app:cornerRadius="25dp"
                             app:strokeColor="@color/maroon_royal" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 2. Prediction Result Header Card (Visible after scan or selection) -->
+            <!-- 2. ML Prediction Result Header Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPredictionResult"
                 android:layout_width="match_parent"
@@ -193,8 +193,8 @@
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/ivArtifactPreview"
-                            android:layout_width="68dp"
-                            android:layout_height="68dp"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
                             android:contentDescription="Artifact Preview"
                             android:scaleType="centerCrop"
                             android:src="@drawable/app_logo"
@@ -226,7 +226,7 @@
                                 android:layout_marginTop="4dp"
                                 android:text="Amer Fort &amp; Sheesh Mahal"
                                 android:textColor="@color/text_primary"
-                                android:textSize="17sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -244,7 +244,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
@@ -278,12 +278,12 @@
                 android:layout_marginTop="10dp"
                 android:background="#FFF3E0"
                 android:padding="10dp"
-                android:text="Ready to Scan: Point camera at any monument or select a site."
+                android:text="Ready to Scan: Pick a photo or select a monument."
                 android:textColor="@color/saffron_primary_dark"
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
-            <!-- Prediction Content Details Container (Visible after scan or selection) -->
+            <!-- Output Container (Visible after scan or selection) -->
             <LinearLayout
                 android:id="@+id/layoutDetailsContainer"
                 android:layout_width="match_parent"
@@ -292,12 +292,65 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <!-- 1. Storytelling Persona Selector -->
+                <!-- 1. Audio Narration Control Bar Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="@color/maroon_royal"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPlayAudio"
+                            style="@style/Widget.MaterialComponents.Button.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Listen Story Audio 🔊"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:backgroundTint="@color/gold_royal"
+                            app:cornerRadius="20dp" />
+
+                        <TextView
+                            android:id="@+id/tvSoundwaveVisualizer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Audio Ready"
+                            android:textColor="@color/gold_royal"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <!-- Playback Speed Chip -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSpeedToggle"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.0x"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 2. Storytelling Persona Selector -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="1. Perspective Persona"
+                    android:text="1. Select Guide Persona:"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -346,12 +399,12 @@
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
-                <!-- 2. Narrative Length Selector -->
+                <!-- 3. Narrative Length Selector -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="2. Narrative Length"
+                    android:text="2. Select Narrative Detail:"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -369,7 +422,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Quick Insight (~20s)"
+                        android:text="Quick Digest (~20s)"
                         app:chipBackgroundColor="@color/chip_bg_unselected" />
 
                     <com.google.android.material.chip.Chip
@@ -386,11 +439,11 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Detailed Chronicle (~3m)"
+                        android:text="Deep Chronicle (~3m)"
                         app:chipBackgroundColor="@color/chip_bg_unselected" />
                 </com.google.android.material.chip.ChipGroup>
 
-                <!-- Main Narrative & Synchronized Audio Player Card -->
+                <!-- 4. Main Structured Output Narrative Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -405,57 +458,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="18dp">
 
-                        <!-- Audio Controls & Visualizer Header -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/maroon_royal"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnPlayAudio"
-                                style="@style/Widget.MaterialComponents.Button.Icon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Listen Audio 🔊"
-                                android:textColor="@color/black"
-                                app:backgroundTint="@color/gold_royal"
-                                app:cornerRadius="18dp" />
-
-                            <TextView
-                                android:id="@+id/tvSoundwaveVisualizer"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="Audio Ready"
-                                android:textColor="@color/gold_royal"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-
-                            <!-- Playback Speed Chip -->
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnSpeedToggle"
-                                style="@style/Widget.MaterialComponents.Button.TextButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1.0x"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:text="📜 Monument Story &amp; Analysis"
+                            android:textColor="@color/maroon_royal"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <!-- Narrative Content -->
                         <TextView
                             android:id="@+id/tvNarrativeText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
-                            android:lineSpacingExtra="5dp"
+                            android:layout_marginTop="12dp"
+                            android:lineSpacingExtra="6dp"
                             android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             tools:text="Amer Fort was constructed by Raja Man Singh I in 1592 CE..." />
@@ -463,12 +482,12 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 3. Interactive Heritage Tools -->
+                <!-- 5. Interactive Decipher Inscription Tool -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="3. Decipher Inscription &amp; Acoustic Archaeology"
+                    android:text="3. Ancient Inscriptions &amp; Epigraphy"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -483,25 +502,25 @@
                         android:id="@+id/btnDecipherEpigraphy"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:text="Decipher Script 📜"
+                        android:text="Decipher Inscriptions 📜"
                         android:textColor="@color/text_primary"
                         android:textSize="12sp"
-                        app:cornerRadius="14dp" />
+                        app:cornerRadius="24dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnAcousticEcho"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
                         android:text="Acoustic Echo 🎵"
                         android:textColor="@color/text_primary"
                         android:textSize="12sp"
-                        app:cornerRadius="14dp" />
+                        app:cornerRadius="24dp" />
                 </LinearLayout>
 
                 <!-- Epigraphy Overlay Container -->
@@ -523,7 +542,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="AR Inscription Translation (Brahmi/Devanagari)"
+                            android:text="Original Inscription Translation (Brahmi / Devanagari)"
                             android:textColor="@color/gold_royal"
                             android:textSize="12sp"
                             android:textStyle="bold" />
