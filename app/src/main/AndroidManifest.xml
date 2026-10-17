@@ -60,6 +60,12 @@
             android:label="SmritiWalk - AI Living Heritage"
             android:parentActivityName=".ui.MainActivity" />
 
+        <activity
+            android:name=".ui.TimelineDetailActivity"
+            android:exported="false"
+            android:label="Historical Era Detail"
+            android:parentActivityName=".ui.StateDetailActivity" />
+
     </application>
 
 </manifest>

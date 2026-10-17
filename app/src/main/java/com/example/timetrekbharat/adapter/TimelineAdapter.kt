@@ -163,6 +163,24 @@ class TimelineAdapter(
                 binding.rvEraGallery.visibility = View.GONE
             }
 
+            itemView.setOnClickListener {
+                itemView.animate()
+                    .scaleX(0.97f)
+                    .scaleY(0.97f)
+                    .setDuration(120)
+                    .withEndAction {
+                        itemView.animate()
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .setDuration(120)
+                            .withEndAction {
+                                onAskAiClickListener(entry)
+                            }
+                            .start()
+                    }
+                    .start()
+            }
+
             binding.btnAskAiEra.setOnClickListener {
                 onAskAiClickListener(entry)
             }

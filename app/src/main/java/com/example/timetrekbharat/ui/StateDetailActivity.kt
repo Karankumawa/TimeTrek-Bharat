@@ -51,10 +51,9 @@ class StateDetailActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = TimelineAdapter { entry ->
-            val intent = Intent(this@StateDetailActivity, AskHistorianActivity::class.java).apply {
+            val intent = Intent(this@StateDetailActivity, TimelineDetailActivity::class.java).apply {
                 putExtra("EXTRA_STATE_NAME", currentStateName)
-                putExtra("EXTRA_ERA_TITLE", "${entry.era} - ${entry.title}")
-                putExtra("EXTRA_DEFAULT_QUESTION", "Tell me about ${entry.title} in $currentStateName during ${entry.period}")
+                putExtra("EXTRA_TIMELINE_ENTRY", entry)
             }
             startActivity(intent)
         }
