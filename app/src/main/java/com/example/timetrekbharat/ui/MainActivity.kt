@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         setupAdapters()
         setupCategoryAndFilterListeners()
-        setupHeaderQuickAccess()
         observeViewModel()
     }
 
@@ -65,20 +64,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvStates.layoutManager = LinearLayoutManager(this)
         binding.rvStates.adapter = stateAdapter
-    }
-
-    private fun setupHeaderQuickAccess() {
-        binding.cardQuickSmritiWalk.setOnClickListener {
-            startActivity(Intent(this@MainActivity, SmritiWalkActivity::class.java))
-        }
-
-        binding.cardQuickAskHistorian.setOnClickListener {
-            startActivity(Intent(this@MainActivity, AskHistorianActivity::class.java))
-        }
-
-        binding.cardQuickCommunity.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CommunityActivity::class.java))
-        }
     }
 
     private fun setupCategoryAndFilterListeners() {
