@@ -3,19 +3,11 @@ package com.example.timetrekbharat.repository
 import android.content.Context
 import com.example.timetrekbharat.model.HistoryCategory
 import com.example.timetrekbharat.model.HistoryTopicItem
+import com.example.timetrekbharat.network.RetrofitClient
 
 object HistoryContentRepository {
 
-    fun getTopicsByCategory(category: HistoryCategory, context: Context? = null): List<HistoryTopicItem> {
-        val rawTopics = when (category) {
-            HistoryCategory.KINGS -> getIndianKingsAndDynasties()
-            HistoryCategory.POLITICS -> getIndianPoliticsAndFreedomMovement()
-            HistoryCategory.ANCIENT -> getIndianAncientHistory()
-            HistoryCategory.MODERN -> getIndianModernHistory()
-            HistoryCategory.STATES -> emptyList() // States handled separately via StateRepository
-        }
-        if (context == null) return rawTopics
-
+    suspend fun fetchTopicsFromSupabase(category: HistoryCategory, context: Context? = null): List<HistoryTopicItem> {
         val folderName = when (category) {
             HistoryCategory.KINGS -> "indian_kings"
             HistoryCategory.POLITICS -> "indian_politics"
@@ -24,41 +16,97 @@ object HistoryContentRepository {
             else -> "statesimage"
         }
 
-        return rawTopics.map { topic ->
-            val resolvedUrl = resolveAssetImage(context, folderName, topic.id, topic.title, topic.imageUrl)
-            topic.copy(imageUrl = resolvedUrl)
-        }
-    }
-
-    fun searchTopics(category: HistoryCategory, query: String, context: Context? = null): List<HistoryTopicItem> {
-        val topics = getTopicsByCategory(category, context)
-        if (query.isBlank()) return topics
-        val q = query.trim().lowercase()
-        return topics.filter { item ->
-            item.title.lowercase().contains(q) ||
-            item.subtitle.lowercase().contains(q) ||
-            item.description.lowercase().contains(q) ||
-            item.dynastyOrParty?.lowercase()?.contains(q) == true ||
-            item.prominentFigures.any { it.lowercase().contains(q) } ||
-            item.keyFacts.any { it.lowercase().contains(q) }
-        }
-    }
-
-    private fun resolveAssetImage(context: Context, folderName: String, topicId: String, title: String, fallbackUrl: String): String {
         try {
-            val files = context.assets.list(folderName)?.toList() ?: emptyList()
-            val cleanId = topicId.lowercase().replace("-", "_")
-            val cleanTitle = title.lowercase().replace(" ", "_").replace("-", "_")
+            val response = RetrofitClient.api.getHistoryTopics("eq.${category.id}")
+            if (response.isSuccessful && !response.body().isNullOrEmpty()) {
+                val networkTopics = response.body()!!
+                return networkTopics.map { topic ->
+                    val resolvedUrl = resolveAssetImage(context, folderName, topic.id, topic.title, topic.stateSlug, topic.imageUrl)
+                    topic.copy(category = category, imageUrl = resolvedUrl)
+                }
+            }
+        } catch (_: Exception) {
+            // Fallback to local offline topics if network fails
+        }
 
-            val matchedFile = files.firstOrNull { fileName ->
-                val name = fileName.substringBeforeLast(".").lowercase().replace("-", "_")
-                name == cleanId || name == cleanTitle || cleanId.contains(name) || name.contains(cleanId)
+        val fallbackTopics = getLocalFallbackTopicsByCategory(category)
+        return fallbackTopics.map { topic ->
+            val resolvedUrl = resolveAssetImage(context, folderName, topic.id, topic.title, topic.stateSlug, topic.imageUrl)
+            topic.copy(category = category, imageUrl = resolvedUrl)
+        }
+    }
+
+    private fun resolveAssetImage(
+        context: Context?,
+        folderName: String,
+        topicId: String,
+        title: String,
+        stateSlug: String?,
+        fallbackUrl: String
+    ): String {
+        if (context != null) {
+            try {
+                val files = context.assets.list(folderName)?.toList() ?: emptyList()
+                val cleanId = topicId.lowercase().replace("-", "_")
+                val cleanTitle = title.lowercase().replace(" ", "_").replace("-", "_")
+
+                val matchedFile = files.firstOrNull { fileName ->
+                    !fileName.startsWith(".") && (
+                        fileName.endsWith(".jpg", ignoreCase = true) ||
+                        fileName.endsWith(".jpeg", ignoreCase = true) ||
+                        fileName.endsWith(".png", ignoreCase = true) ||
+                        fileName.endsWith(".webp", ignoreCase = true)
+                    ) && (
+                        fileName.substringBeforeLast(".").lowercase().replace("-", "_") == cleanId ||
+                        fileName.substringBeforeLast(".").lowercase().replace("-", "_") == cleanTitle ||
+                        cleanId.contains(fileName.substringBeforeLast(".").lowercase().replace("-", "_"))
+                    )
+                }
+                if (matchedFile != null) {
+                    return "file:///android_asset/$folderName/$matchedFile"
+                }
+            } catch (_: Exception) {}
+
+            // Fallback check in statesimage directory if linked to a state
+            if (!stateSlug.isNullOrBlank()) {
+                val cleanStateSlug = stateSlug.lowercase().replace("-", "").replace("_", "")
+                val dirsToCheck = listOf(
+                    "statesimage",
+                    "statesimages",
+                    "statesimage/${cleanStateSlug}images",
+                    "statesimages/${cleanStateSlug}images",
+                    "statesimage/${stateSlug}images",
+                    "statesimages/${stateSlug}images"
+                )
+
+                for (dir in dirsToCheck) {
+                    try {
+                        val files = context.assets.list(dir)?.toList() ?: emptyList()
+                        val matchedFile = files.firstOrNull { fileName ->
+                            !fileName.startsWith(".") && (
+                                fileName.substringBeforeLast(".").equals(stateSlug, ignoreCase = true) ||
+                                fileName.substringBeforeLast(".").replace("-", "").equals(cleanStateSlug, ignoreCase = true)
+                            )
+                        }
+                        if (matchedFile != null) {
+                            return "file:///android_asset/$dir/$matchedFile"
+                        }
+                    } catch (_: Exception) {}
+                }
             }
-            if (matchedFile != null) {
-                return "file:///android_asset/$folderName/$matchedFile"
-            }
-        } catch (_: Exception) {}
+        }
+
         return fallbackUrl
+    }
+
+    private fun getLocalFallbackTopicsByCategory(category: HistoryCategory): List<HistoryTopicItem> {
+        return when (category) {
+            HistoryCategory.KINGS -> getIndianKingsAndDynasties()
+            HistoryCategory.POLITICS -> getIndianPoliticsAndFreedomMovement()
+            HistoryCategory.ANCIENT -> getIndianAncientHistory()
+            HistoryCategory.MODERN -> getIndianModernHistory()
+            HistoryCategory.STATES -> emptyList()
+        }
     }
 
     private fun getIndianKingsAndDynasties(): List<HistoryTopicItem> {
@@ -152,96 +200,6 @@ object HistoryContentRepository {
                 ),
                 prominentFigures = listOf("Chandragupta Maurya", "Chanakya (Kautilya)", "Megasthenes", "Dhana Nanda"),
                 stateSlug = "bihar"
-            ),
-            HistoryTopicItem(
-                id = "king_rajendra_chola",
-                category = HistoryCategory.KINGS,
-                title = "Rajendra Chola I",
-                subtitle = "Imperial Chola Navy & Gangaikonda Cholapuram",
-                periodEra = "1014 – 1044 CE",
-                dynastyOrParty = "Imperial Chola Dynasty",
-                location = "Tamil Nadu (Thanjavur, Gangaikonda Cholapuram)",
-                imageUrl = "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
-                description = "One of India's greatest maritime conquerors who extended the Chola Empire across Northern India to the River Ganga and launched a naval expedition across Southeast Asia (Srivijaya, Malaya, Sumatra).",
-                keyFacts = listOf(
-                    "Built a powerful blue-water navy that controlled the Bay of Bengal, turning it into a 'Chola Lake'.",
-                    "Founded the new capital city 'Gangaikonda Cholapuram' ('The City of the Chola who took the Ganges').",
-                    "Constructed grand Dravidian temples with intricate bronze sculptures and granite monoliths."
-                ),
-                prominentFigures = listOf("Rajendra Chola I", "Raja Raja Chola I", "Srivijaya Emperor"),
-                stateSlug = "tamil-nadu"
-            ),
-            HistoryTopicItem(
-                id = "king_samudragupta",
-                category = HistoryCategory.KINGS,
-                title = "Samudragupta — Golden Age of Guptas",
-                subtitle = "The Indian Napoleon & Cultural Patron",
-                periodEra = "335 – 375 CE",
-                dynastyOrParty = "Gupta Empire",
-                location = "Uttar Pradesh (Prayagraj) & Bihar (Pataliputra)",
-                imageUrl = "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80",
-                description = "Second ruler of the Gupta Empire, described as undefeated in military campaigns across North and South India. Immortalized on the Prayagraj Pillar Inscription (Eran Prasasti) composed by Harishena.",
-                keyFacts = listOf(
-                    "Issued gold coins depicting himself playing the Veena (Indian lute), highlighting his musical patronage.",
-                    "Conducted the Ashvamedha Yajna to celebrate unyielding sovereignty across the subcontinent.",
-                    "Presided over the dawn of classical Sanskrit literature, astronomy, and temple sculpture."
-                ),
-                prominentFigures = listOf("Samudragupta", "Chandragupta I", "Harishena", "Chandragupta II Vikramaditya"),
-                stateSlug = "uttar-pradesh"
-            ),
-            HistoryTopicItem(
-                id = "king_prithviraj_chauhan",
-                category = HistoryCategory.KINGS,
-                title = "Prithviraj Chauhan III",
-                subtitle = "Valor of Ajmer & Delhi • First Battle of Tarain",
-                periodEra = "1178 – 1192 CE",
-                dynastyOrParty = "Chahamana (Chauhan) Dynasty",
-                location = "Delhi & Rajasthan (Ajmer, Qila Rai Pithora)",
-                imageUrl = "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
-                description = "The heroic Rajput king of Ajmer and Delhi legendary for his chivalry, marksmanship, and leadership during the Battles of Tarain against Muhammad Ghori.",
-                keyFacts = listOf(
-                    "Decisively defeated Muhammad Ghori at the First Battle of Tarain in 1191 CE.",
-                    "Built Qila Rai Pithora, the first fortified city of medieval Delhi.",
-                    "Celebrated in the epic ballad 'Prithviraj Raso' composed by court poet Chand Bardai."
-                ),
-                prominentFigures = listOf("Prithviraj Chauhan", "Chand Bardai", "Samyukta"),
-                stateSlug = "delhi"
-            ),
-            HistoryTopicItem(
-                id = "king_rani_lakshmibai",
-                category = HistoryCategory.KINGS,
-                title = "Rani Lakshmibai of Jhansi",
-                subtitle = "Heroine of 1857 War of Independence",
-                periodEra = "1828 – 1858 CE",
-                dynastyOrParty = "Princely State of Jhansi (Maratha)",
-                location = "Uttar Pradesh (Jhansi, Gwalior)",
-                imageUrl = "https://images.unsplash.com/photo-1627894098902-86161860822e?auto=format&fit=crop&w=1200&q=80",
-                description = "The fierce Queen of Jhansi who became the quintessential symbol of Indian resistance against the British East India Company during the 1857 War of Independence.",
-                keyFacts = listOf(
-                    "Refused to surrender Jhansi under the unjust 'Doctrine of Lapse' declared by Lord Dalhousie.",
-                    "Fought on horseback with her infant son Damodar Rao strapped to her back during the Siege of Jhansi.",
-                    "British General Hugh Rose described her as 'the bravest and most dangerous of all rebel leaders'."
-                ),
-                prominentFigures = listOf("Rani Lakshmibai", "Gangadhar Rao", "Tatya Tope", "Jhalkari Bai"),
-                stateSlug = "uttar-pradesh"
-            ),
-            HistoryTopicItem(
-                id = "king_ranjit_singh",
-                category = HistoryCategory.KINGS,
-                title = "Maharaja Ranjit Singh",
-                subtitle = "Sher-e-Punjab & Unification of Sikh Empire",
-                periodEra = "1780 – 1839 CE",
-                dynastyOrParty = "Sikh Empire (Sukerchakia Misl)",
-                location = "Punjab (Amritsar, Lahore)",
-                imageUrl = "https://images.unsplash.com/photo-1588096344356-9a2f64e24296?auto=format&fit=crop&w=1200&q=80",
-                description = "Known as 'Sher-e-Punjab' (Lion of Punjab), he united regional Sikh misls into a sovereign Sikh Empire with secular administration and modernized artillery under general Hari Singh Nalwa.",
-                keyFacts = listOf(
-                    "Gilded the sanctum of Harmandir Sahib (Golden Temple) in Amritsar with pure gold leaf in 1830 CE.",
-                    "Maintained a secular court where ministers were selected from Sikh, Hindu, and Muslim communities.",
-                    "Protected the Northwest Frontier against foreign invasions and recovered the Koh-i-Noor diamond."
-                ),
-                prominentFigures = listOf("Maharaja Ranjit Singh", "Hari Singh Nalwa", "Akali Phula Singh"),
-                stateSlug = "punjab"
             )
         )
     }
@@ -265,24 +223,6 @@ object HistoryContentRepository {
                 ),
                 prominentFigures = listOf("Mangal Pandey", "Rani Lakshmibai", "Tatya Tope", "Nana Saheb", "Bahadur Shah Zafar"),
                 stateSlug = "uttar-pradesh"
-            ),
-            HistoryTopicItem(
-                id = "pol_inc_swadeshi",
-                category = HistoryCategory.POLITICS,
-                title = "Formation of Congress & Swadeshi Movement",
-                subtitle = "Early Political Awakening & Vande Mataram",
-                periodEra = "1885 – 1911 CE",
-                dynastyOrParty = "Indian National Congress & Nationalist Front",
-                location = "Mumbai, Kolkata, Bengal",
-                imageUrl = "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1200&q=80",
-                description = "The Indian National Congress was founded in 1885 in Bombay. The 1905 Partition of Bengal sparked the fiery Swadeshi Movement, popularizing native industries, boycott of foreign goods, and Bankim Chandra's 'Vande Mataram'.",
-                keyFacts = listOf(
-                    "First INC session held in Bombay in December 1885 with 72 delegates under WC Bonnerjee.",
-                    "Lal-Bal-Pal triumvirate (Lala Lajpat Rai, Bal Gangadhar Tilak, Bipin Chandra Pal) demanded 'Purna Swaraj'.",
-                    "Tilak proclaimed: 'Swaraj is my birthright and I shall have it!' during the Swadeshi boycott."
-                ),
-                prominentFigures = listOf("Bal Gangadhar Tilak", "Lala Lajpat Rai", "Bipin Chandra Pal", "Gopal Krishna Gokhale", "AO Hume"),
-                stateSlug = "west-bengal"
             ),
             HistoryTopicItem(
                 id = "pol_satyagraha_dandi",
@@ -355,24 +295,6 @@ object HistoryContentRepository {
                 ),
                 prominentFigures = listOf("Dr. B.R. Ambedkar", "Dr. Rajendra Prasad", "Jawaharlal Nehru", "BN Rau"),
                 stateSlug = "delhi"
-            ),
-            HistoryTopicItem(
-                id = "pol_modern_republic",
-                category = HistoryCategory.POLITICS,
-                title = "Post-Independence Political & Democratic Era",
-                subtitle = "Elections, Green Revolution & Digital Bharat",
-                periodEra = "1951 – Present",
-                dynastyOrParty = "Democratic Electoral Republic",
-                location = "Pan-India",
-                imageUrl = "https://images.unsplash.com/photo-1588096344356-9a2f64e24296?auto=format&fit=crop&w=1200&q=80",
-                description = "From India's first historic General Election in 1951–52 to the Green Revolution in agriculture, Pokhran nuclear tests, and space missions, India evolved into a global democratic superpower.",
-                keyFacts = listOf(
-                    "First General Elections in 1951-52 mobilized 173 million voters with universal suffrage.",
-                    "MS Swaminathan led the Green Revolution, transforming India from food shortage to agricultural exporter.",
-                    "APJ Abdul Kalam and ISRO propelled India into space and defense nuclear capability."
-                ),
-                prominentFigures = listOf("Dr. APJ Abdul Kalam", "MS Swaminathan", "Atal Bihari Vajpayee", "Lal Bahadur Shastri"),
-                stateSlug = "delhi"
             )
         )
     }
@@ -384,7 +306,7 @@ object HistoryContentRepository {
                 category = HistoryCategory.ANCIENT,
                 title = "Indus Valley & Saraswati Civilization",
                 subtitle = "Urban Planning, Dholavira & Lothal Port",
-                periodEra = "c. 3300 – 1300 BCE (Peak 2600–1900 BCE)",
+                periodEra = "c. 3300 – 1300 BCE",
                 dynastyOrParty = "Harappan Bronze Age Civilization",
                 location = "Gujarat (Dholavira, Lothal), Punjab (Ropar), Rajasthan (Kalibangan)",
                 imageUrl = "https://images.unsplash.com/photo-1609949279531-cf48d64bed89?auto=format&fit=crop&w=1200&q=80",
@@ -414,24 +336,6 @@ object HistoryContentRepository {
                 ),
                 prominentFigures = listOf("Maharishi Ved Vyasa", "Maharishi Valmiki", "Yagnavalkya", "Gargi Vachaknavi"),
                 stateSlug = "uttarakhand"
-            ),
-            HistoryTopicItem(
-                id = "anc_mahajanapadas",
-                category = HistoryCategory.ANCIENT,
-                title = "Mahajanapadas & Magadha Hegemony",
-                subtitle = "16 Great Kingdoms & Democratic Republics",
-                periodEra = "600 – 322 BCE",
-                dynastyOrParty = "Haryanka, Shishunaga & Nanda Dynasties",
-                location = "Bihar (Rajgir, Pataliputra, Vaishali)",
-                imageUrl = "https://images.unsplash.com/photo-1610484826917-0f101a7bf7f4?auto=format&fit=crop&w=1200&q=80",
-                description = "Ancient India was organized into 16 Mahajanapadas (Great Kingdoms and Gana-Sangha Republics like Vajji at Vaishali). Magadha emerged as the dominant empire due to iron ore mines and riverine trade.",
-                keyFacts = listOf(
-                    "Vaishali in Bihar was the world's earliest recorded republican democracy with elected assemblies.",
-                    "Bimbisara and Ajatashatru built cyclopean stone walls at Rajgir and fortified Pataliputra.",
-                    "Contemporary with the spiritual awakenings of Gautama Buddha and Bhagwan Mahavira."
-                ),
-                prominentFigures = listOf("Bimbisara", "Ajatashatru", "Gautama Buddha", "Mahavira"),
-                stateSlug = "bihar"
             ),
             HistoryTopicItem(
                 id = "anc_gupta_golden_age",

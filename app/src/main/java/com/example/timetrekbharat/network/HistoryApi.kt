@@ -1,6 +1,7 @@
 package com.example.timetrekbharat.network
 
 import com.example.timetrekbharat.model.CommunityPost
+import com.example.timetrekbharat.model.HistoryTopicItem
 import com.example.timetrekbharat.model.State
 import retrofit2.Response
 import retrofit2.http.Body
@@ -17,6 +18,11 @@ interface HistoryApi {
     suspend fun getStateDetail(
         @Query("slug") slugEqFilter: String
     ): Response<List<State>>
+
+    @GET("history_topics?select=*&order=id.asc")
+    suspend fun getHistoryTopics(
+        @Query("category") categoryFilter: String? = null
+    ): Response<List<HistoryTopicItem>>
 
     @GET("community_posts?select=*&order=created_at.desc")
     suspend fun getCommunityPosts(

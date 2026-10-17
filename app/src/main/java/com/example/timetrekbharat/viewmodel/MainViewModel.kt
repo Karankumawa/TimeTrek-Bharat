@@ -5,6 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 import com.example.timetrekbharat.model.HistoryCategory
 import com.example.timetrekbharat.model.HistoryTopicItem
@@ -59,8 +62,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             return
         }
         val query = _searchQuery.value ?: ""
-        val filteredTopics = HistoryContentRepository.searchTopics(category, query, getApplication())
-        historyTopics.value = filteredTopics
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val topics = HistoryContentRepository.fetchTopicsFromSupabase(category, getApplication())
+            val filtered = if (query.isBlank()) {
+                topics
+            } else {
+                val q = query.trim().lowercase()
+                topics.filter { item ->
+                    item.title.lowercase().contains(q) ||
+                    item.subtitle.lowercase().contains(q) ||
+                    item.description.lowercase().contains(q) ||
+                    item.dynastyOrParty?.lowercase()?.contains(q) == true ||
+                    item.prominentFigures.any { it.lowercase().contains(q) } ||
+                    item.keyFacts.any { it.lowercase().contains(q) }
+                }
+            }
+            historyTopics.postValue(filtered)
+        }
     }
 
     private fun updateStatesSource() {
